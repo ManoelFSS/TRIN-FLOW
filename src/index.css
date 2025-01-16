@@ -1,0 +1,44 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+
+
+  --color-primary: #FF9D00;
+  --color-secondary: #302F2F;
+
+  --color-bg-primary-element: #FF9D00;
+  --color-bg-secondary-element: #282626;
+
+  --color-title-primary: #FF9D00;
+  
+  --color-text-primary: #252525;
+  --color-text-secondary: #fff;
+  --color-text-hover: #000;
+
+  --color-icon-primary: #000;
+  --color-icon-secondary: #fff;
+  --color-icon-hover: #FF9D00;
+
+  --color-bg-primary: #fff;
+  --color-bg-secondary: #EBEBEB;
+
+  --color-bg-btn-primary: #FF9D00;
+  --color-bg-btn-secondary: #fff;
+  --color-bg-btn-hover: #e28c00;
+
+  --color-bord-btn-primary:#FF9D00;
+  --color-bord-btn-hover:#e28c00;
+
+  --color-bg-input: #e5e2e2;
+  
+
+}
+
+body {
+  min-height: 100svh;
+}
