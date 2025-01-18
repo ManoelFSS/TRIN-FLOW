@@ -11,7 +11,7 @@ export const Label = styled.label`
     }
 
     @media (orientation: landscape) and (max-width: 800px) {
-        font-size: 1rem;
+        font-size: 1.3rem;
         padding-top: 0.3rem;
     }
 

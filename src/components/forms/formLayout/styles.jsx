@@ -49,7 +49,7 @@ export const Container = styled.div`
         }
 
         @media (orientation: landscape) {
-            font-size: 0.8rem;
+            font-size: 1rem;
         }
 
     }

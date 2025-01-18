@@ -19,7 +19,6 @@ export const Container_login = styled.section`
         padding: 3vh;
         text-align: center;
         
-        
         .box-container {
             
             padding-bottom: 1.5rem;
@@ -51,7 +50,7 @@ export const Container_login = styled.section`
                 }
 
                 @media (orientation: landscape) {
-                    font-size: 0.9rem;
+                    font-size: 1rem;
                     padding: 0.2rem 0;
                 }
 
@@ -110,13 +109,14 @@ export const Container_login = styled.section`
             position: absolute;
             bottom: 0;
             font-size: 2vh;
-            font-weight: 500;
+            font-weight: 600;
             z-index: 2;
             padding: 0.5vh;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: var( --color-bg-secondary );
 
             @media (max-height: 580px) {
                 font-size: 3vh;
