@@ -11,7 +11,7 @@ export const Text = styled.h3`
         font-size: 6vh;
     }
 
-    @media (orientation: landscape) and (max-width: 800px) {
+    @media (orientation: landscape) and (max-width: 950px) {
         font-size: 2rem;
         border-bottom: solid 1.2vh var( --color-bord-btn-primary );
         padding-bottom: 0.6rem;
