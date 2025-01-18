@@ -1,9 +1,14 @@
 import { Container } from "./styles"
 
 const FormLayout = ({ children }) => {
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    }
+
     return (
         <Container>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 {children}
             </form>
         </Container>

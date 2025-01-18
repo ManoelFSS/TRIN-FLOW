@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Montserrat", serif;
 }
 
 :root {
@@ -35,6 +35,7 @@
   --color-bord-btn-hover:#e28c00;
 
   --color-bg-input: #e5e2e2;
+  --color-bg-input-hover: #d9d9d9;
   
 
 }

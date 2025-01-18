@@ -1,8 +1,13 @@
 import { Button } from "./styles"
 
-const BtnNavigate = ({$text}) => {
+const BtnNavigate = ({$text, $onClick}) => {
     return (
-        <Button type="submit">{$text}</Button>
+        <Button 
+            type="button"
+            onClick={$onClick}
+        >
+            {$text}
+        </Button>
     )
 }
 

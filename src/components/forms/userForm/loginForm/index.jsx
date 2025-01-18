@@ -8,7 +8,7 @@ import Title from "../../../title"
 import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
 
-const LoginForm = () => {
+const LoginForm = ({setSelectForm}) => {
 
     return (
         <FormLayout>
@@ -23,10 +23,17 @@ const LoginForm = () => {
                 <LabelComponent $text="Senha" $htmlFor="senha" />
                 <InputComponent $typeText="password" $textId="senha" $name="senha" $placeholder="Digite sua  Senha" $autoComplete="current-password" $required />
             </section>
-            <p>Esqueci minha senha</p>
+
+            <p onClick={() => setSelectForm("password")}>
+                Esqueci minha senha
+            </p>
+
             <section className="btns">
                 <BtnSubmit $text="Entrar" />
-                <BtnNavigate $text="Registre-se" />
+                <BtnNavigate 
+                    $text="Registre-se" 
+                    $onClick={() => setSelectForm("register")}
+                />
             </section>
         </FormLayout>
     )

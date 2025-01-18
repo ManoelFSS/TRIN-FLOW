@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    width: 45vh;
     padding: 5vh ;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 1.5px 2px 8px rgba(0, 0, 0, 0.4);
     border-radius: 1vh;
+    position: relative;
 
     .logo {
         display: flex;
@@ -18,19 +20,23 @@ export const Container = styled.div`
         flex-direction: column;
         gap: 1vh;
 
-        @media (orientation: landscape) {
+        @media (orientation: landscape) and (max-width: 950px) {
             gap: 0.5rem;
+            margin-bottom: 3vh;
+            
         }
     }
 
     p {
-        text-align: right;
+        width: 100%;
+        text-align: center;
         color: var(--color-text-primary);
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
-        font-size: 2vh;
-        padding-bottom: 1vw;
+        font-size: 1.8vh;
+        padding: 0 0 1.6vh 0;
         trasition: color 0.3s ease;
+        boder: solid 0.2rem var( --color-bord-btn-primary );
 
         &:hover {
             color: var( --color-text-hover );
@@ -38,8 +44,12 @@ export const Container = styled.div`
         }
 
         @media (max-height: 580px) {
-            font-size: 3vh;
+            font-size: 2vh;
             padding-bottom: 2vh;
+        }
+
+        @media (orientation: landscape) {
+            font-size: 0.8rem;
         }
 
     }
@@ -49,15 +59,40 @@ export const Container = styled.div`
         flex-direction: column;
         gap: 2vh;
 
-        @media (orientation: landscape) {
+        @media (orientation: landscape) and (max-width: 950px) {
             gap: 1rem;
+            padding-top: 3vh;
+        }
+
+        @media screen and (max-height: 270px) {
+            padding-top: 10vh;
         }
 
     }
 
-    @media (orientation: landscape) {
-        padding: 3rem 2rem;
+
+    @media (min-width: 1600px) {
+        min-width: 42vh;
+        
     }
 
+
+    @media (orientation: landscape) and (max-width: 1000px) {
+        width: 60vw;
+        padding: 8vh;
+    }
+
+    @media (orientation: landscape) and (max-width: 950px) {
+        padding: 3rem 2rem;
+        
+    }
+
+    @media screen and (max-width: 440px) {
+        width: 100%;
+    }
+        
+    @media screen and (max-height: 270px) {
+        min-width: 60vh;
+    }
 
 `;

@@ -13,19 +13,20 @@ export const Input = styled.input`
     font-size: 2vh;
     font-weight: 500;
     outline: none;
+    trasition: background-color 0.3s ease;
 
-    @media screen and (max-height: 580px) {
-        font-size: 4vh;
-        padding: 2vh;
+    &:hover {
+        background-color: var( --color-bg-input-hover );
+    }
+        
+    @media screen and (max-height: 500px) {
+        font-size: 6vh;
+        padding: 4vh;
     }
 
     @media screen and (max-height: 270px) {
         font-size: 10vh;
         padding: 6vh;
-    }
-
-    @media (orientation: landscape) {
-        min-width: 200px;
     }
 
 

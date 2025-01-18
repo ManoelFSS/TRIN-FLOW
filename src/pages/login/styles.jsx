@@ -19,6 +19,7 @@ export const Container_login = styled.section`
         padding: 3vh;
         text-align: center;
         
+        
         .box-container {
             
             padding-bottom: 1.5rem;
@@ -33,7 +34,7 @@ export const Container_login = styled.section`
                 }
 
                 @media (orientation: landscape) {
-                    font-size: 1rem;
+                    font-size: 1.3rem;
                 }
 
                 @media (orientation: landscape) and (min-width: 1300px) {
@@ -50,7 +51,7 @@ export const Container_login = styled.section`
                 }
 
                 @media (orientation: landscape) {
-                    font-size: 0.7rem;
+                    font-size: 0.9rem;
                     padding: 0.2rem 0;
                 }
 
@@ -148,10 +149,11 @@ export const Container_login = styled.section`
         align-items: center;
         padding: 2vh;
         overflow: hidden;
+        gap: 2vh;
         background:  #000 url(${graficPhoto}) no-repeat right center / 100% 100%;
 
         @media (orientation: landscape) {
-            padding: 1.5rem;
+            padding: 1rem;
         }
     }
     

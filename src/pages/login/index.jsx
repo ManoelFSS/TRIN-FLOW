@@ -2,10 +2,17 @@ import { Container_login} from "./styles";
 //components
 import Logo from "../../components/logo"
 import LoginForm from "../../components/forms/userForm/loginForm"
+import Register from "../../components/forms/userForm/register"
+import Password_Recovery from "../../components/forms/userForm/password_recovery"
+//Hooks
+import useLFormSelect from "../../hooks/useFormSelect";
+
 // icons
 import { FaWhatsapp, FaFacebook, FaInstagram  } from "react-icons/fa";
 
 const Login = () => {
+
+    const { selectForm, setSelectForm   } = useLFormSelect();
 
     return (
         <Container_login>
@@ -23,7 +30,9 @@ const Login = () => {
                 <p className="copyright"> © 2024 Trin-Flow.</p>
             </section>
             <section className="box-right">
-                <LoginForm />
+                { selectForm === "login" && <LoginForm  setSelectForm={setSelectForm}/>}
+                { selectForm === "register" && <Register  setSelectForm={setSelectForm} /> }
+                { selectForm === "password" && <Password_Recovery  setSelectForm={setSelectForm} />}
             </section>
         </Container_login>
     )

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
     width: 100%;
-    background-color: var( --color-bg-btn );
+    background-color: var(  --color-bg-btn-secondary );
     padding: 1vh;
     border-radius: 0.5vh;
     border: solid 0.2rem var( --color-bord-btn-primary );
@@ -17,8 +17,8 @@ export const Button = styled.button`
     }
 
     @media screen and (max-height: 500px) {
-        font-size: 4vh;
-        padding: 2vh;
+        font-size: 6vh;
+        padding: 4vh;
         border: solid 0.8vh var( --color-bord-btn-primary );
     }
 
