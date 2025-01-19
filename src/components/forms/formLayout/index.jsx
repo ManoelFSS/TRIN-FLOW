@@ -1,13 +1,13 @@
 import { Container } from "./styles"
 
-const FormLayout = ({ children }) => {
+const FormLayout = ({ children, $height }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
     }
 
     return (
-        <Container>
+        <Container style={{ height: $height }}> 
             <form onSubmit={handleSubmit}>
                 {children}
             </form>

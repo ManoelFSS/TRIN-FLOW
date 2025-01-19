@@ -10,61 +10,35 @@ export const Container_login = styled.section`
     position: relative;
     
     .box-left {
-        max-width: 40vh;
+        height: 100svh;
         min-width: 280px;
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
-        padding: 3vh;
         text-align: center;
+        overflow: hidden;
         
         .box-container {
-            
-            padding-bottom: 1.5rem;
+            width: 100%;
+            margin: auto;
             
             h1 {
-                font-size: 3.2vh;
+                font-size: 22px;
                 font-weight: 900;
                 color: var( --color-title-primary );
-
-                @media (max-height: 580px) {
-                    font-size: 5vh;
-                }
-
-                @media (orientation: landscape) {
-                    font-size: 1.3rem;
-                }
-
-                @media (orientation: landscape) and (min-width: 1300px) {
-                    font-size: 4vh;
-                }
-            
             }
             
             p {
-                font-size: 2vh;
-
-                @media (max-height: 580px) {
-                    font-size: 3vh;
-                }
-
-                @media (orientation: landscape) {
-                    font-size: 1rem;
-                    padding: 0.2rem 0;
-                }
-
-                @media (orientation: landscape) and (min-width: 1300px) {
-                    font-size: 2vh;
-                }
+                font-size: 16px;
             }
             
             .icons {
                 display: flex;
                 justify-content: center;
-                gap: 2vh;
-                font-size: 4vh;
-                padding: 1.5vh;
+                gap:10px ;
+                font-size: 30px;
+                padding: 10px 0px;
                 
                 .whatsapp,
                 .facebook,
@@ -88,82 +62,71 @@ export const Container_login = styled.section`
                 .instagram {
                     color: #e1306c;
                 }
-
-                @media (max-height: 580px) {
-                    font-size: 6vh;
-                }
-
-                @media (orientation: landscape) {
-                    font-size: 2rem;
-                    gap: 1rem;
-                    padding: 1rem;
-                }
-
-                @media (orientation: landscape) and (min-width: 1300px) {
-                    font-size: 5vh;
-                }
+                
             }
         }
         
-        .copyright {
-            position: absolute;
-            bottom: 0;
-            font-size: 2vh;
+        .copyright {   
+            font-size: 14px;
             font-weight: 600;
             z-index: 2;
-            padding: 0.5vh;
+            padding: 5px;
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var( --color-bg-secondary );
-
-            @media (max-height: 580px) {
-                font-size: 3vh;
-            }
-
-            @media (orientation: landscape) {
-                font-size: 0.8rem;
-            }
+            background-color: var( --color-bg-secondary )
         }
-
-        @media (max-height: 580px) {
-            min-height: 50vh;
-        }
-
-        @media (max-width: 550px) {
-            height: 40vh;
-        }
-
-        @media (orientation: landscape) {
-            height: auto;
-            min-width: 12rem;
-        }
-
     }
     
     .box-right {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2vh;
-        overflow: hidden;
-        gap: 2vh;
+        width: 100%;
+        height: 100svh;
         background:  #000 url(${graficPhoto}) no-repeat right center / 100% 100%;
 
-        @media (orientation: landscape) {
-            padding: 1rem;
+        .box-blu {
+            flex: 1;
+            display: flex;
+            width: 100%;
+            height: 100svh;
+            background-color: rgba(0, 0, 0, 0.6);
+            overflow: auto;
+            padding: 15px 0;
         }
     }
     
-    @media (max-width: 900px) {
+    @media (max-width: 560px) {
         flex-direction: column;
+    }
+
+    @media (max-width: 321px) {
         
         .box-left {
+            height: 48vh;
             min-width: 100%;
-            padding-top: 1rem;
+            align-items: flex-end;
+        }
+
+        .box-right {
+            max-height: 52vh;
+
+            .box-blu {
+                max-height: 52vh;
+            }
         }
     }
-    
+
+    @media (min-width: 321px) and (max-width: 560px) {
+        
+        .box-left {
+            height: 30vh;
+            min-width: 100%;
+        }
+
+        .box-right {
+            max-height: 70vh;
+
+            .box-blu {
+                max-height: 70vh;
+            }
+        }
+    }
+
 `;

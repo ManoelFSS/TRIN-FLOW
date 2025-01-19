@@ -1,98 +1,74 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 45vh;
-    padding: 3vh 5vh 5vh 5vh ;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 300px;
+    padding: 20px 20px 30px 20px;
+    background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 1.5px 2px 8px rgba(0, 0, 0, 0.4);
-    border-radius: 1vh;
+    border-radius: 10px;
     position: relative;
-
+    margin: auto;
+    
     .logo {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 2vh;
+        padding-bottom: 10px;
     }
 
     .box {
         display: flex;
         flex-direction: column;
-        gap: 1vh;
+        padding: 2px 0;
 
-        @media (orientation: landscape) and (max-width: 950px) {
-            gap: 0.5rem;
-            margin-bottom: 3vh;
-            
+        @media (min-width: 1550px) {
+            gap: 1vh;
         }
     }
 
     p {
-        width: 100%;
-        text-align: center;
+        text-align: right;
         color: var(--color-text-primary);
         font-weight: 600;
         cursor: pointer;
-        font-size: 1.8vh;
-        padding: 0 0 1.6vh 0;
+        font-size: 12px;
         trasition: color 0.3s ease;
-        boder: solid 0.2rem var( --color-bord-btn-primary );
+        boder: solid 2px var( --color-bord-btn-primary );
+        padding: 5px 0 0;
 
         &:hover {
             color: var( --color-text-hover );
             text-decoration: underline;
         }
 
-        @media (max-height: 580px) {
-            font-size: 2vh;
-            padding-bottom: 2vh;
+        @media (min-width: 1550px) {
+            font-size: 1.8vh;
+            padding: 1vh 0 0;
         }
+    }
 
-        @media (orientation: landscape) {
-            font-size: 1rem;
-        }
-
+    .text {
+        text-align: center;
     }
 
     .btns {
         display: flex;
         flex-direction: column;
-        gap: 2vh;
+        padding-top: 1.5vh;
+        gap: 10px;
 
-        @media (orientation: landscape) and (max-width: 950px) {
-            gap: 1rem;
-            padding-top: 3vh;
+        @media (min-width: 1550px) {
+            gap: 1.8vh;
         }
-
-        @media screen and (max-height: 270px) {
-            padding-top: 10vh;
-        }
-
     }
 
-
-    @media (min-width: 1600px) {
-        min-width: 42vh;
-        
+    @media (min-width: 500px) and (max-width: 570px) {
+        width: 260px;
     }
 
-
-    @media (orientation: landscape) and (max-width: 1000px) {
-        width: 60vw;
-        padding: 8vh;
-    }
-
-    @media (orientation: landscape) and (max-width: 950px) {
-        padding: 3rem 2rem;
-        
-    }
-
-    @media screen and (max-width: 440px) {
-        width: 100%;
-    }
-        
-    @media screen and (max-height: 270px) {
-        min-width: 60vh;
+    @media (min-width: 1550px) {
+        width: 40vh;
+        padding: 4vh 3vh 5vh 3vh;
     }
 
 `;

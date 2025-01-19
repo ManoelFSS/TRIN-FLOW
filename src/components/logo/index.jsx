@@ -4,7 +4,7 @@ import LogoTipo from "../../assets/logo.svg"
 const Logo = ({$width}) => {
     return (
         <Image 
-            style={{ width:$width}}
+            // style={{ width:$width}}
             src={LogoTipo}
             alt="Logo tipo do Trin-Flow, uma ingrenagem com grafico de financas em 2d" 
         />

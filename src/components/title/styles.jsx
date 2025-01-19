@@ -1,19 +1,16 @@
 import styled from "styled-components";
 
 export const Text = styled.h3`
-    font-size: 2.5vh;
+    font-size: 20px;
     font-weight: 700;
     color: var( --color-title-primary );
-    padding-bottom: 0.6vh;
-    border-bottom: solid 0.5vh var( --color-bord-btn-primary );
+    border-bottom: solid 4px var( --color-bord-btn-primary );
+    padding-bottom: 5px;
 
-    @media (max-height: 550px) {
-        font-size: 6vh;
+    @media (min-width: 1550px) {
+        font-size: 3vh;
+        padding-bottom: 1vh;
+        border-bottom: solid 0.5vh var( --color-bord-btn-primary );
     }
 
-    @media (orientation: landscape) and (max-width: 950px) {
-        font-size: 2rem;
-        border-bottom: solid 1.2vh var( --color-bord-btn-primary );
-        padding-bottom: 0.6rem;
-    }
 `

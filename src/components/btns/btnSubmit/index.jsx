@@ -1,10 +1,10 @@
 import { Button } from "./styles"
 
-const BtnSubmit = ({$text, $marginBottom, onClick, $disabled, $opacity, $timer }) => {
+const BtnSubmit = ({$text, $marginTop, onClick, $disabled, $opacity, $timer }) => {
     return (
         <Button 
             type="submit"
-            style={{marginBottom: $marginBottom, opacity: `${$opacity ? "0.8" : "1"}` }}
+            style={{marginTop: $marginTop, opacity: `${$opacity ? "0.8" : "1"}` }}
             onClick={onClick}
             disabled={$disabled}
         >

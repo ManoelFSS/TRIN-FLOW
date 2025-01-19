@@ -11,7 +11,7 @@ import LabelComponent from "../../../labelComponent"
 const LoginForm = ({setSelectForm}) => {
 
     return (
-        <FormLayout>
+        <FormLayout $height="">
             <section className="logo">
                 <Title $text="Login"  $cor={"var(  --color-text-primary )"}  />
             </section>
@@ -22,12 +22,10 @@ const LoginForm = ({setSelectForm}) => {
             <section className="box">
                 <LabelComponent $text="Senha" $htmlFor="senha" />
                 <InputComponent $typeText="password" $textId="senha" $name="senha" $placeholder="Digite sua  Senha" $autoComplete="current-password" $required />
+                <p onClick={() => setSelectForm("password")}>
+                    Esqueci minha senha
+                </p>
             </section>
-
-            <p onClick={() => setSelectForm("password")}>
-                Esqueci minha senha
-            </p>
-
             <section className="btns">
                 <BtnSubmit $text="Entrar" />
                 <BtnNavigate 

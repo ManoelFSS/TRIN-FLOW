@@ -17,7 +17,7 @@ const Register = ({setSelectForm}) => {
             </section>
             <section className="box">
                 <LabelComponent $text="Telefone" $htmlFor="phone" />
-                <InputComponent $typeText="text" $textId="nphone" $name="phone" $placeholder="Digite seu Nome" $autoComplete="current-text" $required />
+                <InputComponent $typeText="text" $textId="nphone" $name="phone" $placeholder="(xx) xxxxx-xxxx" $autoComplete="current-text" $required />
             </section>
             <section className="box">
                 <LabelComponent $text="CPF" $htmlFor="cpf" />
@@ -36,7 +36,7 @@ const Register = ({setSelectForm}) => {
                 <InputComponent $typeText="password" $textId="senha02" $name="senha02" $placeholder="Digite a Senha novamente" $autoComplete="current-password" $required />
             </section>
             <section className="btns">
-                <BtnSubmit $text="Entrar" />
+                <BtnSubmit $text="Cadastrar" />
                 <BtnNavigate 
                     $text="Recuperar Senha" 
                     $onClick={() => setSelectForm("password")}

@@ -60,29 +60,32 @@ const Password_Recovery = ({setSelectForm}) => {
     return (
         <FormLayout>
             <section className="logo">
-                <Title $text="Redefinir Senha"  $cor={"var(  --color-text-primary )"}  />
+                <Title $text="Recuperar senha"  $cor={"var(  --color-text-primary )"}  />
             </section>
             <section className="box">
                 <LabelComponent $text="Email" $htmlFor="email" />
                 <InputComponent $typeText="email" $textId="email" $name="email" $placeholder="Exmplo@gmail.com" $autoComplete="current-email" $required />
             </section>
-
             <BtnSubmit 
                 $text={simulaApi ? ` Reenviar Codigo` : 'Enviar Codigo'}
-                $marginBottom="2vh"
+                $marginTop="1vh"
                 onClick={() => handleFormUpdate()} 
                 $disabled={isDisabledBtn}
                 $opacity={isDisabledBtn}
                 $timer={coutTime}
             />
-            
-        
             { simulaApi && 
                 <>
                     <p className="text"> Por Favor Verifique seu Email envianos um codigo</p>
                     <section className="box">
                         <LabelComponent $text="Codigo" $htmlFor="codigo" />
                         <InputComponent $typeText="text" $textId="codigo" $name="codigo" $placeholder="Digite o Codigo" $autoComplete="current-text" $required />
+                        { simulaApi && 
+                            <BtnSubmit 
+                                $text="Verificar Codigo"
+                                $marginTop="1.5vh" 
+                            />
+                        }
                     </section>
                 </>
             }
@@ -95,14 +98,9 @@ const Password_Recovery = ({setSelectForm}) => {
                 <InputComponent $typeText="password" $textId="senha02" $name="senha02" $placeholder="Digite a Senha novamente" $autoComplete="current-password" $required />
             </section> */}
             <section className="btns">
-                { simulaApi && 
-                    <BtnSubmit 
-                        $text="Verificar Codigo" 
-                    />
-                }
                 {!simulaApi && 
                     <BtnNavigate 
-                        $text="Registra-se"
+                        $text="Cadastre-se"
                         $onClick={() => setSelectForm("register")} 
                     />
                 }
