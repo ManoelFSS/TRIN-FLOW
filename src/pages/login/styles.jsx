@@ -105,26 +105,42 @@ export const Container_login = styled.section`
         }
 
         .box-right {
-            max-height: 52vh;
+            max-height: 52svh;
 
             .box-blu {
-                max-height: 52vh;
+                max-height: 52svh;
             }
         }
     }
 
-    @media (min-width: 321px) and (max-width: 560px) {
+    @media (min-width: 321px) and (max-width: 426px) {
         
         .box-left {
-            height: 33vh;
+            height: 33svh;
             min-width: 100%;
         }
 
         .box-right {
-            max-height: 67vh;
+            max-height: 67svh;
 
             .box-blu {
-                max-height: 67vh;
+                max-height: 67svh;
+            }
+        }
+    }
+
+    @media (min-width: 427px) and (max-width: 430px) {
+        
+        .box-left {
+            height: 29svh;
+            min-width: 100%;
+        }
+
+        .box-right {
+            max-height: 71svh;
+
+            .box-blu {
+                max-height: 71svh;
             }
         }
     }
