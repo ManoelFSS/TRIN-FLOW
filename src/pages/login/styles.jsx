@@ -116,15 +116,15 @@ export const Container_login = styled.section`
     @media (min-width: 321px) and (max-width: 560px) {
         
         .box-left {
-            height: 30vh;
+            height: 33vh;
             min-width: 100%;
         }
 
         .box-right {
-            max-height: 70vh;
+            max-height: 67vh;
 
             .box-blu {
-                max-height: 70vh;
+                max-height: 67vh;
             }
         }
     }
