@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 300px;
+    width: 260px;
     padding: 20px 20px 30px 20px;
     background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 1.5px 2px 8px rgba(0, 0, 0, 0.4);
@@ -22,7 +22,8 @@ export const Container = styled.div`
         padding: 2px 0;
 
         @media (min-width: 1550px) {
-            gap: 1vh;
+            gap: 0.5vh;
+            padding: 0.4vh 0;
         }
     }
 
@@ -31,7 +32,7 @@ export const Container = styled.div`
         color: var(--color-text-primary);
         font-weight: 600;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 14px;
         trasition: color 0.3s ease;
         boder: solid 2px var( --color-bord-btn-primary );
         padding: 5px 0 0;
@@ -49,6 +50,12 @@ export const Container = styled.div`
 
     .text {
         text-align: center;
+        font-size: 12px;
+        &:hover {
+            text-decoration:none;
+            cursor: default;
+            color: var( --color-text-primary );
+        }
     }
 
     .btns {
@@ -62,8 +69,8 @@ export const Container = styled.div`
         }
     }
 
-    @media (min-width: 500px) and (max-width: 570px) {
-        width: 260px;
+    @media (min-width: 500px) and (max-width: 768px) {
+        width: 240px;
     }
 
     @media (min-width: 1550px) {

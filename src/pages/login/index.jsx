@@ -28,7 +28,6 @@ const Login = () => {
                         <FaFacebook className="facebook" onClick={() => window.open('https://www.facebook.com/manoel.fernando.50', '_blank')} />
                         <FaInstagram className="instagram" onClick={() => window.open('https://www.instagram.com/manoelfernandoplk/', '_blank')} />
                     </div>
-                    <p className="copyright"> © 2024 Trin-Flow.</p>
                 </div>
             </section>
             <section className="box-right">
@@ -37,6 +36,7 @@ const Login = () => {
                     { selectForm === "register" && <Register  setSelectForm={setSelectForm} /> }
                     { selectForm === "password" && <Password_Recovery  setSelectForm={setSelectForm} />}
                 </div>
+                <p className="copyright"> © 2024 Trin-Flow.</p>
             </section>
         </Container_login>
     )

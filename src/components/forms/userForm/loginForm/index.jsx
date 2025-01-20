@@ -7,8 +7,13 @@ import BtnNavigate from "../../../btns/btnNavigate"
 import Title from "../../../title"
 import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
+// hooks
+import useFormValue from "../../../../hooks/useFormValue"
+import { set } from "mongoose"
 
 const LoginForm = ({setSelectForm}) => {
+
+    const { email, setEmail, password, setPassword } = useFormValue();
 
     return (
         <FormLayout $height="">
@@ -17,11 +22,29 @@ const LoginForm = ({setSelectForm}) => {
             </section>
             <section className="box">
                 <LabelComponent $text="Email" $htmlFor="email" />
-                <InputComponent $typeText="email" $textId="email" $name="email" $placeholder="Exmplo@gmail.com" $autoComplete="current-email" $required />
+                <InputComponent 
+                    $typeText="email" 
+                    $textId="email" 
+                    $value={email} 
+                    $onchange={(e) => setEmail(e.target.value)}
+                    $name="email" 
+                    $placeholder="Exmplo@gmail.com" 
+                    $autoComplete="current-email" 
+                    $required 
+                />
             </section>
             <section className="box">
                 <LabelComponent $text="Senha" $htmlFor="senha" />
-                <InputComponent $typeText="password" $textId="senha" $name="senha" $placeholder="Digite sua  Senha" $autoComplete="current-password" $required />
+                <InputComponent 
+                    $typeText="password" 
+                    $textId="senha" 
+                    $value={password} 
+                    $onchange={(e) => setPassword(e.target.value)}
+                    $name="senha" 
+                    $placeholder="Digite sua  Senha" 
+                    $autoComplete="current-password" 
+                    $required 
+                />
                 <p onClick={() => setSelectForm("password")}>
                     Esqueci minha senha
                 </p>

@@ -15,7 +15,6 @@ export const Container_login = styled.section`
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
         text-align: center;
         overflow: hidden;
         
@@ -23,20 +22,27 @@ export const Container_login = styled.section`
             width: 100%;
             margin: auto;
             
+            
             h1 {
                 font-size: 22px;
                 font-weight: 900;
                 color: var( --color-title-primary );
+                @media (min-width: 1550px) {
+                    font-size: 4.5vh;
+                }
             }
             
             p {
                 font-size: 16px;
+                @media (min-width: 1550px) {
+                    font-size: 2.5vh;
+                }
             }
             
             .icons {
                 display: flex;
                 justify-content: center;
-                gap:10px ;
+                gap:2vh ;
                 font-size: 30px;
                 padding: 10px 0px;
                 
@@ -63,16 +69,16 @@ export const Container_login = styled.section`
                     color: #e1306c;
                 }
                 
+                @media (min-width: 1550px) {
+                    font-size: 4.5vh;
+                }
+                
             }
         }
         
-        .copyright {   
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 2;
-            padding: 5px;
-            width: 100%;
-            background-color: var( --color-bg-secondary )
+        @media (min-width: 1550px) {
+            width: 30vw;
+            min-width: 600px;
         }
     }
     
@@ -80,6 +86,7 @@ export const Container_login = styled.section`
         width: 100%;
         height: 100svh;
         background:  #000 url(${graficPhoto}) no-repeat right center / 100% 100%;
+        position: relative;
 
         .box-blu {
             flex: 1;
@@ -88,59 +95,58 @@ export const Container_login = styled.section`
             height: 100svh;
             background-color: rgba(0, 0, 0, 0.6);
             overflow: auto;
-            padding: 15px 0;
+            padding: 25px 10px;
+        }
+
+        .copyright {   
+            font-size: 1.7vh;
+            font-weight: 600;
+            z-index: 2;
+            padding: 2.5px;
+            width: 100%;
+            text-align: center;
+            color: var( --color-text-secondary );
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            
         }
     }
     
-    @media (max-width: 560px) {
+    @media (max-width: 552px) {
         flex-direction: column;
     }
 
-    @media (max-width: 321px) {
+    @media (min-width: 250px) and (max-width: 374px) {
         
         .box-left {
-            height: 48vh;
+            height: 48svh;
             min-width: 100%;
-            align-items: flex-end;
         }
-
+        
         .box-right {
             max-height: 52svh;
-
+            
             .box-blu {
                 max-height: 52svh;
             }
         }
     }
-
-    @media (min-width: 321px) and (max-width: 426px) {
+    
+    @media (orientation: portrait) and (min-width: 375px) and (max-width: 600px) {
         
         .box-left {
-            height: 33svh;
+            height: 34svh;
             min-width: 100%;
         }
-
-        .box-right {
-            max-height: 67svh;
-
-            .box-blu {
-                max-height: 67svh;
-            }
-        }
-    }
-
-    @media (min-width: 427px) and (max-width: 430px) {
         
-        .box-left {
-            height: 29svh;
-            min-width: 100%;
-        }
-
         .box-right {
-            max-height: 71svh;
-
+            max-height: 66svh;
+            
             .box-blu {
-                max-height: 71svh;
+                max-height: 66svh;
             }
         }
     }

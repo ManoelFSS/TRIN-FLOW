@@ -1,6 +1,16 @@
 import { Input } from "./styles"
 
-const InputComponent = ({$typeText, $placeholder, $textId, $name, $autoComplete, $required}) => {
+const InputComponent = (
+    {
+        $typeText, 
+        $placeholder, 
+        $textId, 
+        $name, 
+        $autoComplete, 
+        $required,
+        $value,
+        $onchange
+    }) => {
     return (
         <Input 
             type={$typeText} 
@@ -8,7 +18,9 @@ const InputComponent = ({$typeText, $placeholder, $textId, $name, $autoComplete,
             name={$name} 
             placeholder={$placeholder} 
             autoComplete={$autoComplete}
-            required
+            value={$value}
+            onChange={$onchange}
+            required={$required}
         />
     )
 }
