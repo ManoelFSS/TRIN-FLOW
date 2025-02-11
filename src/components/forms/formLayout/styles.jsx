@@ -32,7 +32,7 @@ export const Container = styled.div`
         color: var(--color-text-primary);
         font-weight: 600;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 13px;
         trasition: color 0.3s ease;
         boder: solid 2px var( --color-bord-btn-primary );
         padding: 5px 0 0;

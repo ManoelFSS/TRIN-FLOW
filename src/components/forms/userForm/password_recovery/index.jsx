@@ -8,8 +8,8 @@ import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
 import Loading from "../../../loading"
 // hooks
-import useLoading from "../../../../hooks/useLoading"
-import useFormValue from "../../../../hooks/useFormValue"
+import useLoading from "../../../../pages/hooks/useLoading"
+import useFormValue from "../../../../pages/hooks/useFormValue"
 
 
 const Password_Recovery = ({setSelectForm}) => {

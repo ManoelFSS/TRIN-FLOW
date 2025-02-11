@@ -8,7 +8,7 @@ import Title from "../../../title"
 import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
 // hooks
-import useFormValue from "../../../../hooks/useFormValue"
+import useFormValue from "../../../../pages/hooks/useFormValue"
 
 const LoginForm = ({setSelectForm}) => {
 

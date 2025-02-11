@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Image = styled.img`
-    width: 140px;
+    width: ${props => props.$width};
 
-    @media (min-width: 1550px) {
-        width: 30vh;
-    }
+    // @media (min-width: 1550px) {
+    //     width: 30vh;
+    // }
 
 `
