@@ -11,15 +11,15 @@ const Header = ({$setToogleMenu, $toogleMenu}) => {
 
     return (
         <Container_header $toogleMenu={$toogleMenu} > 
-            <IoMenu className="icon menu" onClick={() => $setToogleMenu(!$toogleMenu)} />
+            <IoMenu className="menu" onClick={() => $setToogleMenu(!$toogleMenu)} />
             <div className="title">
-                <Logo $width={"6.5vh"} />
+                <Logo  />
                 <Title 
                     $text="TRIN-FLOW" 
                     $cor={"var( --color-text-primary )"} 
                     $bord={"none"}
                     padd={"0"}
-                    $fontSize={"3vh"}
+                    
                 />
             </div>
             <div className="box_right">

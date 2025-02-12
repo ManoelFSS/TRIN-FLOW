@@ -5,30 +5,33 @@ export const Container = styled.div`
     min-height: 100svh;
     width: 100%;
     background-color: #fff;
-    position: relative;
     
     .sidebar {
         transition: width 0.3s ease;
-        width: ${props => props.$toogleMenu ? "35vh" : "6vh"};
-        height: 100svh;
+        width: ${props => props.$toogleMenu ? "170px" : "30px" };
+        height: 100svh;        
         background-color: var( --color-secondary );
         box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
-        position: relative;
         z-index: 99;
+        position: absolute;
         overflow: hidden;
 
-        @media (max-width: 550px) {
-            width: 6vh;
+        @media (max-height: 500px) {
+            // height: 140svh;
         }
 
         .bar {
+            min-width: 30px;
             position: absolute;
-            top: 0;
             left: 0;
-            background-color: var( --color-primary );
-            width: 6vh;
+            top: 0;
             height: 100svh;
+            background-color: var( --color-primary );
             z-index: -1;
+
+            @media (max-height: 530px) {
+                padding-top: 100px;
+            }
         }
     }
 
@@ -36,9 +39,19 @@ export const Container = styled.div`
         width: 100%;
         
         .main {
-            height: calc( 100svh );
-            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: padding 0.3s ease;
+            height: 100svh ;
+            width: 100%;
             background-color: var( --color-bg-secondary );
+            overflow: auto;
+            padding: ${props => props.$toogleMenu ? "10px 10px 10px 180px" : "10px 10px 10px 40px" };
+
+            @media (max-height: 530px) {
+                min-height: 100svh;  /////////  aqui e o container que vai receber as rotas | pages  //////////
+            }
         }
 
         footer {
@@ -54,7 +67,7 @@ export const Container = styled.div`
             position: fixed;
             bottom: 0;
             right: 0;
-            width: ${props => props.$toogleMenu ? "calc( 100% - 30vh )" : "calc( 100% - 6vh )" };
+            width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 30px )" };
         }
     }
     

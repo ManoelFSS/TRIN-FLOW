@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 // components
-import Painel from "./pages/painel/layout"
+import Layout from "./pages/painel/layout"
 import Login from "./pages/login"
 // hooks
 import useToogleMenu from "./pages/hooks/useToogleMenu"
@@ -11,7 +11,7 @@ function App() {
   
   return (
     <>
-      {!islogged ? <Painel $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu} /> : <Login />}
+      {!islogged ? <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}><h1>Dashboard</h1></Layout> : <Login />}
     </>
   )
 }

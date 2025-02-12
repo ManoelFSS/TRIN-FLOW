@@ -19,11 +19,11 @@ const Menu = () => {
     return (
         <Nav>
             <div className="logo">
-                <Logo $width={"20vh"} />
+                <Logo />
                 <h3>TRIN-FLOW</h3>
             </div>
             <ul>
-                <li> 
+                <li className="active"> 
                     <MdDashboardCustomize className="icon" /> 
                     Dashboard
                 </li>

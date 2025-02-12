@@ -5,23 +5,26 @@ export const Container_header = styled.div`
     align-items: center;
     justify-content: space-between;
     transition: width 0.3s ease;
-    width: ${props => props.$toogleMenu ? "calc( 100% - 30vh )" : "calc( 100% - 6vh )" };
-    min-height: 8vh;
-    padding: 0 2vh;
+    width: ${props => props.$toogleMenu ? "calc(100% - 168px)" : "calc(100% - 30px)"};
+    padding: 2px 10px;
     position: fixed;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     background-color: var( --color-bg-primary );
-
-    @media (max-width: 550px) {
-        .menu {
-            display: none;
-        }
-    }
+    right: 0;
 
     .title {
         display: flex;
         align-items: center;
         gap: 1vh;
+
+        img {
+            height: 30px;
+        }
+
+        h3 {
+            font-size: 0.8rem;
+            color: var(--color-text-primary);
+        }
     }
 
     .box_right {
@@ -38,15 +41,28 @@ export const Container_header = styled.div`
 
             .icon {
                 color: var(--color-text-primary);
-                font-size: 6vh;
+                width: 30px;
             }
+
+            button {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+            
         }
     }
     
 
-    .icon {
+    .menu {
         color: var(--color-text-primary);
-        font-size:6vh;
+        width: 30px;
+        height: 30px;
         cursor: pointer;
+        
+        @media (max-width: 600px){
+            display: none;
+        }
     }
+
+
 `
