@@ -8,7 +8,7 @@ export const Container = styled.div`
     
     .sidebar {
         transition: width 0.3s ease;
-        width: ${props => props.$toogleMenu ? "170px" : "40px" };
+        width: ${props => props.$toogleMenu ? "170px" : "50px" };
         height: 100svh;        
         background-color: var( --color-secondary );
         box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
@@ -22,7 +22,7 @@ export const Container = styled.div`
         }
 
         .bar {
-            min-width: 40px;
+            min-width: 50px;
             position: absolute;
             left: 0;
             top: 0;
@@ -69,7 +69,7 @@ export const Container = styled.div`
             position: fixed;
             bottom: 0;
             right: 0;
-            width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 40px )" };
+            width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 50px )" };
 
             @media (max-height: 500px) {
                 width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 30px )" };

@@ -17,7 +17,7 @@ export const Nav = styled.nav`
         position: absolute;
         width:165px;
         top: 1vh;
-        padding-left: 34px;
+        padding-left: 50px;
 
         @media (max-height: 530px) {
             display: none;
@@ -47,8 +47,8 @@ export const Nav = styled.nav`
             width: 100%;
             align-items: center;
             cursor: pointer;
-            font-size: 0.8rem;
-            gap: 16px;
+            font-size: 0.7rem;
+            gap: 20px;
             transition: color 0.3s ease;
             color: var( --color-text-secondary );
 
@@ -66,7 +66,8 @@ export const Nav = styled.nav`
                 height: 40px;
                 color: var( --color-icon-primary );
                 position: relative;
-                padding: 6px;
+                padding: 5px;
+                left: 4px;
 
                 @media (max-height: 530px) {
                     width: 25px;

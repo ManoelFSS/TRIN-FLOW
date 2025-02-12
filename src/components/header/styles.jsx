@@ -5,7 +5,7 @@ export const Container_header = styled.div`
     align-items: center;
     justify-content: space-between;
     transition: width 0.3s ease;
-    width: ${props => props.$toogleMenu ? "calc(100% - 168px)" : "calc(100% - 40px)"};
+    width: ${props => props.$toogleMenu ? "calc(100% - 168px)" : "calc(100% - 50px)"};
     padding: 2px 10px;
     position: fixed;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
