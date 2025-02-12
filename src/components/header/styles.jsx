@@ -5,12 +5,16 @@ export const Container_header = styled.div`
     align-items: center;
     justify-content: space-between;
     transition: width 0.3s ease;
-    width: ${props => props.$toogleMenu ? "calc(100% - 168px)" : "calc(100% - 30px)"};
+    width: ${props => props.$toogleMenu ? "calc(100% - 168px)" : "calc(100% - 40px)"};
     padding: 2px 10px;
     position: fixed;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     background-color: var( --color-bg-primary );
     right: 0;
+
+    @media (max-height: 500px) {
+        width: ${props => props.$toogleMenu ? "calc(100% - 168px)" : "calc(100% - 30px)"};
+    }
 
     .title {
         display: flex;

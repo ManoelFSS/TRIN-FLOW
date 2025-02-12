@@ -8,7 +8,7 @@ export const Container = styled.div`
     
     .sidebar {
         transition: width 0.3s ease;
-        width: ${props => props.$toogleMenu ? "170px" : "30px" };
+        width: ${props => props.$toogleMenu ? "170px" : "40px" };
         height: 100svh;        
         background-color: var( --color-secondary );
         box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
@@ -17,11 +17,12 @@ export const Container = styled.div`
         overflow: hidden;
 
         @media (max-height: 500px) {
+            width: ${props => props.$toogleMenu ? "170px" : "30px" };
             // height: 140svh;
         }
 
         .bar {
-            min-width: 30px;
+            min-width: 40px;
             position: absolute;
             left: 0;
             top: 0;
@@ -31,6 +32,7 @@ export const Container = styled.div`
 
             @media (max-height: 530px) {
                 padding-top: 100px;
+                min-width: 30px;
             }
         }
     }
@@ -47,7 +49,7 @@ export const Container = styled.div`
             width: 100%;
             background-color: var( --color-bg-secondary );
             overflow: auto;
-            padding: ${props => props.$toogleMenu ? "10px 10px 10px 180px" : "10px 10px 10px 40px" };
+            padding: ${props => props.$toogleMenu ? "10px 10px 10px 190px" : "10px 10px 10px 50px" };
 
             @media (max-height: 530px) {
                 min-height: 100svh;  /////////  aqui e o container que vai receber as rotas | pages  //////////
@@ -67,7 +69,11 @@ export const Container = styled.div`
             position: fixed;
             bottom: 0;
             right: 0;
-            width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 30px )" };
+            width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 40px )" };
+
+            @media (max-height: 500px) {
+                width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 30px )" };
+            }
         }
     }
     

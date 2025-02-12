@@ -62,8 +62,8 @@ export const Nav = styled.nav`
                 
             .icon {
                 cursor: pointer;
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 color: var( --color-icon-primary );
                 position: relative;
                 padding: 6px;
