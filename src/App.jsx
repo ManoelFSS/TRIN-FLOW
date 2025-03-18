@@ -11,7 +11,7 @@ function App() {
   
   return (
     <>
-      {!islogged ? <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}><h1>Dashboard</h1></Layout> : <Login />}
+      {!islogged ? <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}></Layout> : <Login />}
     </>
   )
 }

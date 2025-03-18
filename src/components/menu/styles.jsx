@@ -5,19 +5,15 @@ export const Nav = styled.nav`
     trasition: width 0.3s ease;
     flex-direction: column;
     min-height: 100svh;
-    padding-top: 100px;
-
-    @media (max-height: 530px) {
-        padding-top: 35px;
-    }
     
     .logo {
         display: flex;
         flex-direction: column;
-        position: absolute;
+        position: ;
         width:165px;
-        top: 1vh;
-        padding-left: 50px;
+        padding-left: 65px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         @media (max-height: 530px) {
             display: none;
@@ -41,13 +37,14 @@ export const Nav = styled.nav`
         width: 170px;
         max-width: 170px;
         flex-direction: column;
+        gap: 2px;
 
         li {
             display: flex;
-            width: 100%;
+            width: 180px;
             align-items: center;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             gap: 20px;
             transition: color 0.3s ease;
             color: var( --color-text-secondary );
@@ -68,14 +65,6 @@ export const Nav = styled.nav`
                 position: relative;
                 padding: 5px;
                 left: 4px;
-
-                @media (max-height: 530px) {
-                    width: 25px;
-                    height: 25px;
-                    padding: 4px;
-                    position: relative;
-                    left: 3px;
-                }
             }
         }
 

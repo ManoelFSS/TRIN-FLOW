@@ -8,6 +8,10 @@ export const Container_login = styled.section`
     width: 100%;
     background-color: #fff;
     position: relative;
+
+    @media (max-width: 552px) {
+        flex-direction: column;
+    }
     
     .box-left {
         height: 100svh;
@@ -21,8 +25,7 @@ export const Container_login = styled.section`
         .box-container {
             width: 100%;
             margin: auto;
-            
-            
+
             h1 {
                 font-size: 22px;
                 font-weight: 900;
@@ -80,6 +83,14 @@ export const Container_login = styled.section`
             width: 30vw;
             min-width: 600px;
         }
+        
+        @media (max-width: 552px) {
+            max-height: 36svh;
+        }
+
+        @media (orientation: landscape) {
+            min-height: 50svh;
+        }
     }
     
     .box-right {
@@ -88,14 +99,21 @@ export const Container_login = styled.section`
         background:  #000 url(${graficPhoto}) no-repeat right center / 100% 100%;
         position: relative;
 
+        @media (max-width: 550px) {
+            min-height: 64svh;
+        }
+
         .box-blu {
-            flex: 1;
             display: flex;
             width: 100%;
             height: 100svh;
             background-color: rgba(0, 0, 0, 0.6);
             overflow: auto;
-            padding: 25px 10px;
+            padding: 10px 10px 20px;
+
+            @media (max-width: 550px) {
+                min-height: 64svh;
+            }
         }
 
         .copyright {   
@@ -114,41 +132,4 @@ export const Container_login = styled.section`
             
         }
     }
-    
-    @media (max-width: 552px) {
-        flex-direction: column;
-    }
-
-    @media (min-width: 250px) and (max-width: 374px) {
-        
-        .box-left {
-            height: 48svh;
-            min-width: 100%;
-        }
-        
-        .box-right {
-            max-height: 52svh;
-            
-            .box-blu {
-                max-height: 52svh;
-            }
-        }
-    }
-    
-    @media (orientation: portrait) and (min-width: 375px) and (max-width: 600px) {
-        
-        .box-left {
-            height: 34svh;
-            min-width: 100%;
-        }
-        
-        .box-right {
-            max-height: 66svh;
-            
-            .box-blu {
-                max-height: 66svh;
-            }
-        }
-    }
-
 `;

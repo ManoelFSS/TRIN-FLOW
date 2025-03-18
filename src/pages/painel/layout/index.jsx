@@ -3,7 +3,13 @@ import { Container } from "./styles"
 import Header from "../../../components/header"
 import Menu from "../../../components/menu"
 
+
 const Layout = ({children, $setToogleMenu, $toogleMenu}) => {
+
+    const Year = new Date().getFullYear()
+    console.log(Year)
+
+
     return (
         <Container $toogleMenu={$toogleMenu} >
             <section className="sidebar" >
@@ -15,7 +21,7 @@ const Layout = ({children, $setToogleMenu, $toogleMenu}) => {
                 <div className="main">
                     {children}
                 </div>
-                <footer><p>© 2023 Trin-Flow | MF-Tech</p></footer>
+                <footer><p>© 2024 - {Year} Trin-Flow | Todos os direitos reservados | Trin-codex</p></footer>
             </section>
         </Container>
     )

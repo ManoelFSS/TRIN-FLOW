@@ -63,10 +63,10 @@ const Menu = () => {
                     <MdAdminPanelSettings className="icon" />
                     Administrador
                 </li>
-                <li>
+                {/* <li>
                     <FaGear className="icon gear" />
                     Configurações
-                </li>
+                </li> */}
             </ul>
         </Nav>
     )
