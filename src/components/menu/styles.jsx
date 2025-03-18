@@ -4,7 +4,7 @@ export const Nav = styled.nav`
     display: flex;
     trasition: width 0.3s ease;
     flex-direction: column;
-    min-height: 100svh;
+    height: 100svh;
     
     .logo {
         display: flex;
@@ -16,7 +16,7 @@ export const Nav = styled.nav`
         padding-bottom: 10px;
 
         @media (max-height: 530px) {
-            display: none;
+            // display: none;
         }
 
         img {
@@ -37,7 +37,6 @@ export const Nav = styled.nav`
         width: 170px;
         max-width: 170px;
         flex-direction: column;
-        gap: 2px;
 
         li {
             display: flex;
