@@ -13,6 +13,7 @@ import { FaWhatsapp, FaFacebook, FaInstagram  } from "react-icons/fa";
 const Login = () => {
 
     const { selectForm, setSelectForm   } = useLFormSelect();
+    console.log("API KEY:", import.meta.env.VITE_FIREBASE_API_KEY);
 
     return (
         <Container_login>
