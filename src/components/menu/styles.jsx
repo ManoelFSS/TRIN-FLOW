@@ -8,10 +8,11 @@ export const Nav = styled.nav`
     
     .logo {
         display: flex;
+        gap: 10px;
         flex-direction: column;
         position: ;
-        width:165px;
-        padding-left: 65px;
+        width:190px;
+        padding-left: 55px;
         padding-top: 10px;
         padding-bottom: 10px;
 
@@ -25,6 +26,7 @@ export const Nav = styled.nav`
 
         h3 {
             font-size: 0.7rem;
+            font-weight: 700;
             color: var( --color-text-secondary );
             text-align: center;
         }
@@ -40,11 +42,11 @@ export const Nav = styled.nav`
 
         li {
             display: flex;
-            width: 180px;
+            width: 190px;
             align-items: center;
             cursor: pointer;
             font-size: 0.8rem;
-            gap: 20px;
+            gap: 30px;
             transition: color 0.3s ease;
             color: var( --color-text-secondary );
 

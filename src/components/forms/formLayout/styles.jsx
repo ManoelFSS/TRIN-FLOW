@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 260px;
+    min-width: 320px;
     padding: 20px 20px 30px 20px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 1.5px 2px 8px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     position: relative;
@@ -25,6 +25,44 @@ export const Container = styled.div`
             gap: 0.5vh;
             padding: 0.4vh 0;
         }
+    }
+
+    .box-check {
+        display: flex;
+        align-items: center;
+
+        input {
+            min-width: 35px;
+            min-height: 35px;
+            border: none;
+            box-shadow: none;
+
+            @media (min-width: 1550px) {
+                width: 4vh;
+                height: 4vh;
+            }
+        }
+
+        .text-check {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 4px 8px;
+            
+            span {
+                width: 240px;
+                font-weight: 800;
+                font-size: 0.9rem;
+                text-align: center;
+                
+                @media (min-width: 1550px) {
+                    font-size: 2vh;
+                }
+            }
+        }
+
     }
 
     p {
@@ -70,7 +108,7 @@ export const Container = styled.div`
     }
 
     @media (min-width: 500px) and (max-width: 768px) {
-        width: 240px;
+        width: 250px;
     }
 
     @media (min-width: 1550px) {

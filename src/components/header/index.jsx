@@ -6,8 +6,12 @@ import  Title from "../../components/title"
 import Btn from "../../components/btns/btnSubmit"
 // icons
 import { IoMenu, IoArrowUndo, IoToggle } from "react-icons/io5";
+// context
+import { useAuthContext } from "../../context/AuthContext"
 
 const Header = ({$setToogleMenu, $toogleMenu}) => {
+
+    const { logoutUser } = useAuthContext()
 
     return (
         <Container_header $toogleMenu={$toogleMenu} > 
@@ -25,7 +29,10 @@ const Header = ({$setToogleMenu, $toogleMenu}) => {
             <div className="box_right">
                 <div className="exit">
                     <IoArrowUndo className="icon" />
-                    <Btn $text="Sair" />
+                    <Btn 
+                        $text="Sair"
+                        onClick={logoutUser}
+                    />
                 </div>
             </div>
         </Container_header>

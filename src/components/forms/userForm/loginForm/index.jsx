@@ -1,5 +1,4 @@
 
-
 // components
 import FormLayout from "../../formLayout"
 import BtnSubmit from "../../../btns/btnSubmit"
@@ -7,15 +6,18 @@ import BtnNavigate from "../../../btns/btnNavigate"
 import Title from "../../../title"
 import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
+// context
+import { useAuthContext } from "../../../../context/AuthContext"
 // hooks
 import useFormValue from "../../../../pages/hooks/useFormValue"
 
 const LoginForm = ({setSelectForm}) => {
 
+    const { signInUser } = useAuthContext();
     const { email, setEmail, password, setPassword } = useFormValue();
 
     return (
-        <FormLayout $height="">
+        <FormLayout >
             <section className="logo">
                 <Title $text="Login"  $cor={"var(  --color-text-primary )"}  />
             </section>

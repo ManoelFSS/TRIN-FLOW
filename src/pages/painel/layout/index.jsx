@@ -7,8 +7,6 @@ import Menu from "../../../components/menu"
 const Layout = ({children, $setToogleMenu, $toogleMenu}) => {
 
     const Year = new Date().getFullYear()
-    console.log(Year)
-
 
     return (
         <Container $toogleMenu={$toogleMenu} >
@@ -20,7 +18,7 @@ const Layout = ({children, $setToogleMenu, $toogleMenu}) => {
                 <div className="main">
                     {children}
                 </div>
-                <footer><p>© 2024 - {Year} Trin-Flow | Todos os direitos reservados | Trin-codex</p></footer>
+                <footer><p>© 2024 - {Year} Trin-Flow | Todos os direitos reservados - Trin-Codex</p></footer>
             </section>
         </Container>
     )

@@ -12,8 +12,6 @@ import { FaWhatsapp, FaFacebook, FaInstagram  } from "react-icons/fa";
 
 const Login = () => {
 
-    
-
     const { selectForm, setSelectForm   } = useLFormSelect();
 
     return (

@@ -11,11 +11,14 @@ import
         FaMapLocationDot,
         FaGear
     } from "react-icons/fa6";
-
 import Logo from "../logo";
+// context
+import { useAuthContext } from "../../context/AuthContext";
 
 
 const Menu = () => {
+    const {  } = useAuthContext();
+
     return (
         <Nav>
             <div className="logo">

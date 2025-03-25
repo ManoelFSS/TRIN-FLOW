@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Button = styled.button`
     width: 100%;
+    height: 35px;
     background-color: var( --color-bg-btn-primary );
-    padding: 1vh;
     border-radius: 4px;
     border: none;
     color: var( --color-text-secondary );
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    font-size: 2vh;
+    font-size: 1rem;
     font-weight: 800;
     transition: background-color 0.3s ease; 
     position: relative;

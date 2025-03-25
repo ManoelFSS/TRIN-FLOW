@@ -15,13 +15,10 @@ export const LoaderContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Espaçamento entre as bolinhas */
+    gap: 10px;
     width: 100%;
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-
+    position: relative;
+    top: 20px;
 `;
 
 // Estilos das bolinhas com a animação de fade-in/fade-out

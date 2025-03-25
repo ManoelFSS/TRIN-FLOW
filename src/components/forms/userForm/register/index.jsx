@@ -13,14 +13,12 @@ const Register = ({setSelectForm}) => {
         setName, 
         phone, 
         setPhone, 
-        cpf, 
-        setCpf, 
         email, 
         setEmail, 
         password, 
         setPassword,
-        passwordRepeat, 
-        setPasswordRepeat 
+        checkbox,
+        setCheckbox
     } = useFormValue();
     
     return (
@@ -55,19 +53,6 @@ const Register = ({setSelectForm}) => {
                 />
             </section>
             <section className="box">
-                <LabelComponent $text="CPF | CNPJ" $htmlFor="cpf" />
-                <InputComponent 
-                    $typeText="text"
-                    $value={cpf}
-                    $onchange={(e) => setCpf(e.target.value)} 
-                    $textId="cpf" 
-                    $name="cpf" 
-                    $placeholder="Digite seu CPF" 
-                    $autoComplete="current-text" 
-                    $required 
-                />
-            </section>
-            <section className="box">
                 <LabelComponent $text="Email" $htmlFor="email" />
                 <InputComponent 
                     $typeText="email"
@@ -93,18 +78,21 @@ const Register = ({setSelectForm}) => {
                     $required 
                 />
             </section>
-            <section className="box">
-                <LabelComponent $text="Repita a Senha" $htmlFor="senha02" />
+            <section className="box-check">
                 <InputComponent 
-                    $typeText="password"
-                    $value={passwordRepeat} 
-                    $onchange={(e) => setPasswordRepeat(e.target.value)}
-                    $textId="senha02" 
-                    $name="senha02" 
-                    $placeholder="Digite a Senha novamente" 
-                    $autoComplete="current-password" 
+                    $typeText="checkbox"
+                    $value={checkbox} 
+                    $onchange={(e) => setCheckbox(e.target.value)} 
+                    $textId="termo" 
+                    $name="termo" 
+                    $placeholder="Digite sua  Senha" 
+                    $autoComplete="current-checkbox" 
                     $required 
                 />
+                <div className="text-check">
+                    <span>Eu li e concordo com os termos e condições</span>
+                    <span><a href="#">Termos e condições</a></span>
+                </div>
             </section>
             <section className="btns">
                 <BtnSubmit $text="Cadastrar" />

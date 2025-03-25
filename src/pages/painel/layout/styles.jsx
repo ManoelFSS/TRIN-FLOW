@@ -8,9 +8,9 @@ export const Container = styled.div`
     
     .sidebar {
         transition: width 0.3s ease;
-        width: ${props => props.$toogleMenu ? "180px" : "50px" };
+        width: ${props => props.$toogleMenu ? "190px" : "50px" };
         height: 100vh;        
-        background: linear-gradient(90deg, var( --color-primary) 0px, var( --color-primary ) 50px, black 50px, black 100%);
+        background: linear-gradient(90deg, var( --color-primary) 0px, var( --color-primary ) 50px, var(  --color-secondary ) 50px, var( --color-secondary ) 100%);
         box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
         z-index: 99;
         position: absolute;
@@ -20,6 +20,7 @@ export const Container = styled.div`
 
     .content {
         width: 100%;
+        height: 100svh;
         
         .main {
             display: flex;
@@ -39,8 +40,8 @@ export const Container = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var( --color-bg-primary );
-            color: var( --color-text-primary );
+            background-color: var(  --color-secondary );
+            color: var( --color-text-secondary);
             font-weight: 700;
             font-size: 0.6rem;
             position: fixed;
@@ -48,7 +49,7 @@ export const Container = styled.div`
             right: 0;
             padding: 5px 10px;
             text-align: center;
-            width: ${props => props.$toogleMenu ? "calc( 100% - 150px )" : "calc( 100% - 50px )" };
+            width: ${props => props.$toogleMenu ? "calc( 100% - 190px )" : "calc( 100% - 50px )" };
         }
     }
     
