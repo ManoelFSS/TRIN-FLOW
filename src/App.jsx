@@ -19,7 +19,7 @@ function App() {
     if (loading) {
       setTimeout(() => {
         setLoading(false); // Garante a atualização correta do estado
-      }, 2000);
+      }, 3000);
     }
   }, [authenticated]);
   
