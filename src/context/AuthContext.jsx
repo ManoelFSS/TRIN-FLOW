@@ -118,16 +118,24 @@ export const AuthProvider = ({ children }) => {
             
             return { success: true };
         } catch (error) {
-            
-            setTimeout(() => {
-                setMessege({ 
-                    success: false,
-                    title: "Erro ao Cadastrar", 
-                    message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
-                });
-            }, 2000);
 
-            // console.error("Ops! Email ja cadastrados:", error.message);
+            if (error.code === "auth/email-already-in-use") {
+                setTimeout(() => {
+                    setMessege({ 
+                        success: false,
+                        title: "Erro ao Cadastrar", 
+                        message: "O e-mail já está em uso! Tente fazer login ou recuperar sua senha."
+                    });
+                }, 2000);
+            }else {
+                setTimeout(() => {
+                    setMessege({ 
+                        success: false,
+                        title: "Erro ao Cadastrar", 
+                        message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
+                    });
+                }, 2000);
+            }
             return  {success: false};
         }finally {
             setTimeout(() => {
