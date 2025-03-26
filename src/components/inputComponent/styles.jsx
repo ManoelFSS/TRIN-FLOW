@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Input = styled.input`
     height: 35px;
     background-color: var( --color-bg-input );
-    padding: 6px;
+    padding-left: 10px;
     border-radius: 5px;
     border: none;
     color: var( --color-text-primary );
@@ -18,9 +18,10 @@ export const Input = styled.input`
         background-color: var( --color-bg-input-hover );
     }
 
-    @media (min-width: 1550px) {
+    @media (min-width: 1920px) {
         font-size: 2vh;
         padding: 1vh;
+        height: 5vh;
     }
     
 `

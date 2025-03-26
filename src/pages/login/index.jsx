@@ -4,16 +4,19 @@ import Logo from "../../components/logo"
 import LoginForm from "../../components/forms/userForm/loginForm"
 import Register from "../../components/forms/userForm/register"
 import Password_Recovery from "../../components/forms/userForm/password_recovery"
+import Messege from "../../components/messege";
 //Hooks
 import useLFormSelect from "../../pages/hooks/useFormSelect";
+// context
+import { useAuthContext } from "../../context/AuthContext";
 
 // icons
 import { FaWhatsapp, FaFacebook, FaInstagram  } from "react-icons/fa";
 
 const Login = () => {
 
+    const { messege } = useAuthContext();
     const { selectForm, setSelectForm   } = useLFormSelect();
-    console.log("API KEY:", import.meta.env.VITE_FIREBASE_API_KEY);
 
     return (
         <Container_login>
@@ -34,6 +37,7 @@ const Login = () => {
                     { selectForm === "login" && <LoginForm  setSelectForm={setSelectForm}/>}
                     { selectForm === "register" && <Register  setSelectForm={setSelectForm} /> }
                     { selectForm === "password" && <Password_Recovery  setSelectForm={setSelectForm} />}
+                    { messege && <Messege $title={messege.title} $text={messege.message} /> }
                 </div>
                 <p className="copyright"> © 2024 Trin-Flow.</p>
             </section>

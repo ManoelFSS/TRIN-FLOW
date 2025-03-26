@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 // pages
 import Layout from "./pages/painel/layout"
 import Login from "./pages/login"
@@ -12,15 +12,14 @@ import { useAuthContext } from "./context/AuthContext"
 
 function App() {
   const { toogleMenu, setToogleMenu } = useToogleMenu()
-
-  const { loading, setLoading, authenticated } = useAuthContext()
+  const { authenticated } = useAuthContext()
+  const [loading, setLoading] = useState(null);
 
   useEffect(() => {
-    if (loading) {
+      setLoading(true);
       setTimeout(() => {
         setLoading(false); // Garante a atualização correta do estado
       }, 3000);
-    }
   }, [authenticated]);
   
   if(loading) return <Loadingpage />

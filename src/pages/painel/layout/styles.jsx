@@ -42,12 +42,12 @@ export const Container = styled.div`
             align-items: center;
             background-color: var(  --color-secondary );
             color: var( --color-text-secondary);
-            font-weight: 700;
-            font-size: 0.6rem;
+            font-weight: 500;
+            font-size: 0.7rem;
             position: fixed;
             bottom: 0;
             right: 0;
-            padding: 5px 10px;
+            padding: 5px 20px;
             text-align: center;
             width: ${props => props.$toogleMenu ? "calc( 100% - 190px )" : "calc( 100% - 50px )" };
         }

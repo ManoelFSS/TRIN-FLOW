@@ -17,7 +17,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [authenticated, setAuthenticated] = useState(false);
     const [userId, setUserId] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [messege, setMessege] = useState(null);
 
     // const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(null);
                 setAuthenticated(false);
             }
-            // setLoading(false);
+            setLoading(false);
         });
 
         return () => unsubscribe();
@@ -49,6 +50,7 @@ export const AuthProvider = ({ children }) => {
 
     // Função de login
     const signInUser = async (email, password) => {
+        setLoading(true);
         try {
             await setPersistence(auth, browserLocalPersistence); // Garante a persistência
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -58,10 +60,20 @@ export const AuthProvider = ({ children }) => {
             console.log("Login realizado com sucesso!");
             setAuthenticated(true);
             // navigate("/dashboard/jogo"); // Redireciona após login
-            return { success: true, message: "Login realizado com sucesso!" };
+            // return { success: true, message: "Login realizado com sucesso!" };
         } catch (error) {
-            console.log(error.message);
-            return { success: false, message: error.message };
+            setTimeout(() => {
+                setMessege({ 
+                    success: false,
+                    title: "Email ou Senha Incorreto", 
+                    message: "Email ou Senha que vocé inseriu está incorreto. Por favor, tente novamente." 
+                });
+            }, 2000);
+            return  {success: false};
+        }finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         }
     };
 
@@ -92,8 +104,6 @@ export const AuthProvider = ({ children }) => {
             setUserId(userId);
             setUser(userDoc.data());
             // setIsAdmin(user.isAdmin);
-            
-            
             } else {
                 console.log("Usuário não encontrado.");
                 return { success: false, message: "Usuário não encontrado." };
@@ -109,7 +119,8 @@ export const AuthProvider = ({ children }) => {
                     user,
                     getuser,
                     setLoading,
-                    loading
+                    loading,
+                    messege, setMessege
                 }}>
                 {children}
             </AuthContext.Provider>

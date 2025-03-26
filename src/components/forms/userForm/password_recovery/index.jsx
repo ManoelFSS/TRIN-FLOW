@@ -162,12 +162,12 @@ const Password_Recovery = ({setSelectForm}) => {
                 {!simulaApi && 
                     <BtnNavigate 
                         $text="Cadastre-se"
-                        $onClick={() => setSelectForm("register")} 
+                        onClick={() => setSelectForm("register")} 
                     />
                 }
                 <BtnNavigate 
                     $text="Voltar" 
-                    $onClick={() => setSelectForm("login")}
+                    onClick={() => setSelectForm("login")}
                 />
             </section>
             

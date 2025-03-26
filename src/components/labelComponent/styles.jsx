@@ -7,7 +7,7 @@ export const Label = styled.label`
     cursor: pointer;
     padding: 0 0 3px ;
 
-    @media (min-width: 1550px) {
+    @media (min-width: 1920px) {
         font-size: 2vh;
     }
 

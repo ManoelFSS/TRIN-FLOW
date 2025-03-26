@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
     width: 100%;
-    height: 35px;
+    padding: 1vh;
     background-color: var( --color-bg-btn-primary );
     border-radius: 4px;
     border: none;
@@ -17,13 +17,14 @@ export const Button = styled.button`
     span {
         position: absolute;
         color: var( --color-text-secondary );
-        font-size: 12px;
+        font-size: 1rem;
         font-weight: 700;
         right: 10px;
-        top: 5px;
+        top: 6px;
 
-        @media (min-width: 1550px) {
+        @media (min-width: 1920px) {
             font-size: 2vh;
+            top: 1.2vh;
         }
     }
 
@@ -31,9 +32,9 @@ export const Button = styled.button`
         background-color: var( --color-bg-btn-hover );
     }
 
-    @media (min-width: 1550px) {
+    @media (min-width: 1920px) {
         font-size: 2.2vh;
-        padding: 0.8vh;
+        padding: 1vh;
         border-radius: 1.2vh;
         border: solid 0.4vh var( --color-bord-btn-primary );
     }

@@ -4,6 +4,7 @@ import { useAuthContext } from "../../../context/AuthContext"
 //Hooks
 import useLFormSelect from "../../../pages/hooks/useFormSelect";
 
+
 const FormLayout = ({ children, $height }) => {
 
     const {  setLoading, signInUser } = useAuthContext()
@@ -14,9 +15,10 @@ const FormLayout = ({ children, $height }) => {
 
         switch (selectForm) {
             case "login":
-                const { success, message } =  await signInUser(event.target.email.value, event.target.senha.value);
-                if (!success) return alert(message);
-                setLoading(true);
+                const { success } =  await signInUser(event.target.email.value, event.target.senha.value);
+                if (!success) return
+                
+                // setLoading(true);
                 break;
             case "register":
 

@@ -7,7 +7,7 @@ export const Text = styled.h3`
     border-bottom: solid 4px var( --color-bord-btn-primary );
     padding-bottom: 5px;
 
-    @media (min-width: 1550px) {
+    @media (min-width: 1920px) {
         font-size: 3vh;
         padding-bottom: 1vh;
         border-bottom: solid 0.5vh var( --color-bord-btn-primary );

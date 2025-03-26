@@ -6,6 +6,7 @@ import BtnNavigate from "../../../btns/btnNavigate"
 import Title from "../../../title"
 import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
+import Loading from "../../../loading"
 // context
 import { useAuthContext } from "../../../../context/AuthContext"
 // hooks
@@ -13,7 +14,7 @@ import useFormValue from "../../../../pages/hooks/useFormValue"
 
 const LoginForm = ({setSelectForm}) => {
 
-    const { signInUser } = useAuthContext();
+    const { loading, setLoading } = useAuthContext();
     const { email, setEmail, password, setPassword } = useFormValue();
 
     return (
@@ -54,9 +55,10 @@ const LoginForm = ({setSelectForm}) => {
                 <BtnSubmit $text="Entrar" />
                 <BtnNavigate 
                     $text="Registre-se" 
-                    $onClick={() => setSelectForm("register")}
+                    onClick={() => setSelectForm("register")}
                 />
             </section>
+            {loading && <Loading />}
         </FormLayout>
     )
 }

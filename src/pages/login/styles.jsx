@@ -110,6 +110,7 @@ export const Container_login = styled.section`
             background-color: rgba(0, 0, 0, 0.6);
             overflow: auto;
             padding: 10px 10px 20px;
+            position: relative;
 
             @media (max-width: 550px) {
                 min-height: 64svh;

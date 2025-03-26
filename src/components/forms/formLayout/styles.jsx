@@ -4,8 +4,8 @@ export const Container = styled.div`
     min-width: 320px;
     padding: 20px 20px 30px 20px;
     background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 1.5px 2px 8px rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
+    box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.6);
+    border-radius: 6px;
     position: relative;
     margin: auto;
     
@@ -21,7 +21,7 @@ export const Container = styled.div`
         flex-direction: column;
         padding: 2px 0;
 
-        @media (min-width: 1550px) {
+        @media (min-width: 1920px) {
             gap: 0.5vh;
             padding: 0.4vh 0;
         }
@@ -32,12 +32,12 @@ export const Container = styled.div`
         align-items: center;
 
         input {
-            min-width: 35px;
-            min-height: 35px;
+            min-width: 20px;
+            min-height: 20px;
             border: none;
             box-shadow: none;
 
-            @media (min-width: 1550px) {
+            @media (min-width: 1920px) {
                 width: 4vh;
                 height: 4vh;
             }
@@ -52,13 +52,14 @@ export const Container = styled.div`
             padding: 20px 4px 8px;
             
             span {
-                width: 240px;
+                width: 230px;
                 font-weight: 800;
                 font-size: 0.9rem;
                 text-align: center;
                 
-                @media (min-width: 1550px) {
+                @media (min-width: 1920px) {
                     font-size: 2vh;
+                    width: 100%;
                 }
             }
         }
@@ -70,7 +71,7 @@ export const Container = styled.div`
         color: var(--color-text-primary);
         font-weight: 600;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 1rem;
         trasition: color 0.3s ease;
         boder: solid 2px var( --color-bord-btn-primary );
         padding: 5px 0 0;
@@ -80,19 +81,27 @@ export const Container = styled.div`
             text-decoration: underline;
         }
 
-        @media (min-width: 1550px) {
+        @media (min-width: 1920px) {
             font-size: 1.8vh;
             padding: 1vh 0 0;
         }
     }
 
     .text {
+        width: 280px;
         text-align: center;
-        font-size: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+
         &:hover {
             text-decoration:none;
             cursor: default;
             color: var( --color-text-primary );
+        }
+
+        @media (min-width: 1920px) {
+            font-size: 1.8vh;
+            width: 100%;
         }
     }
 
@@ -102,7 +111,7 @@ export const Container = styled.div`
         padding-top: 1.5vh;
         gap: 10px;
 
-        @media (min-width: 1550px) {
+        @media (min-width: 1920px) {
             gap: 1.8vh;
         }
     }
@@ -111,7 +120,7 @@ export const Container = styled.div`
         width: 250px;
     }
 
-    @media (min-width: 1550px) {
+    @media (min-width: 1920px) {
         width: 40vh;
         padding: 4vh 3vh 5vh 3vh;
     }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
     width: 100%;
-    height: 35px;
+    padding: 1vh;
     background-color: var(  --color-bg-btn-secondary );
     border-radius: 4px;
     border: solid 2px var( --color-bord-btn-primary );
@@ -16,7 +16,7 @@ export const Button = styled.button`
         border: solid 2px var( --color-bord-btn-hover );
     }
 
-    @media (min-width: 1550px) {
+    @media (min-width: 1920px) {
         font-size: 2vh;
         padding: 1vh;
         border: solid 0.4vh var( --color-bord-btn-primary );

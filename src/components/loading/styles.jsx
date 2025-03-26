@@ -19,12 +19,13 @@ export const LoaderContainer = styled.div`
     width: 100%;
     position: relative;
     top: 20px;
+    padding: 0 0 5px;
 `;
 
 // Estilos das bolinhas com a animação de fade-in/fade-out
 export const Dot = styled.div`
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     background-color: ${(props) => props.color};
     animation: ${fade} 1.4s linear infinite;

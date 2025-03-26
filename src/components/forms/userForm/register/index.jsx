@@ -98,11 +98,11 @@ const Register = ({setSelectForm}) => {
                 <BtnSubmit $text="Cadastrar" />
                 <BtnNavigate 
                     $text="Recuperar Senha" 
-                    $onClick={() => setSelectForm("password")}
+                    onClick={() => setSelectForm("password")}
                 />
                 <BtnNavigate 
                     $text="Voltar" 
-                    $onClick={() => setSelectForm("login")}
+                    onClick={() => setSelectForm("login")}
                 />
             </section>
         </FormLayout>
