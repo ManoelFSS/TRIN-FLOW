@@ -24,7 +24,7 @@ export const Button = styled.button`
 
         @media (min-width: 1920px) {
             font-size: 2vh;
-            top: 1.2vh;
+            top: 1vh;
         }
     }
 

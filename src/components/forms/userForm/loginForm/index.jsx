@@ -14,7 +14,7 @@ import useFormValue from "../../../../pages/hooks/useFormValue"
 
 const LoginForm = ({setSelectForm}) => {
 
-    const { loading, setLoading } = useAuthContext();
+    const { loading } = useAuthContext();
     const { email, setEmail, password, setPassword } = useFormValue();
 
     return (

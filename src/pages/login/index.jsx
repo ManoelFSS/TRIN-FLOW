@@ -5,8 +5,7 @@ import LoginForm from "../../components/forms/userForm/loginForm"
 import Register from "../../components/forms/userForm/register"
 import Password_Recovery from "../../components/forms/userForm/password_recovery"
 import Messege from "../../components/messege";
-//Hooks
-import useLFormSelect from "../../pages/hooks/useFormSelect";
+
 // context
 import { useAuthContext } from "../../context/AuthContext";
 
@@ -14,10 +13,8 @@ import { useAuthContext } from "../../context/AuthContext";
 import { FaWhatsapp, FaFacebook, FaInstagram  } from "react-icons/fa";
 
 const Login = () => {
-
-    const { messege } = useAuthContext();
-    const { selectForm, setSelectForm   } = useLFormSelect();
-
+    const { messege, selectForm, setSelectForm } = useAuthContext();
+    
     return (
         <Container_login>
             <section className="box-left">

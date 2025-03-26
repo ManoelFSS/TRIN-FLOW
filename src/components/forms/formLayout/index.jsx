@@ -1,30 +1,36 @@
 import { Container } from "./styles"
 // context
 import { useAuthContext } from "../../../context/AuthContext"
-//Hooks
-import useLFormSelect from "../../../pages/hooks/useFormSelect";
 
 
 const FormLayout = ({ children, $height }) => {
-
-    const {  setLoading, signInUser } = useAuthContext()
-    const { selectForm } = useLFormSelect();
+    const { signInUser, registerUser, selectForm } = useAuthContext()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const user = {
+            name: event.target.name?.value || "",
+            phone: event.target.phone?.value || "",
+            email: event.target.email?.value || "",
+            password: event.target.senha?.value || "",
+            acceptTerms: event.target.termo?.checked || true, // Checkbox usa checked
+            isAdmin: true,
+            createdAt: new Date(),
+            lastPaymentDate: new Date(),
+            status: "active"
+        };
+
+
         switch (selectForm) {
             case "login":
-                const { success } =  await signInUser(event.target.email.value, event.target.senha.value);
-                if (!success) return
-                
-                // setLoading(true);
+                await signInUser(user.email, user.password);
                 break;
             case "register":
-
+                await registerUser(user);
                 break;
             case "password":
-
+                console.log("formulário de troca de senha");
                 break;
             default:
                 break;

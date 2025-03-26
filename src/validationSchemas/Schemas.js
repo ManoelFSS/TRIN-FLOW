@@ -1,7 +1,10 @@
 // fieldSchemas.js
 import { z } from "zod";
 
-export const nameSchema = z.string().min(3, "O nome é obrigatório.");
+export const nameSchema = z
+    .string()
+    .min(2, "O nome deve ter pelo menos 3 caracteres")
+    .regex(/^[A-Za-zÀ-ÿ\s]+$/, "O nome não pode conter números");
 
 export const emailSchema = z.string().email("Insira um e-mail válido.");
 
@@ -18,7 +21,11 @@ export const passwordSchema = z
     .regex(/[0-9]/, "A senha deve ter pelo menos um número.")
     .regex(/[\W_]/, "A senha deve ter pelo menos um caractere especial (ex: !, @, #, etc.).");
 
-export const checkboxSchema = z
+export const termoSchema = z
+    .boolean()
+    .refine((value) => value === true, "Você precisa aceitar os termos e condições.");
+
+export const  checkboxSchema = z
     .boolean()
     .refine((value) => value === true, "Você precisa aceitar os termos e condições.");
 
@@ -28,7 +35,10 @@ export const registerSchema = z.object({
     phone: phoneSchema,
     email: emailSchema,
     password: passwordSchema,
-    isAdmin: z.boolean().optional(),
+    acceptTerms: termoSchema,
+    isAdmin:  z.boolean().optional(),
+    lastPaymentDate: z.date().optional(),
+    status: z.string().optional(),
 });
 
 // schema de recuperação de senha

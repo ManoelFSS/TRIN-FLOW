@@ -4,22 +4,45 @@ import BtnNavigate from "../../../btns/btnNavigate"
 import Title from "../../../title"
 import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
+import Loading from "../../../loading"
+// context
+import { useAuthContext } from "../../../../context/AuthContext"
 // hooks 
 import useFormValue from "../../../../pages/hooks/useFormValue"
 const Register = ({setSelectForm}) => {
-
+    const { loading } = useAuthContext();
+    
     const { 
-        name, 
-        setName, 
-        phone, 
-        setPhone, 
-        email, 
-        setEmail, 
-        password, 
-        setPassword,
-        checkbox,
-        setCheckbox
+        name, setName, 
+        phone, setPhone, 
+        email, setEmail, 
+        password,setPassword,
+        checkbox, setCheckbox
     } = useFormValue();
+
+    const handlePhoneChange = (event) => {
+        const { value } = event.target;
+        const formattedPhone = formatPhoneNumber(value);
+        setPhone(formattedPhone);
+    };
+    
+    function formatPhoneNumber(value) {
+        // Remove qualquer caractere não numérico
+        const cleanedValue = value.replace(/\D/g,'');
+        // Se o valor estiver vazio, retorne uma string vazia
+        if (cleanedValue.length === 0) {
+            return '';
+        }
+        // Verifica a quantidade de números e aplica a formatação
+        if (cleanedValue.length <= 2) {
+            return `(${cleanedValue}`;
+        } else if (cleanedValue.length <= 7) {
+            return `(${cleanedValue.slice(0, 2)})${cleanedValue.slice(2)}`;
+        } else {
+            return `(${cleanedValue.slice(0, 2)})${cleanedValue.slice(2, 7)}-${cleanedValue.slice(7, 11)}`;
+        }
+    }
+    
     
     return (
         <FormLayout>
@@ -31,7 +54,7 @@ const Register = ({setSelectForm}) => {
                 <InputComponent 
                     $typeText="text"
                     $value={name} 
-                    $onchange={(e) => setName(e.target.value)} 
+                    $onchange={(e) => setName(e.target.value.replace(/\d/g, ""))} 
                     $textId="name" 
                     $name="name" 
                     $placeholder="Digite seu Nome" 
@@ -44,8 +67,8 @@ const Register = ({setSelectForm}) => {
                 <InputComponent 
                     $typeText="text"
                     $value={phone} 
-                    $onchange={(e) => setPhone(e.target.value)} 
-                    $textId="nphone" 
+                    $onchange={handlePhoneChange} 
+                    $textId="phone" 
                     $name="phone" 
                     $placeholder="(xx) xxxxx-xxxx" 
                     $autoComplete="current-text" 
@@ -82,7 +105,7 @@ const Register = ({setSelectForm}) => {
                 <InputComponent 
                     $typeText="checkbox"
                     $value={checkbox} 
-                    $onchange={(e) => setCheckbox(e.target.value)} 
+                    $onchange={(e) => setCheckbox(e.target.checked)} 
                     $textId="termo" 
                     $name="termo" 
                     $placeholder="Digite sua  Senha" 
@@ -101,10 +124,11 @@ const Register = ({setSelectForm}) => {
                     onClick={() => setSelectForm("password")}
                 />
                 <BtnNavigate 
-                    $text="Voltar" 
+                    $text="Fazer Login" 
                     onClick={() => setSelectForm("login")}
                 />
             </section>
+            {loading && <Loading />}
         </FormLayout>
     )
 }

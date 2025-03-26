@@ -8,4 +8,9 @@ export const All_loading = styled.div`
     width: 100%;
     height: 100svh;
     gap: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var( --color-bg-primary );
+    z-index: 9999;
 `

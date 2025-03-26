@@ -6,9 +6,12 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
+    createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
+// schema
+import { registerSchema } from "../validationSchemas/Schemas"
 
 const AuthContext = createContext();
 
@@ -19,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     const [userId, setUserId] = useState(null);
     const [loading, setLoading] = useState(false);
     const [messege, setMessege] = useState(null);
+    const [selectForm, setSelectForm] = useState("login");
 
     // const navigate = useNavigate();
 
@@ -44,7 +48,6 @@ export const AuthProvider = ({ children }) => {
             }
             setLoading(false);
         });
-
         return () => unsubscribe();
     }, []);
 
@@ -90,11 +93,51 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const registerUser = async (data) => {
+        setLoading(true);
+
+        try {
+            const validatedUser =  registerSchema.parse(data); // Valida o objeto
+            if(!validatedUser) return validatedUser.errors;
+
+            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            const user = userCredential.user;
+            
+            console.log("Usuário criado com sucesso:");
+            
+            await setDoc(doc(db, "users", user.uid), {
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                lastPaymentDate: data.lastPaymentDate,
+                acceptTerms: data.acceptTerms,
+                isAdmin: data.isAdmin,
+                createdAt: data.createdAt,
+            });
+            
+            return { success: true };
+        } catch (error) {
+            
+            setTimeout(() => {
+                setMessege({ 
+                    success: false,
+                    title: "Erro ao Cadastrar", 
+                    message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
+                });
+            }, 2000);
+
+            // console.error("Ops! Email ja cadastrados:", error.message);
+            return  {success: false};
+        }finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+        }
+    }
+
     // Função para obter os dados do usuário
     const getuser = async (userId) => {
-        
         if (!userId) return { success: false, message: "userId não encontrado." };
-        
         const userRef = doc(db, "users", userId);
         const userDoc = await getDoc(userRef);
         if (userDoc.exists()) {
@@ -104,28 +147,28 @@ export const AuthProvider = ({ children }) => {
             setUserId(userId);
             setUser(userDoc.data());
             // setIsAdmin(user.isAdmin);
-            } else {
-                console.log("Usuário não encontrado.");
-                return { success: false, message: "Usuário não encontrado." };
-            }
-        }   
+        } else {
+            console.log("Usuário não encontrado.");
+            return { success: false, message: "Usuário não encontrado." };
+        }
+    }   
     
-        return (
-            <AuthContext.Provider value=
-                {{ 
-                    authenticated, setAuthenticated, 
-                    signInUser, logoutUser,
-                    userId, setUserId,
-                    user,
-                    getuser,
-                    setLoading,
-                    loading,
-                    messege, setMessege
-                }}>
-                {children}
-            </AuthContext.Provider>
-        );
-    };
+    return (
+        <AuthContext.Provider value=
+            {{ 
+                authenticated, setAuthenticated, 
+                signInUser, logoutUser,
+                userId, setUserId,
+                user, getuser,
+                loading, setLoading,
+                messege, setMessege,
+                selectForm, setSelectForm,
+                registerUser
+            }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
 
 // Hook personalizado para acessar o contexto de autenticação
 export const useAuthContext = () => {

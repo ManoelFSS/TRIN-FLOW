@@ -13,7 +13,7 @@ import { useAuthContext } from "./context/AuthContext"
 function App() {
   const { toogleMenu, setToogleMenu } = useToogleMenu()
   const { authenticated } = useAuthContext()
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
       setLoading(true);
@@ -22,11 +22,12 @@ function App() {
       }, 3000);
   }, [authenticated]);
   
-  if(loading) return <Loadingpage />
+  // if(loading) return <Loadingpage />
   
   return (
     <>
       {authenticated ? <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}></Layout> : <Login />}
+      {loading && <Loadingpage />}
     </>
   )
 }

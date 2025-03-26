@@ -166,7 +166,7 @@ const Password_Recovery = ({setSelectForm}) => {
                     />
                 }
                 <BtnNavigate 
-                    $text="Voltar" 
+                    $text="Fazer Login" 
                     onClick={() => setSelectForm("login")}
                 />
             </section>
