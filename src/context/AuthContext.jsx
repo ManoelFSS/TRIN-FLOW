@@ -113,6 +113,7 @@ export const AuthProvider = ({ children }) => {
                 acceptTerms: data.acceptTerms,
                 isAdmin: data.isAdmin,
                 createdAt: data.createdAt,
+                status: data.status
             });
             
             return { success: true };
