@@ -148,7 +148,7 @@ export const AuthProvider = ({ children }) => {
     const sendEmail = async (email, recoveryCode) => {
         setLoading(true);
         console.log(email, recoveryCode);
-
+    
         try {
             const userName = "paulo"; // Nome do usuário
             
@@ -197,7 +197,7 @@ export const AuthProvider = ({ children }) => {
         
             // Configuração do e-mail
             const mailOptions = {
-                from: process.env.VITE_EMAIL_USER,
+                from: import.meta.env.VITE_EMAIL_USER, // Acessando variáveis do Vite
                 to: email,
                 subject: "Código de Recuperação",
                 html: htmlContent,
@@ -206,10 +206,8 @@ export const AuthProvider = ({ children }) => {
             // Enviar o e-mail com o Nodemailer
             const response = await fetch("https://trin-flow.netlify.app/.netlify/functions/sendEmail", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(mailOptions), // Passando os dados do e-mail corretamente
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(mailOptions), // Passa os dados do e-mail
             });
         
             // Verifica se a resposta foi bem-sucedida
@@ -221,12 +219,11 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error("Erro ao tentar enviar o e-mail:", error.message);
             alert("Ocorreu um erro ao enviar o e-mail. Tente novamente.");
-        }finally {
+        } finally {
             setLoading(false);
         }
-        
     };
-
+    
     // Função para obter os dados do usuário
     const getuser = async (userId) => {
         if (!userId) return { success: false, message: "userId não encontrado." };
