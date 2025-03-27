@@ -7,13 +7,13 @@ export const handler = async (event) => {
         const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: process.env.EMAIL_USER,  // Definido no painel da Netlify
-            pass: process.env.EMAIL_PASS,  // Definido no painel da Netlify
+            user: process.env.VITE_EMAIL_USER,  // Definido no painel da Netlify
+            pass: process.env.VITE_EMAIL_PASS,  // Definido no painel da Netlify
         },
         });
 
         const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: process.env.VITE_EMAIL_USER,
         to,
         subject,
         text,
