@@ -197,7 +197,7 @@ export const AuthProvider = ({ children }) => {
         
             // Configuração do e-mail
             const mailOptions = {
-                from: process.env.EMAIL_USER,
+                from: process.env.VITE_EMAIL_USER,
                 to: email,
                 subject: "Código de Recuperação",
                 html: htmlContent, // Passa o conteúdo HTML aqui
