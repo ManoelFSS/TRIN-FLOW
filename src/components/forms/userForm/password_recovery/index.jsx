@@ -39,17 +39,15 @@ const Password_Recovery = ({setSelectForm}) => {
         const codigoGerado = gerarCodigo();
         setValidaCodigo(codigoGerado)
         const result = await sendEmail(email, codigoGerado);
-        console.log(result);
         if (!result.success) {
             setMessege({success: false, title: result.title, message: result.message});
             return
         }
-
-        setTimeout(() => {
-            setSimulaApi(true);
-            setIsDisabledBtn(true);
-            setControlerTime(!controlerTime)
-        }, 3000);
+        
+        setSimulaApi(true);
+        setIsDisabledBtn(true);
+        setControlerTime(!controlerTime)
+        
     };
 
     const hendleInpassword = () => {
