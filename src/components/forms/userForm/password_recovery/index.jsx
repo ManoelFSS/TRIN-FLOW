@@ -15,7 +15,7 @@ import { useAuthContext } from "../../../../context/AuthContext"
 const Password_Recovery = ({setSelectForm}) => {
 
     const { sendEmail,  loading, setMessege, setLoading } = useAuthContext();
-    const { email, setEmail, password, setPassword, passwordRepeat, setPasswordRepeat, codigo, setCodigo } = useFormValue();
+    const { email, setEmail, password, setPassword, codigo, setCodigo } = useFormValue();
 
     const [simulaApi, setSimulaApi] = useState(false)
     const [isDisabledBtn, setIsDisabledBtn] = useState(false);
@@ -157,17 +157,6 @@ const Password_Recovery = ({setSelectForm}) => {
                         />
                     </section>
                     <section className="box">
-                        <LabelComponent $text="Repita a Senha" $htmlFor="senha02" />
-                        <InputComponent 
-                            $typeText="password" 
-                            $textId="senha02"
-                            $value={passwordRepeat}
-                            $onchange={(e) => setPasswordRepeat(e.target.value)} 
-                            $name="senha02" 
-                            $placeholder="Digite a Senha novamente" 
-                            $autoComplete="current-password" 
-                            $required 
-                        />
                         <BtnSubmit 
                             $text="Alterar Senha"
                             $marginTop="1.5vh" 
