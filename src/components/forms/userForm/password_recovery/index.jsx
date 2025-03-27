@@ -43,7 +43,7 @@ const Password_Recovery = ({setSelectForm}) => {
             setMessege({success: false, title: result.title, message: result.message});
             return
         }
-        
+        console.log(result);
         setSimulaApi(true);
         setIsDisabledBtn(true);
         setControlerTime(!controlerTime)
