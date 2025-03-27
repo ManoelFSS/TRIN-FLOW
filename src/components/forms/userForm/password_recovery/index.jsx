@@ -43,6 +43,7 @@ const Password_Recovery = ({setSelectForm}) => {
             return
         }
 
+        localStorage.setItem("email", email);
         console.log(result);
         setSimulaApi(true);
         setIsDisabledBtn(true);
