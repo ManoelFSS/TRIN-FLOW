@@ -49,7 +49,7 @@ const Password_Recovery = ({setSelectForm}) => {
         setControlerTime(!controlerTime)
         
     };
-
+    
     const hendleInpassword = () => {
         setLoading(true);
         if (validaCodigo !== codigo){
@@ -58,14 +58,14 @@ const Password_Recovery = ({setSelectForm}) => {
                 setLoading(false);
                 return console.log("Codigo Invalido");
             }, 2000);
-        };
-
-        setTimeout(() => {
-            setFromPassword(false) 
-            setLoading(false);
-        }, 2000);
+        }else{
+            setTimeout(() => {
+                setFromPassword(false) 
+                setLoading(false);
+            }, 2000);
+        }
     }
-
+    
     useEffect(() => {
         if (simulaApi) {
             const interval = setInterval(() => {
