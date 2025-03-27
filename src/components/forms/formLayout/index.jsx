@@ -32,7 +32,6 @@ const FormLayout = ({ children, $height }) => {
                 break;
             case "password":
                 await updateUserPassword(getEmail, user.password);
-                console.log("formulário de troca de senha");
                 break;
             default:
                 break;

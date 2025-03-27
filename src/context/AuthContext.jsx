@@ -166,7 +166,6 @@ export const AuthProvider = ({ children }) => {
         
         try {
             const exists = await checkEmailExists(email);
-            console.log(exists);
             if (!exists) return { success: false, title: "Email não encontrado", message: "Por favor, verifique o email e tente novamente" };
             
             const userName = user?.name || "Usuário"; // Nome do usuário
@@ -234,7 +233,6 @@ export const AuthProvider = ({ children }) => {
                 throw new Error(`Erro ao enviar o e-mail: ${response.statusText}`);
             }
             
-            console.log("E-mail enviado com sucesso!");
             return { success: true };
         } catch (error) {
             setMessege({success: false, title: "Erro ao enviar o e-mail", message: " por favor, tente novamente"});
@@ -256,14 +254,14 @@ const updateUserPassword = async (email, newPassword) => {
         const querySnapshot = await getDocs(q);
         
         if (querySnapshot.empty) {
-            return console.log("Usuário nao encontrado.");
+            return 
         }
         
         const userDoc = querySnapshot.docs[0]; // Pegamos o primeiro usuário encontrado
         const userData = userDoc.data();
         
         if (!userData.password) {
-            return  console.log("Senha nao encontrada.");
+            return
         }
         const oldPassword = userData.password;
         // 2️⃣ Autenticar o usuário com a senha antiga
