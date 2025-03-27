@@ -22,7 +22,7 @@ export async function handler(event) {
         const emailPass = process.env.VITE_EMAIL_PASS;
 
         if (!emailUser || !emailPass) {
-            throw new Error("As variáveis de ambiente não estão configuradas corretamente.");
+            throw new Error("As variáveis de ambiente não estão configuradas corretamente...");
         }
 
         // Configuração do transporte para o envio do e-mail
