@@ -163,7 +163,7 @@ export const AuthProvider = ({ children }) => {
     // envio de email
     const sendEmail = async (email, recoveryCode) => {
         setLoading(true);
-    
+        
         try {
             const exists = await checkEmailExists(email);
             console.log(exists);
@@ -233,8 +233,9 @@ export const AuthProvider = ({ children }) => {
             if (!response.ok) {
                 throw new Error(`Erro ao enviar o e-mail: ${response.statusText}`);
             }
-        
+            
             console.log("E-mail enviado com sucesso!");
+            return { success: true };
         } catch (error) {
             setMessege({success: false, title: "Erro ao enviar o e-mail", message: " por favor, tente novamente"});
             console.error("Erro ao tentar enviar o e-mail:", error.message);

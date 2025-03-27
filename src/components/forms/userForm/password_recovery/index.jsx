@@ -15,7 +15,6 @@ import { useAuthContext } from "../../../../context/AuthContext"
 const Password_Recovery = ({setSelectForm}) => {
 
     const { sendEmail,  loading, setMessege } = useAuthContext();
-
     const { email, setEmail, password, setPassword, passwordRepeat, setPasswordRepeat, codigo, setCodigo } = useFormValue();
 
     const [simulaApi, setSimulaApi] = useState(false)
@@ -43,6 +42,7 @@ const Password_Recovery = ({setSelectForm}) => {
             setMessege({success: false, title: result.title, message: result.message});
             return
         }
+
         console.log(result);
         setSimulaApi(true);
         setIsDisabledBtn(true);
