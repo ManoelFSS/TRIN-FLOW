@@ -197,17 +197,19 @@ export const AuthProvider = ({ children }) => {
         
             // Configuração do e-mail
             const mailOptions = {
-                from: "piloukos45@gmail.com",
+                from: process.env.VITE_EMAIL_USER,
                 to: email,
                 subject: "Código de Recuperação",
-                html: htmlContent, // Passa o conteúdo HTML aqui
+                html: htmlContent,
             };
         
             // Enviar o e-mail com o Nodemailer
             const response = await fetch("https://trin-flow.netlify.app/.netlify/functions/sendEmail", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(mailOptions), // Passa os dados do e-mail
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(mailOptions), // Passando os dados do e-mail corretamente
             });
         
             // Verifica se a resposta foi bem-sucedida
