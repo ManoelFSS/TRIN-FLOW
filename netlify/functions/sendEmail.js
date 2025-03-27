@@ -1,4 +1,3 @@
-import "dotenv/config";
 import nodemailer from "nodemailer";
 
 export async function handler(event) {
