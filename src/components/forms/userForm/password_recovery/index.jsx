@@ -39,7 +39,11 @@ const Password_Recovery = ({setSelectForm}) => {
         const codigoGerado = gerarCodigo();
         setValidaCodigo(codigoGerado)
         const result = await sendEmail(email, codigoGerado);
-        if (!result.success)  return console.log("Erro ao enviar email");
+        console.log(result);
+        if (!result.success) {
+            setMessege({success: false, title: result.title, message: result.message});
+            return
+        }
 
         setTimeout(() => {
             setSimulaApi(true);

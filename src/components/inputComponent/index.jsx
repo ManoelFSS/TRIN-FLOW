@@ -7,7 +7,6 @@ const InputComponent = (
         $textId, 
         $name, 
         $autoComplete, 
-        $required,
         $value,
         $onchange
     }) => {
@@ -20,7 +19,7 @@ const InputComponent = (
             autoComplete={$autoComplete}
             value={$value}
             onChange={$onchange}
-            required={$required}
+            required
         />
     )
 }

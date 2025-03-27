@@ -8,10 +8,11 @@ import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, getDocs, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc, getDocs, collection  } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
 // schema
 import { registerSchema } from "../validationSchemas/Schemas"
+
 
 const AuthContext = createContext();
 
@@ -150,7 +151,6 @@ export const AuthProvider = ({ children }) => {
             const querySnapshot = await getDocs(collection(db, "users"));
             // Verifica se algum dos documentos contém o e-mail desejado
             const exists = querySnapshot.docs.some(doc => doc.data().email === email);
-            console.log(exists);
             return exists; // Retorna true se o e-mail existir, false caso contrário
         } catch (error) {
             setTimeout(() => {
@@ -163,13 +163,13 @@ export const AuthProvider = ({ children }) => {
     // envio de email
     const sendEmail = async (email, recoveryCode) => {
         setLoading(true);
-        console.log(email);
     
         try {
             const exists = await checkEmailExists(email);
-            if (!exists) return { success: false, message: "Email não encontrado." };
+            console.log(exists);
+            if (!exists) return { success: false, title: "Email não encontrado", message: "Por favor, verifique o email e tente novamente" };
             
-            const userName = user.name; // Nome do usuário
+            const userName = user?.name || "Usuário"; // Nome do usuário
             
             const htmlContent = `
                 <html>
@@ -236,14 +236,10 @@ export const AuthProvider = ({ children }) => {
         
             console.log("E-mail enviado com sucesso!");
         } catch (error) {
-            setTimeout(() => {
-                setMessege({success: false, title: "Erro ao enviar o e-mail", message: " por favor, tente novamente"});
-            }, 2000);
+            setMessege({success: false, title: "Erro ao enviar o e-mail", message: " por favor, tente novamente"});
             console.error("Erro ao tentar enviar o e-mail:", error.message);
         } finally {
-            setTimeout(() => {
-                setLoading(false);
-            }, 2000);
+            setLoading(false);
         }
     };
     
