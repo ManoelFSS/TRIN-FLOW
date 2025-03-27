@@ -103,13 +103,14 @@ const Password_Recovery = ({setSelectForm}) => {
                         />
                     </section>
                     <BtnSubmit 
+                        $typeText="button"
                         $text={simulaApi ? ` Reenviar Codigo` : 'Enviar Codigo'}
                         $marginTop="1vh"
-                        onClick={() => handleFormUpdate()} 
+                        onClick={(event) =>{ event.preventDefault();  handleFormUpdate()}} 
                         $disabled={isDisabledBtn}
                         $opacity={isDisabledBtn}
                         $timer={coutTime}
-                    />
+                    /> 
                     
                     { simulaApi && 
                         <>
