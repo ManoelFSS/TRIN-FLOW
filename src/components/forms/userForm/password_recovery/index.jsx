@@ -25,8 +25,7 @@ const Password_Recovery = ({setSelectForm}) => {
     const [coutTime, setCountTime] = useState(240)
     const [controlerTime, setControlerTime] = useState(false)
     const [fromPassword, setFromPassword] = useState(true)
-  
-
+    const [validaCodigo, setValidaCodigo] = useState(null)
 
     const handleFormUpdate = async () => {
         function gerarCodigo() {
@@ -42,15 +41,15 @@ const Password_Recovery = ({setSelectForm}) => {
         }
         
         const codigoGerado = gerarCodigo();
+        setValidaCodigo(codigoGerado)
         await sendEmail(email, codigoGerado);
         
     };
 
     const hendleInpassword = () => {
-        setLoading(true);
-        setFromPassword(false)
+        if (validaCodigo !== codigo) return console.log("Codigo Invalido");
+        setFromPassword(true) 
     }
-
 
     useEffect(() => {
         if (loading) {
@@ -128,10 +127,10 @@ const Password_Recovery = ({setSelectForm}) => {
                                     $required 
                                 />
                                 <BtnSubmit 
+                                    $typeText="button"
                                     $text="Verificar Codigo"
                                     $marginTop="1.5vh" 
-                                    $typeText="submit"
-                                    onClick={(e) => {simulaApi && e.preventDefault() ,  hendleInpassword()}}
+                                    onClick={(event) => {simulaApi && event.preventDefault();  hendleInpassword()}}
                                 />
                             </section>
                         </>
