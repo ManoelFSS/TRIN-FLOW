@@ -18,8 +18,8 @@ export async function handler(event) {
             throw new Error("Faltando parâmetros essenciais!");
         }
 
-        const emailUser = process.env.EMAIL_USER;
-        const emailPass = process.env.EMAIL_PASS;
+        const emailUser = process.env.VITE_EMAIL_USER;
+        const emailPass = process.env.VITE_EMAIL_PASS;
 
         if (!emailUser || !emailPass) {
             throw new Error("As variáveis de ambiente não estão configuradas corretamente.");
