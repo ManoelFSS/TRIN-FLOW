@@ -1,35 +1,38 @@
-import nodemailer from 'nodemailer';
+import "dotenv/config";
+import nodemailer from "nodemailer";
 
-export const handler = async (event) => {
+export async function handler(event) {
     try {
-        const { to, subject, text, image } = JSON.parse(event.body);
+        const { to, subject, html } = JSON.parse(event.body);
 
-        const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.VITE_EMAIL_USER,  // Definido no painel da Netlify
-            pass: process.env.VITE_EMAIL_PASS,  // Definido no painel da Netlify
-        },
+        const emailUser = process.env.VITE_EMAIL_USER;
+        const emailPass = process.env.VITE_EMAIL_PASS;
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: emailUser,
+                pass: emailPass,
+            },
         });
 
-        const mailOptions = {
-        from: process.env.VITE_EMAIL_USER,
-        to,
-        subject,
-        text,
-        attachments: image ? [{ path: image }] : [],
+        let mailOptions = {
+            from: emailUser,
+            to,
+            subject,
+            html,
         };
 
-        await transporter.sendMail(mailOptions);
+        let info = await transporter.sendMail(mailOptions);
 
         return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "Email enviado com sucesso!" }),
+            statusCode: 200,
+            body: JSON.stringify({ message: "E-mail enviado com sucesso!", info }),
         };
     } catch (error) {
         return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "Erro ao enviar email" }),
+            statusCode: 500,
+            body: JSON.stringify({ message: "Erro ao enviar e-mail", error: error.message }),
         };
     }
-};
+}
