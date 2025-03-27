@@ -144,6 +144,87 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    // envio de email
+    const sendEmail = async (email, recoveryCode) => {
+        setLoading(true);
+        console.log(email, recoveryCode);
+
+        try {
+            const userName = "paulo"; // Nome do usuário
+            
+            const htmlContent = `
+                <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                background-color: #f4f4f9;
+                                color: #333;
+                                padding: 20px;
+                            }
+                            h1 {
+                                color: #1E90FF;
+                            }
+                            .content {
+                                background-color: #ffffff;
+                                padding: 20px;
+                                border-radius: 8px;
+                                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                            }
+                            .button {
+                                background-color: #4CAF50;
+                                color: white;
+                                padding: 10px 20px;
+                                text-decoration: none;
+                                border-radius: 5px;
+                                font-size: 16px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="content">
+                            <h1>Código de Recuperação</h1>
+                            <p>Olá ${userName},</p>
+                            <p>Seu código de recuperação é: <strong>${recoveryCode}</strong></p>
+                            <p>Por favor, use este código para recuperar sua conta.</p>
+                            <a href="https://trin-flow.netlify.app/" class="button">Acessar Recuperação</a>
+                            <img src="https://trin-flow.netlify.app/assets/logo-DkWKLF2t.svg" alt="Logo do Site" />
+                            <p>Atenciosamente,<br>Equipe Trin-Flow</p>
+                        </div>
+                    </body>
+                </html>
+            `;
+        
+            // Configuração do e-mail
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: email,
+                subject: "Código de Recuperação",
+                html: htmlContent, // Passa o conteúdo HTML aqui
+            };
+        
+            // Enviar o e-mail com o Nodemailer
+            const response = await fetch("/.netlify/functions/sendEmail", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(mailOptions), // Passa os dados do e-mail
+            });
+        
+            // Verifica se a resposta foi bem-sucedida
+            if (!response.ok) {
+                throw new Error(`Erro ao enviar o e-mail: ${response.statusText}`);
+            }
+        
+            console.log("E-mail enviado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao tentar enviar o e-mail:", error.message);
+            alert("Ocorreu um erro ao enviar o e-mail. Tente novamente.");
+        }finally {
+            setLoading(false);
+        }
+        
+    };
+
     // Função para obter os dados do usuário
     const getuser = async (userId) => {
         if (!userId) return { success: false, message: "userId não encontrado." };
@@ -172,7 +253,8 @@ export const AuthProvider = ({ children }) => {
                 loading, setLoading,
                 messege, setMessege,
                 selectForm, setSelectForm,
-                registerUser
+                registerUser,
+                sendEmail
             }}>
             {children}
         </AuthContext.Provider>

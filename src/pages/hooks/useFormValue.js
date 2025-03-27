@@ -6,8 +6,8 @@ const useFormValue = () => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [checkbox, setCheckbox] = useState('');
+    const [codigo, setCodigo] = useState('');
 
-    
     return { 
         email, 
         setEmail, 
@@ -18,7 +18,8 @@ const useFormValue = () => {
         phone, 
         setPhone, 
         checkbox,
-        setCheckbox
+        setCheckbox,
+        codigo, setCodigo
     };
 };
 

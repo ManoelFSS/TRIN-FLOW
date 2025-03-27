@@ -10,11 +10,14 @@ import Loading from "../../../loading"
 // hooks
 import useLoading from "../../../../pages/hooks/useLoading"
 import useFormValue from "../../../../pages/hooks/useFormValue"
+// context
+import { useAuthContext } from "../../../../context/AuthContext"
 
 
 const Password_Recovery = ({setSelectForm}) => {
 
-    const { loading, setLoading } = useLoading();
+    const { sendEmail,  loading, setLoading, } = useAuthContext();
+
     const { email, setEmail, password, setPassword, passwordRepeat, setPasswordRepeat, codigo, setCodigo } = useFormValue();
 
     const [simulaApi, setSimulaApi] = useState(false)
@@ -22,10 +25,24 @@ const Password_Recovery = ({setSelectForm}) => {
     const [coutTime, setCountTime] = useState(240)
     const [controlerTime, setControlerTime] = useState(false)
     const [fromPassword, setFromPassword] = useState(true)
+  
 
 
-    const handleFormUpdate = () => {
-        setLoading(true);
+    const handleFormUpdate = async () => {
+        function gerarCodigo() {
+            const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?";
+            let codigo = "";
+            
+            for (let i = 0; i < 8; i++) {
+              const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+                codigo += caracteres[indiceAleatorio];
+            }
+            
+            return codigo;
+        }
+        
+        const codigoGerado = gerarCodigo();
+        await sendEmail(email, codigoGerado);
         
     };
 
@@ -33,7 +50,6 @@ const Password_Recovery = ({setSelectForm}) => {
         setLoading(true);
         setFromPassword(false)
     }
-
 
 
     useEffect(() => {
