@@ -51,6 +51,7 @@ const Password_Recovery = ({setSelectForm}) => {
     };
 
     const hendleInpassword = () => {
+        console.log(validaCodigo, codigo);
         if (validaCodigo !== codigo){
             setMessege({success: false, title: "Codigo Invalido", message: "Verifique o Codigo e Tente Novamente"});
             return console.log("Codigo Invalido");
