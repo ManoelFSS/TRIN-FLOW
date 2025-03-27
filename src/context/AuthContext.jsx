@@ -8,7 +8,7 @@ import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, getDocs, collection } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
 // schema
 import { registerSchema } from "../validationSchemas/Schemas"
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [authenticated, setAuthenticated] = useState(false);
     const [userId, setUserId] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(null);
     const [messege, setMessege] = useState(null);
     const [selectForm, setSelectForm] = useState("login");
 
@@ -144,13 +144,32 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const checkEmailExists = async (email) => {
+        try {
+            // Verifica se o e-mail existe na coleção "users"
+            const querySnapshot = await getDocs(collection(db, "users"));
+            // Verifica se algum dos documentos contém o e-mail desejado
+            const exists = querySnapshot.docs.some(doc => doc.data().email === email);
+            console.log(exists);
+            return exists; // Retorna true se o e-mail existir, false caso contrário
+        } catch (error) {
+            setTimeout(() => {
+                setMessege({success: false, title: "Erro email não encontrado", message: "Por favor, verifique o email e tente novamente"});
+            }, 2000);
+            return;
+        }
+    };
+    
     // envio de email
     const sendEmail = async (email, recoveryCode) => {
         setLoading(true);
-        console.log(email, recoveryCode);
+        console.log(email);
     
         try {
-            const userName = "paulo"; // Nome do usuário
+            const exists = await checkEmailExists(email);
+            if (!exists) return { success: false, message: "Email não encontrado." };
+            
+            const userName = user.name; // Nome do usuário
             
             const htmlContent = `
                 <html>
@@ -217,10 +236,14 @@ export const AuthProvider = ({ children }) => {
         
             console.log("E-mail enviado com sucesso!");
         } catch (error) {
+            setTimeout(() => {
+                setMessege({success: false, title: "Erro ao enviar o e-mail", message: " por favor, tente novamente"});
+            }, 2000);
             console.error("Erro ao tentar enviar o e-mail:", error.message);
-            alert("Ocorreu um erro ao enviar o e-mail. Tente novamente.");
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         }
     };
     

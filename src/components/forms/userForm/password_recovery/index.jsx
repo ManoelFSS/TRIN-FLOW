@@ -8,15 +8,13 @@ import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
 import Loading from "../../../loading"
 // hooks
-import useLoading from "../../../../pages/hooks/useLoading"
 import useFormValue from "../../../../pages/hooks/useFormValue"
 // context
 import { useAuthContext } from "../../../../context/AuthContext"
 
-
 const Password_Recovery = ({setSelectForm}) => {
 
-    const { sendEmail,  loading, setLoading, } = useAuthContext();
+    const { sendEmail,  loading, setMessege } = useAuthContext();
 
     const { email, setEmail, password, setPassword, passwordRepeat, setPasswordRepeat, codigo, setCodigo } = useFormValue();
 
@@ -31,36 +29,32 @@ const Password_Recovery = ({setSelectForm}) => {
         function gerarCodigo() {
             const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?";
             let codigo = "";
-            
             for (let i = 0; i < 8; i++) {
               const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
                 codigo += caracteres[indiceAleatorio];
             }
-            
             return codigo;
         }
         
         const codigoGerado = gerarCodigo();
         setValidaCodigo(codigoGerado)
-        await sendEmail(email, codigoGerado);
-        
+        const result = await sendEmail(email, codigoGerado);
+        if (!result.success)  return console.log("Erro ao enviar email");
+
+        setTimeout(() => {
+            setSimulaApi(true);
+            setIsDisabledBtn(true);
+            setControlerTime(!controlerTime)
+        }, 3000);
     };
 
     const hendleInpassword = () => {
-        if (validaCodigo !== codigo) return console.log("Codigo Invalido");
+        if (validaCodigo !== codigo){
+            setMessege({success: false, title: "Codigo Invalido", message: "Verifique o Codigo e Tente Novamente"});
+            return console.log("Codigo Invalido");
+        };
         setFromPassword(true) 
     }
-
-    useEffect(() => {
-        if (loading) {
-            setTimeout(() => {
-                setSimulaApi(true);
-                setIsDisabledBtn(true);
-                setLoading(false);
-                setControlerTime(!controlerTime)
-            }, 3000);
-        }
-    }, [loading]);
 
     useEffect(() => {
         if (simulaApi) {
@@ -69,7 +63,6 @@ const Password_Recovery = ({setSelectForm}) => {
                     if (prevCount === 0) {
                         clearInterval(interval);
                         setIsDisabledBtn(false);
-                        setLoading(false);
                         return 240; // Reseta o contador
                     }
                     return prevCount - 1;
