@@ -56,7 +56,7 @@ const Password_Recovery = ({setSelectForm}) => {
             setMessege({success: false, title: "Codigo Invalido", message: "Verifique o Codigo e Tente Novamente"});
             return console.log("Codigo Invalido");
         };
-        setFromPassword(true) 
+        setFromPassword(false) 
     }
 
     useEffect(() => {
