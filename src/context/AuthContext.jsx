@@ -7,9 +7,9 @@ import {
     signOut,
     onAuthStateChanged,
     createUserWithEmailAndPassword,
+    updatePassword 
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getDocs, collection,  query, where, updateDoc  } from "firebase/firestore";
-import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import { auth, db } from "../services/firebase";
 // schema
 import { registerSchema } from "../validationSchemas/Schemas"

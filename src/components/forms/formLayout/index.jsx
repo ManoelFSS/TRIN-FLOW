@@ -4,7 +4,6 @@ import { useAuthContext } from "../../../context/AuthContext"
 // hooks
 import useFormValue from "../../../pages/hooks/useFormValue"
 
-
 const FormLayout = ({ children, $height }) => {
 
     const { email} = useFormValue();
@@ -26,8 +25,7 @@ const FormLayout = ({ children, $height }) => {
             lastPaymentDate: new Date(),
             status: "active"
         };
-
-
+        
         switch (selectForm) {
             case "login":
                 await signInUser(user.email, user.password);
@@ -36,7 +34,7 @@ const FormLayout = ({ children, $height }) => {
                 await registerUser(user);
                 break;
             case "password":
-                await updateUserPassword (email, user.password);
+                await updateUserPassword(email, user.password);
                 console.log("formulário de troca de senha");
                 break;
             default:
