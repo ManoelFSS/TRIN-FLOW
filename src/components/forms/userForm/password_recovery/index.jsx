@@ -14,7 +14,7 @@ import { useAuthContext } from "../../../../context/AuthContext"
 
 const Password_Recovery = ({setSelectForm}) => {
 
-    const { sendEmail,  loading, setMessege } = useAuthContext();
+    const { sendEmail,  loading, setMessege, setLoading } = useAuthContext();
     const { email, setEmail, password, setPassword, passwordRepeat, setPasswordRepeat, codigo, setCodigo } = useFormValue();
 
     const [simulaApi, setSimulaApi] = useState(false)
@@ -51,12 +51,19 @@ const Password_Recovery = ({setSelectForm}) => {
     };
 
     const hendleInpassword = () => {
-        console.log(validaCodigo, codigo);
+        setLoading(true);
         if (validaCodigo !== codigo){
-            setMessege({success: false, title: "Codigo Invalido", message: "Verifique o Codigo e Tente Novamente"});
-            return console.log("Codigo Invalido");
+            setTimeout(() => {
+                setMessege({success: false, title: "Codigo Invalido", message: "Verifique o Codigo e Tente Novamente"});
+                setLoading(false);
+                return console.log("Codigo Invalido");
+            }, 2000);
         };
-        setFromPassword(false) 
+
+        setTimeout(() => {
+            setFromPassword(false) 
+            setLoading(false);
+        }, 2000);
     }
 
     useEffect(() => {
