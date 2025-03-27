@@ -204,7 +204,7 @@ export const AuthProvider = ({ children }) => {
             };
         
             // Enviar o e-mail com o Nodemailer
-            const response = await fetch("/.netlify/functions/sendEmail", {
+            const response = await fetch("https://trin-flow.netlify.app/.netlify/functions/sendEmail", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(mailOptions), // Passa os dados do e-mail
