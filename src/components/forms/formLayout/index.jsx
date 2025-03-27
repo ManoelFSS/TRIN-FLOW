@@ -1,10 +1,16 @@
 import { Container } from "./styles"
 // context
 import { useAuthContext } from "../../../context/AuthContext"
+// hooks
+import useFormValue from "../../../pages/hooks/useFormValue"
 
 
 const FormLayout = ({ children, $height }) => {
-    const { signInUser, registerUser, selectForm } = useAuthContext()
+
+    const { email} = useFormValue();
+    console.log(email);
+
+    const { signInUser, registerUser, updateUserPassword, selectForm } = useAuthContext()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,6 +36,7 @@ const FormLayout = ({ children, $height }) => {
                 await registerUser(user);
                 break;
             case "password":
+                await updateUserPassword (email, user.password);
                 console.log("formulário de troca de senha");
                 break;
             default:

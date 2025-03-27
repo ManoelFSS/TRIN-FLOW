@@ -8,11 +8,11 @@ import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, getDocs, collection  } from "firebase/firestore";
+import { doc, getDoc, setDoc, getDocs, collection,  query, where, updateDoc  } from "firebase/firestore";
+import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import { auth, db } from "../services/firebase";
 // schema
 import { registerSchema } from "../validationSchemas/Schemas"
-
 
 const AuthContext = createContext();
 
@@ -243,6 +243,47 @@ export const AuthProvider = ({ children }) => {
             setLoading(false);
         }
     };
+
+
+    // Função para buscar o usuário e alterar a senha
+const updateUserPassword = async (email, newPassword) => {
+    setLoading(true);
+
+    try {
+        // 1️⃣ Buscar o usuário pelo e-mail no Firestore
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", email));
+        const querySnapshot = await getDocs(q);
+        
+        if (querySnapshot.empty) {
+            return console.log("Usuário nao encontrado.");
+        }
+        
+        const userDoc = querySnapshot.docs[0]; // Pegamos o primeiro usuário encontrado
+        const userData = userDoc.data();
+        
+        if (!userData.password) {
+            return  console.log("Senha nao encontrada.");
+        }
+        const oldPassword = userData.password;
+        // 2️⃣ Autenticar o usuário com a senha antiga
+        const userCredential = await signInWithEmailAndPassword(auth, email, oldPassword);
+        const user = userCredential.user;
+        // 3️⃣ Atualizar a senha no Firebase Authentication
+        await updatePassword(user, newPassword);
+        // 4️⃣ Atualizar a senha no Firestore
+        const userDocRef = doc(db, "users", userDoc.id);
+        await updateDoc(userDocRef, { password: newPassword });
+        return { success: true, title: "Senha Alterada", message: "Senha alterada com sucesso!" };
+        
+    } catch (error) {
+        console.error("Erro ao atualizar a senha:", error);
+        setMessege({success: false, title: "Erro ao atualizar a senha", message: " por favor, tente novamente"});
+        return { success: false};
+    }finally {
+        setLoading(false);
+    }
+};
     
     // Função para obter os dados do usuário
     const getuser = async (userId) => {
@@ -273,7 +314,8 @@ export const AuthProvider = ({ children }) => {
                 messege, setMessege,
                 selectForm, setSelectForm,
                 registerUser,
-                sendEmail
+                sendEmail,
+                updateUserPassword
             }}>
             {children}
         </AuthContext.Provider>
