@@ -289,6 +289,7 @@ const updateUserPassword = async (email, newPassword) => {
         setMessege({success: false, title: "Erro ao atualizar a senha", message: " por favor, tente novamente"});
         return { success: false};
     }finally {
+        logoutUser()
         setTimeout(() => {
             setLoading(false);
         }, 2000);
