@@ -181,14 +181,13 @@ export const AuthProvider = ({ children }) => {
                             }
                             h1 {
                                 color: #1E90FF;
-                                padding: 5px;
                             }
                             h2 {
                                 color:#FF9D00;
-                                padding-left:15px;
+                                padding-left:25px;
                             }
                             .content {
-                                background-color: #ffffff;
+                                background-color:rgb(217, 217, 217);
                                 padding: 20px;
                                 border-radius: 8px;
                                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -203,6 +202,11 @@ export const AuthProvider = ({ children }) => {
                                 font-size: 40px;
                                 font-weight: 900;
                             }
+                            b {
+                                color:#FF9D00;
+                                font-size: 20px;
+                                font-weight: 900;
+                            }
                         </style>
                     </head>
                     <body>
@@ -210,11 +214,10 @@ export const AuthProvider = ({ children }) => {
                             <img class="img" src="https://trin-flow.netlify.app/assets/logo-a64r1GgQ.png" alt="Logo do Site" />
                             <h2>Trin-Flow</h2>
                             <h1>Código de Recuperação</h1>
-                            <p>Olá...</p>
-                            <p>Seu código de recuperação é:</p>
+                            <p>Olá... Seu código de recuperação é: ⬇️</p>
                             <p class="code">${recoveryCode}</p>
                             <p>Por favor, use este código para recuperar sua conta.</p>
-                            <p>Atenciosamente,<br>Equipe Trin-Flow</p>
+                            <p>Atenciosamente ➡️ Equipe <b>Trin-Flow</b> </p>
                         </div>
                     </body>
                 </html>
