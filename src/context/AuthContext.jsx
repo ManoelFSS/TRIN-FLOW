@@ -169,8 +169,6 @@ export const AuthProvider = ({ children }) => {
             const exists = await checkEmailExists(email);
             if (!exists) return { success: false, title: "Email não encontrado", message: "Por favor, verifique o email e tente novamente" };
             
-            const userName = user?.name || "Usuário"; // Nome do usuário
-            
             const htmlContent = `
                 <html>
                     <head>
@@ -197,17 +195,27 @@ export const AuthProvider = ({ children }) => {
                                 text-decoration: none;
                                 border-radius: 5px;
                                 font-size: 16px;
+                                color:#FFF;
+                            }
+                            img {
+                                width: 150px;
+                                heigth: 150px;
+                            }
+                            strong {
+                                color:#FF9D00;
+                                font-size: 40px;
+                                font-weight: 900;
                             }
                         </style>
                     </head>
                     <body>
                         <div class="content">
                             <h1>Código de Recuperação</h1>
-                            <p>Olá ${userName},</p>
+                            <p>Olá 😎  </p>
                             <p>Seu código de recuperação é: <strong>${recoveryCode}</strong></p>
                             <p>Por favor, use este código para recuperar sua conta.</p>
                             <a href="https://trin-flow.netlify.app/" class="button">Acessar Recuperação</a>
-                            <img src="https://trin-flow.netlify.app/assets/logo-DkWKLF2t.svg" alt="Logo do Site" />
+                            <img src="https://trin-flow.netlify.app/assets/logo-a64r1GgQ.png" alt="Logo do Site" />
                             <p>Atenciosamente,<br>Equipe Trin-Flow</p>
                         </div>
                     </body>
@@ -273,7 +281,7 @@ const updateUserPassword = async (email, newPassword) => {
         // 4️⃣ Atualizar a senha no Firestore
         const userDocRef = doc(db, "users", userDoc.id);
         await updateDoc(userDocRef, { password: newPassword });
-        
+
         logoutUser()
         return { success: true, title: "Senha Alterada", message: "Senha alterada com sucesso!" };
     } catch (error) {
