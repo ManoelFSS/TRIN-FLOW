@@ -3,14 +3,14 @@ import { z } from "zod";
 
 export const nameSchema = z
     .string()
-    .min(2, "O nome deve ter pelo menos 3 caracteres")
+    .min(2, "O nome deve ter pelo menos 2 caracteres")
     .regex(/^[A-Za-zÀ-ÿ\s]+$/, "O nome não pode conter números");
 
 export const emailSchema = z.string().email("Insira um e-mail válido.");
 
 export const phoneSchema = z
     .string()
-    .min(14, "O telefone deve ter pelo menos 14 caracteres.")
+    .min(14, "O telefone deve ter 14 caracteres.")
     .regex(/^\(\d{2}\)\d{5}-\d{4}$/, "O telefone deve estar no formato (XX)XXXXX-XXXX.");
 
 export const passwordSchema = z

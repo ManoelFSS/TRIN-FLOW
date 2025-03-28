@@ -13,6 +13,7 @@ import { doc, getDoc, setDoc, getDocs, collection,  query, where, updateDoc  } f
 import { auth, db } from "../services/firebase";
 // schema
 import { registerSchema } from "../validationSchemas/Schemas"
+import CryptoJS from "crypto-js";
 
 const AuthContext = createContext();
 
@@ -112,9 +113,11 @@ export const AuthProvider = ({ children }) => {
                 acceptTerms: data.acceptTerms,
                 isAdmin: data.isAdmin,
                 createdAt: data.createdAt,
-                status: data.status
+                status: data.status,
+                password:data.password
             });
-            
+
+            logoutUser()
             return { success: true };
         } catch (error) {
 

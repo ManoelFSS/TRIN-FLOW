@@ -29,11 +29,11 @@ const FormLayout = ({ children, $height }) => {
                 break;
             case "register":
                 await registerUser(user);
-                logoutUser();
+                // logoutUser();
                 break;
             case "password":
                 await updateUserPassword(getEmail, user.password);
-                logoutUser();
+                // logoutUser();
                 break;
             default:
                 break;
