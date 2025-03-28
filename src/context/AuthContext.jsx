@@ -283,14 +283,16 @@ const updateUserPassword = async (email, newPassword) => {
         const userDocRef = doc(db, "users", userDoc.id);
         await updateDoc(userDocRef, { password: newPassword });
 
-        await logoutUser()
-        return { success: true, title: "Senha Alterada", message: "Senha alterada com sucesso!" };
+        logoutUser()
+        return { success: true };
     } catch (error) {
         console.error("Erro ao atualizar a senha:", error);
         setMessege({success: false, title: "Erro ao atualizar a senha", message: " por favor, tente novamente"});
         return { success: false};
     }finally {
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }
 };
     
