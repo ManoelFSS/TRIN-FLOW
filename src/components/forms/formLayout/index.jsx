@@ -4,7 +4,7 @@ import { useAuthContext } from "../../../context/AuthContext"
 
 const FormLayout = ({ children, $height }) => {
 
-    const { signInUser, registerUser, updateUserPassword, selectForm } = useAuthContext()
+    const { signInUser, registerUser, updateUserPassword, selectForm, logoutUser } = useAuthContext()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,9 +29,11 @@ const FormLayout = ({ children, $height }) => {
                 break;
             case "register":
                 await registerUser(user);
+                logoutUser();
                 break;
             case "password":
                 await updateUserPassword(getEmail, user.password);
+                logoutUser();
                 break;
             default:
                 break;

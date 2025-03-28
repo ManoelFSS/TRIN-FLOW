@@ -25,8 +25,6 @@ export const AuthProvider = ({ children }) => {
     const [messege, setMessege] = useState(null);
     const [selectForm, setSelectForm] = useState("login");
 
-    // const navigate = useNavigate();
-
     // Verifica a autenticação ao carregar a página
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -88,7 +86,7 @@ export const AuthProvider = ({ children }) => {
             setUser(null);
             setAuthenticated(false);
             localStorage.clear();
-            // navigate("/login");
+            setSelectForm("login")
         } catch (error) {
             console.log("Erro ao deslogar:", error);
         }
