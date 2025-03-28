@@ -181,6 +181,11 @@ export const AuthProvider = ({ children }) => {
                             }
                             h1 {
                                 color: #1E90FF;
+                                padding: 5px;
+                            }
+                            h3 {
+                                color:#FF9D00;
+                                padding: 5px;
                             }
                             .content {
                                 background-color: #ffffff;
@@ -188,34 +193,29 @@ export const AuthProvider = ({ children }) => {
                                 border-radius: 8px;
                                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
                             }
-                            .button {
-                                background-color: #4CAF50;
-                                color: white;
-                                padding: 10px 20px;
-                                text-decoration: none;
-                                border-radius: 5px;
-                                font-size: 16px;
-                                color:#FFF;
-                            }
-                            img {
+                            .img {
+                                display: block;
                                 width: 150px;
                                 heigth: 150px;
+                                padding: 10px;
                             }
-                            strong {
+                            .code {
                                 color:#FF9D00;
-                                font-size: 40px;
+                                font-size: 30px;
                                 font-weight: 900;
+                                padding: 10px;
                             }
                         </style>
                     </head>
                     <body>
                         <div class="content">
+                            <img clas="img" src="https://trin-flow.netlify.app/assets/logo-a64r1GgQ.png" alt="Logo do Site" />
+                            <h3>Trin-Flow</h3>
                             <h1>Código de Recuperação</h1>
-                            <p>Olá 😎  </p>
-                            <p>Seu código de recuperação é: <strong>${recoveryCode}</strong></p>
+                            <p>Olá...</p>
+                            <p>Seu código de recuperação é:</p>
+                            <p class="code">${recoveryCode}</p>
                             <p>Por favor, use este código para recuperar sua conta.</p>
-                            <a href="https://trin-flow.netlify.app/" class="button">Acessar Recuperação</a>
-                            <img src="https://trin-flow.netlify.app/assets/logo-a64r1GgQ.png" alt="Logo do Site" />
                             <p>Atenciosamente,<br>Equipe Trin-Flow</p>
                         </div>
                     </body>
