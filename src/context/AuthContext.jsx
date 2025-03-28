@@ -185,7 +185,7 @@ export const AuthProvider = ({ children }) => {
                             }
                             h2 {
                                 color:#FF9D00;
-                                padding: 5px;
+                                padding-left:15px;
                             }
                             .content {
                                 background-color: #ffffff;
@@ -197,13 +197,11 @@ export const AuthProvider = ({ children }) => {
                                 display: block;
                                 width: 150px;
                                 heigth: 150px;
-                                padding: 5px;
                             }
                             .code {
                                 color:#FF9D00;
                                 font-size: 40px;
                                 font-weight: 900;
-                                padding: 5px;
                             }
                         </style>
                     </head>
