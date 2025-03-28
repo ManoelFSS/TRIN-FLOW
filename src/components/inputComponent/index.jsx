@@ -13,7 +13,7 @@ const InputComponent = (
         $onchange,
     }) => {
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(true);
 
     return (
         <Container>

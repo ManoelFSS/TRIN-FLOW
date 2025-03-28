@@ -117,7 +117,21 @@ export const AuthProvider = ({ children }) => {
                 password:data.password
             });
 
-            logoutUser()
+            setTimeout(() => {
+                setMessege({ 
+                    success: false,
+                    title: "Cadastro Realizado com sucesso ✅", 
+                    message: `
+                        ✅ Bem-vindo ao Trin-Flow! 🎉
+                        Estamos felizes por ter você com a gente!
+                        Agora você faz parte de uma plataforma que vai transformar sua experiência.
+                        Explore, aproveite e conte conosco nessa jornada.
+                        💚 Vamos começar? 😉
+                    `
+                });
+            }, 2000);
+
+            // logoutUser()
             return { success: true };
         } catch (error) {
 
@@ -283,13 +297,25 @@ const updateUserPassword = async (email, newPassword) => {
         const userDocRef = doc(db, "users", userDoc.id);
         await updateDoc(userDocRef, { password: newPassword });
 
+        setTimeout(() => {
+            setMessege({ 
+                success: false,
+                title: "Senha Redefinida com sucesso ! ✅", 
+                message: `
+                    🔒 Sua senha foi atualizada com sucesso!
+                    Agora você pode acessar sua conta com segurança e tranquilidade.
+                    Atenciosamente Equipe  ➡️ Trin-Flow!
+                `
+            });
+        }, 2000);
+
         return { success: true };
     } catch (error) {
         console.error("Erro ao atualizar a senha:", error);
         setMessege({success: false, title: "Erro ao atualizar a senha", message: " por favor, tente novamente"});
         return { success: false};
     }finally {
-        logoutUser()
+        // logoutUser()
         setTimeout(() => {
             setLoading(false);
         }, 2000);

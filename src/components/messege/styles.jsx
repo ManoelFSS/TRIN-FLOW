@@ -20,7 +20,7 @@ export const Container_messege = styled.div`
         align-items: center;    
         gap: 15px;
         min-width: 290px;
-        max-width: 360px;
+        max-width: 420px;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -42,6 +42,7 @@ export const Container_messege = styled.div`
             font-size: 0.8rem;
             font-weight: 700;
             color:rgb(99, 99, 99);
+            width: 100%;
             text-align: center;
         }
     }

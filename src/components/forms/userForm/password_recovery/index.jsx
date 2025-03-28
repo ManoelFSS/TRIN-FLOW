@@ -87,7 +87,7 @@ const Password_Recovery = ({setSelectForm}) => {
     return (
         <FormLayout>
             <section className="logo">
-                <Title $text="Recuperar senha"  $cor={"var(  --color-text-primary )"}  />
+                <Title $text="Redefinir senha"  $cor={"var(  --color-text-primary )"}  />
             </section>
             { fromPassword && 
                 <>
@@ -99,7 +99,7 @@ const Password_Recovery = ({setSelectForm}) => {
                             $value={email}
                             $onchange={(e) => setEmail(e.target.value)} 
                             $name="email" 
-                            $placeholder="Exmplo@gmail.com" 
+                            $placeholder="Digite seu email" 
                             $autoComplete="current-email" 
                             $required 
                         />
