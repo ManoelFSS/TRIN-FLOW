@@ -108,7 +108,6 @@ const Register = ({setSelectForm}) => {
                     $onchange={(e) => setCheckbox(e.target.checked)} 
                     $textId="termo" 
                     $name="termo" 
-                    $placeholder="Digite sua  Senha" 
                     $autoComplete="current-checkbox" 
                     $required 
                 />

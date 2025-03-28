@@ -8,7 +8,7 @@ export const Container = styled.div`
     border-radius: 6px;
     position: relative;
     margin: auto;
-    
+
     .logo {
         display: flex;
         justify-content: center;
@@ -31,12 +31,12 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
 
-        input {
-            min-width: 20px;
-            min-height: 20px;
+        .checkd {
+            width: 20px;
+            height: 20px;
             border: none;
-            box-shadow: none;
-
+            box-shadow: none;      
+            
             @media (min-width: 1920px) {
                 width: 4vh;
                 height: 4vh;
@@ -45,21 +45,22 @@ export const Container = styled.div`
 
         .text-check {
             display: flex;
+            width: 100%;
             flex-direction: column;
             gap: 5px;
             align-items: center;
             justify-content: center;
-            padding: 20px 4px 8px;
+            padding: 10px 3px;
             
             span {
-                width: 230px;
+                width: 245px;
                 font-weight: 800;
                 font-size: 0.9rem;
                 text-align: center;
                 
                 @media (min-width: 1920px) {
                     font-size: 2vh;
-                    width: 100%;
+                    width: 360px;
                 }
             }
         }
