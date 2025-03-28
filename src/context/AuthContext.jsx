@@ -183,7 +183,7 @@ export const AuthProvider = ({ children }) => {
                                 color: #1E90FF;
                                 padding: 5px;
                             }
-                            h3 {
+                            h2 {
                                 color:#FF9D00;
                                 padding: 5px;
                             }
@@ -197,20 +197,20 @@ export const AuthProvider = ({ children }) => {
                                 display: block;
                                 width: 150px;
                                 heigth: 150px;
-                                padding: 10px;
+                                padding: 5px;
                             }
                             .code {
                                 color:#FF9D00;
-                                font-size: 30px;
+                                font-size: 40px;
                                 font-weight: 900;
-                                padding: 10px;
+                                padding: 5px;
                             }
                         </style>
                     </head>
                     <body>
                         <div class="content">
-                            <img clas="img" src="https://trin-flow.netlify.app/assets/logo-a64r1GgQ.png" alt="Logo do Site" />
-                            <h3>Trin-Flow</h3>
+                            <img class="img" src="https://trin-flow.netlify.app/assets/logo-a64r1GgQ.png" alt="Logo do Site" />
+                            <h2>Trin-Flow</h2>
                             <h1>Código de Recuperação</h1>
                             <p>Olá...</p>
                             <p>Seu código de recuperação é:</p>
