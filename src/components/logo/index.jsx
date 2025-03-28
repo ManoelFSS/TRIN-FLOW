@@ -1,5 +1,5 @@
 import { Image } from "./styles"
-import LogoTipo from "../../assets/logo.svg"
+import LogoTipo from "../../assets/logo.png"
 
 const Logo = ({$width}) => {
     return (
