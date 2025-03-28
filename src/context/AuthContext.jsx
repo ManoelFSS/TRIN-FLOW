@@ -187,10 +187,10 @@ export const AuthProvider = ({ children }) => {
                                 padding-left:25px;
                             }
                             .content {
-                                background-color:rgb(217, 217, 217);
+                                background-color:rgb(255, 255, 255);
                                 padding: 20px;
                                 border-radius: 8px;
-                                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
                             }
                             .img {
                                 display: block;
@@ -283,7 +283,7 @@ const updateUserPassword = async (email, newPassword) => {
         const userDocRef = doc(db, "users", userDoc.id);
         await updateDoc(userDocRef, { password: newPassword });
 
-        logoutUser()
+        await logoutUser()
         return { success: true, title: "Senha Alterada", message: "Senha alterada com sucesso!" };
     } catch (error) {
         console.error("Erro ao atualizar a senha:", error);
