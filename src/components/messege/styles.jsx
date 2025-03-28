@@ -32,11 +32,12 @@ export const Container_messege = styled.div`
 
         h3 {
             width: 100%;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             font-weight: 900;
             text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
             color: #000;
+            text-align: center;
         }
 
         p {
