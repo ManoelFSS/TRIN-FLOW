@@ -11,7 +11,6 @@ const InputComponent = (
         $autoComplete, 
         $value,
         $onchange,
-        className
     }) => {
 
     const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +18,7 @@ const InputComponent = (
     return (
         <Container>
             <Input 
-                type={$typeText === "password" && showPassword ? $typeText : "text"} 
+                type={$typeText === "password" ? showPassword ? $typeText : "text" : $typeText} 
                 id={$textId} 
                 name={$name} 
                 placeholder={$placeholder} 
