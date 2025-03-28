@@ -6,7 +6,7 @@ export const Container_messege = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.46);
+    background-color: rgba(0, 0, 0, 0.59);
     z-index: 9999;
     display: flex;
     justify-content: center;
@@ -31,19 +31,26 @@ export const Container_messege = styled.div`
         background-color: rgb(255, 255, 255);
 
         h3 {
+            width: 100%;
             font-size: 1rem;
             text-transform: uppercase;
             font-weight: 900;
-            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
             color: #000;
         }
 
         p {
+            width: 100%;
             font-size: 0.8rem;
             font-weight: 700;
             color:rgb(99, 99, 99);
             width: 100%;
             text-align: center;
+        }
+
+        @media (max-width: 500px) {
+            min-width: 90%;
+            max-width: 90%;
         }
     }
 

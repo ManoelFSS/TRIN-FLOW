@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [userId, setUserId] = useState(null);
     const [loading, setLoading] = useState(null);
-    const [messege, setMessege] = useState(null);
+    const [messege, setMessege] = useState(true);
     const [selectForm, setSelectForm] = useState("login");
 
     // Verifica a autenticação ao carregar a página
