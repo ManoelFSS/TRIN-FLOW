@@ -22,6 +22,11 @@ const FormLayout = ({ children, $height }) => {
             lastPaymentDate: new Date(),
             status: "active"
         };
+
+        const userRecovery = {
+            email: event.target.email?.value || "",
+            password: event.target.senha?.value || "",
+        };
         
         switch (selectForm) {
             case "login":
@@ -32,7 +37,7 @@ const FormLayout = ({ children, $height }) => {
                 // logoutUser();
                 break;
             case "password":
-                await updateUserPassword(getEmail, user.password);
+                await updateUserPassword(userRecovery);
                 // logoutUser();
                 break;
             default:

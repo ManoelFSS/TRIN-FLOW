@@ -271,7 +271,7 @@ export const AuthProvider = ({ children }) => {
 
 
     // Função para buscar o usuário e alterar a senha
-const updateUserPassword = async (email, newPassword) => {
+const updateUserPassword = async (data) => {
     setLoading(true);
 
     try {
@@ -281,7 +281,7 @@ const updateUserPassword = async (email, newPassword) => {
 
         // 1️⃣ Buscar o usuário pelo e-mail no Firestore
         const usersRef = collection(db, "users");
-        const q = query(usersRef, where("email", "==", email));
+        const q = query(usersRef, where("email", "==", data.email));
         const querySnapshot = await getDocs(q);
         
         if (querySnapshot.empty) {
@@ -299,10 +299,10 @@ const updateUserPassword = async (email, newPassword) => {
         const userCredential = await signInWithEmailAndPassword(auth, email, oldPassword);
         const user = userCredential.user;
         // 3️⃣ Atualizar a senha no Firebase Authentication
-        await updatePassword(user, newPassword);
+        await updatePassword(user, data.password);
         // 4️⃣ Atualizar a senha no Firestore
         const userDocRef = doc(db, "users", userDoc.id);
-        await updateDoc(userDocRef, { password: newPassword });
+        await updateDoc(userDocRef, { password: data.password });
 
         setTimeout(() => {
             setMessege({ 
