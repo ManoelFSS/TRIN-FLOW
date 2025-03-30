@@ -80,7 +80,7 @@ export const Container = styled.div`
         width: 280px;
         flex-direction: column;
         position: absolute;
-        bottom: 70px;
+        bottom: 68px;
         left: 0px;
         cursor: pointer;
         trasition: color 0.5s ease;
@@ -128,7 +128,7 @@ export const Container = styled.div`
             content: "";
             position: absolute;
             top: 100%;
-            left: 31%;
+            left: 25%;
             margin-left: -10px;
             border-width: 10px;
             border-style: solid;
