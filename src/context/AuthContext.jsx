@@ -285,14 +285,14 @@ const updateUserPassword = async (data) => {
         const querySnapshot = await getDocs(q);
         
         if (querySnapshot.empty) {
-            return 
+            return console.log("Usuário nao encontrado.");
         }
         
         const userDoc = querySnapshot.docs[0]; // Pegamos o primeiro usuário encontrado
         const userData = userDoc.data();
         
         if (!userData.password) {
-            return
+            return console.log("Senha não encontrada.");
         }
         const oldPassword = userData.password;
         // 2️⃣ Autenticar o usuário com a senha antiga

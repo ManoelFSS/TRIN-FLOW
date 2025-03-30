@@ -24,7 +24,7 @@ const FormLayout = ({ children, $height }) => {
         };
 
         const userRecovery = {
-            email: event.target.email?.value || "",
+            email: getEmail || "",
             password: event.target.senha?.value || "",
         };
         
