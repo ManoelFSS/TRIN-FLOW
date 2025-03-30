@@ -296,7 +296,7 @@ const updateUserPassword = async (data) => {
         }
         const oldPassword = userData.password;
         // 2️⃣ Autenticar o usuário com a senha antiga
-        const userCredential = await signInWithEmailAndPassword(auth, email, oldPassword);
+        const userCredential = await signInWithEmailAndPassword(auth, data.email, oldPassword);
         const user = userCredential.user;
         // 3️⃣ Atualizar a senha no Firebase Authentication
         await updatePassword(user, data.password);
