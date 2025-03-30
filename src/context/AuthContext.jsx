@@ -12,7 +12,7 @@ import {
 import { doc, getDoc, setDoc, getDocs, collection,  query, where, updateDoc  } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
 // schema
-import { registerSchema } from "../validationSchemas/Schemas"
+import { registerSchema, recoverySchema  } from "../validationSchemas/Schemas"
 import CryptoJS from "crypto-js";
 
 const AuthContext = createContext();
@@ -136,6 +136,7 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
 
             if (error.code === "auth/email-already-in-use") {
+                console.error("Erro  usuário em uso:", error);
                 setTimeout(() => {
                     setMessege({ 
                         success: false,
@@ -145,6 +146,7 @@ export const AuthProvider = ({ children }) => {
                 }, 2000);
             }else {
                 setTimeout(() => {
+                    console.error("Erro de validação:", error);
                     setMessege({ 
                         success: false,
                         title: "Erro ao Cadastrar", 
@@ -168,6 +170,7 @@ export const AuthProvider = ({ children }) => {
             const exists = querySnapshot.docs.some(doc => doc.data().email === email);
             return exists; // Retorna true se o e-mail existir, false caso contrário
         } catch (error) {
+            console.error("Erro ao verificar o e-mail:");
             setTimeout(() => {
                 setMessege({success: false, title: "Erro email não encontrado", message: "Por favor, verifique o email e tente novamente"});
             }, 2000);
@@ -272,6 +275,10 @@ const updateUserPassword = async (email, newPassword) => {
     setLoading(true);
 
     try {
+
+        const validatedUserRecovery =  recoverySchema.parse(data); // Valida o objeto
+        if(!validatedUserRecovery) return validatedUserRecovery.errors;
+
         // 1️⃣ Buscar o usuário pelo e-mail no Firestore
         const usersRef = collection(db, "users");
         const q = query(usersRef, where("email", "==", email));
@@ -312,7 +319,13 @@ const updateUserPassword = async (email, newPassword) => {
         return { success: true };
     } catch (error) {
         console.error("Erro ao atualizar a senha:", error);
-        setMessege({success: false, title: "Erro ao atualizar a senha", message: " por favor, tente novamente"});
+        setTimeout(() => {
+            setMessege({ 
+                success: false,
+                title: "Erro ao atualizar a senha", 
+                message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
+            });
+        }, 2000);
         return { success: false};
     }finally {
         // logoutUser()
