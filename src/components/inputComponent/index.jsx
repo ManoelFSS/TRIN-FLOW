@@ -76,14 +76,16 @@ const InputComponent = (
                         )
                     }
                     { selectForm !== "login"  && <IoMdInformationCircleOutline className="icon-info" />}
-                    <div className="info-balloon">
-                        <h4>A senha deve conter:</h4>
-                        <span>8 caracteres no mínimo {passwordCriteria.length && <AiOutlineCheck className="check-required" />}</span>
-                        <span>1 letra maiúscula {passwordCriteria.uppercase && <AiOutlineCheck className="check-required" />}</span>
-                        <span>1 letra minúscula {passwordCriteria.lowercase && <AiOutlineCheck className="check-required" />}</span>
-                        <span>1 número {passwordCriteria.number && <AiOutlineCheck className="check-required" />}</span>
-                        <span>1 caractere especial [ !@#$%^&* ] {passwordCriteria.specialChar && <AiOutlineCheck className="check-required" />}</span>
-                    </div>
+                    { selectForm !== "login" &&
+                        <div className="info-balloon">
+                            <h4>A senha deve conter:</h4>
+                            <span>8 caracteres no mínimo {passwordCriteria.length && <AiOutlineCheck className="check-required" />}</span>
+                            <span>1 letra maiúscula {passwordCriteria.uppercase && <AiOutlineCheck className="check-required" />}</span>
+                            <span>1 letra minúscula {passwordCriteria.lowercase && <AiOutlineCheck className="check-required" />}</span>
+                            <span>1 número {passwordCriteria.number && <AiOutlineCheck className="check-required" />}</span>
+                            <span>1 caractere especial [ !@#$%^&* ] {passwordCriteria.specialChar && <AiOutlineCheck className="check-required" />}</span>
+                        </div>
+                    }
                 </> 
             }
         </Container>
