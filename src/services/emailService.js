@@ -1,4 +1,5 @@
-
+import { getDocs, collection } from "firebase/firestore";
+import {  db } from "../services/firebase";
 const checkEmailExists = async (email,  setMessege) => {
     try {
         // Verifica se o e-mail existe na coleção "users"
@@ -22,7 +23,7 @@ export const sendEmail = async (email, recoveryCode, setMessege, setLoading) => 
     
     try {
         const exists = await checkEmailExists(email, setMessege);
-        if (!exists) return { success: false, title: "Email não encontrado", message: "Por favor, verifique o email e tente novamente" };
+        if (!exists) return { success: false, title: "Erro email não encontrado", message: "Por favor, verifique o email e tente novamente" };
         
         const htmlContent = `
             <html>
