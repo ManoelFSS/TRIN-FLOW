@@ -4,19 +4,19 @@ import { useAuthContext } from "../../../context/AuthContext"
 
 const FormLayout = ({ children, $height }) => {
 
-    const { signInUser, registerUser, updateUserPassword, selectForm, logoutUser } = useAuthContext()
+    const { signInUser, registerUser, updateUserPassword, selectForm } = useAuthContext()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const getEmail = localStorage.getItem("email"); ;
+        const getEmail = localStorage.getItem("email");
 
         const user = {
             name: event.target.name?.value || "",
             phone: event.target.phone?.value || "",
             email: event.target.email?.value || "",
             password: event.target.senha?.value || "",
-            acceptTerms: event.target.termo?.checked || true, // Checkbox usa checked
+            acceptTerms: event.target.termo?.checked || true,
             isAdmin: true,
             createdAt: new Date(),
             lastPaymentDate: new Date(),
@@ -25,7 +25,7 @@ const FormLayout = ({ children, $height }) => {
 
         const userRecovery = {
             email: getEmail || "",
-            password: event.target.senha?.value || "",
+            password: event.target.senha?.value || "", 
         };
         
         switch (selectForm) {
@@ -34,11 +34,9 @@ const FormLayout = ({ children, $height }) => {
                 break;
             case "register":
                 await registerUser(user);
-                // logoutUser();
                 break;
             case "password":
                 await updateUserPassword(userRecovery);
-                // logoutUser();
                 break;
             default:
                 break;

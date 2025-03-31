@@ -93,7 +93,7 @@ const Password_Recovery = ({setSelectForm}) => {
                             $typeText="email" 
                             $textId="email"
                             $value={email}
-                            $onchange={(e) => setEmail(e.target.value)} 
+                            $onchange={(e) => setEmail(e.target.value.trim())} 
                             $name="email" 
                             $placeholder="Digite seu email" 
                             $autoComplete="current-email" 
@@ -119,7 +119,7 @@ const Password_Recovery = ({setSelectForm}) => {
                                     $typeText="text" 
                                     $textId="codigo"
                                     $value={codigo}
-                                    $onchange={(e) => setCodigo(e.target.value)} 
+                                    $onchange={(e) => setCodigo(e.target.value.trim())} 
                                     $name="codigo" 
                                     $placeholder="Digite o Codigo" 
                                     $autoComplete="current-text" 
@@ -145,7 +145,7 @@ const Password_Recovery = ({setSelectForm}) => {
                             $typeText="password" 
                             $textId="senha"
                             $value={password}
-                            $onchange={(e) => setPassword(e.target.value)} 
+                            $onchange={(e) => setPassword(e.target.value.trim())} 
                             $name="senha" 
                             $placeholder="Digite sua  Senha" 
                             $autoComplete="current-password" 

@@ -27,7 +27,7 @@ const LoginForm = ({setSelectForm}) => {
                     $typeText="email" 
                     $textId="email" 
                     $value={email} 
-                    $onchange={(e) => setEmail(e.target.value)}
+                    $onchange={(e) => setEmail(e.target.value.trim())}
                     $name="email" 
                     $placeholder="Exmplo@gmail.com" 
                     $autoComplete="current-email" 
@@ -40,7 +40,7 @@ const LoginForm = ({setSelectForm}) => {
                     $typeText="password" 
                     $textId="senha" 
                     $value={password} 
-                    $onchange={(e) => setPassword(e.target.value)}
+                    $onchange={(e) => setPassword(e.target.value.trim())}
                     $name="senha" 
                     $placeholder="Digite sua  Senha" 
                     $autoComplete="current-password" 

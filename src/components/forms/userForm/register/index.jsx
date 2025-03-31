@@ -54,7 +54,7 @@ const Register = ({setSelectForm}) => {
                 <InputComponent 
                     $typeText="text"
                     $value={name} 
-                    $onchange={(e) => setName(e.target.value.replace(/\d/g, ""))} 
+                    $onchange={(e) => setName(e.target.value.replace(/\d/g, "").trim())} 
                     $textId="name" 
                     $name="name" 
                     $placeholder="Digite seu Nome" 
@@ -80,7 +80,7 @@ const Register = ({setSelectForm}) => {
                 <InputComponent 
                     $typeText="email"
                     $value={email} 
-                    $onchange={(e) => setEmail(e.target.value)} 
+                    $onchange={(e) => setEmail(e.target.value.trim())} 
                     $textId="email" 
                     $name="email" 
                     $placeholder="Exmplo@gmail.com" 
@@ -93,7 +93,7 @@ const Register = ({setSelectForm}) => {
                 <InputComponent 
                     $typeText="password"
                     $value={password} 
-                    $onchange={(e) => setPassword(e.target.value)} 
+                    $onchange={(e) => setPassword(e.target.value.trim())} 
                     $textId="senha" 
                     $name="senha" 
                     $placeholder="Digite sua  Senha" 

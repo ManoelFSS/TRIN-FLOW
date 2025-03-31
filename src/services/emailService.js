@@ -36,10 +36,11 @@ export const sendEmail = async (email, recoveryCode, setMessege, setLoading) => 
                             padding: 20px;
                         }
                         h1 {
+                            font-size: 0.9rem;
                             color: #1E90FF;
                         }
                         h2 {
-                            color:#FF9D00;
+                            color: #FF9D00;
                             padding-left:25px;
                         }
                         .content {
@@ -54,12 +55,12 @@ export const sendEmail = async (email, recoveryCode, setMessege, setLoading) => 
                             heigth: 150px;
                         }
                         .code {
-                            color:#FF9D00;
+                            color: #FF9D00;
                             font-size: 40px;
                             font-weight: 900;
                         }
                         b {
-                            color:#FF9D00;
+                            color: #FF9D00;
                             font-size: 20px;
                             font-weight: 900;
                         }
