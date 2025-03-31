@@ -355,7 +355,6 @@ const updateUserPassword = async (data) => {
                 messege, setMessege,
                 selectForm, setSelectForm,
                 registerUser,
-                sendEmail,
                 updateUserPassword
             }}>
             {children}
