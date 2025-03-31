@@ -5,7 +5,7 @@ import Login from "./pages/login"
 // components
 import Loadingpage from "./components/loadingpage"
 // hooks
-import useToogleMenu from "./pages/hooks/useToogleMenu"
+import useToogleMenu from "./hooks/useToogleMenu"
 // context  
 import { useAuthContext } from "./context/AuthContext"
 
@@ -17,12 +17,11 @@ function App() {
 
   useEffect(() => {
       setLoading(true);
+
       setTimeout(() => {
-        setLoading(false); // Garante a atualização correta do estado
+        setLoading(false); 
       }, 3000);
   }, [authenticated]);
-  
-  // if(loading) return <Loadingpage />
   
   return (
     <>

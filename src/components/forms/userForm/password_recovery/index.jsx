@@ -8,13 +8,15 @@ import InputComponent from "../../../inputComponent"
 import LabelComponent from "../../../labelComponent"
 import Loading from "../../../loading"
 // hooks
-import useFormValue from "../../../../pages/hooks/useFormValue"
+import useFormValue from "../../../../hooks/useFormValue"
 // context
 import { useAuthContext } from "../../../../context/AuthContext"
+// services
+import { sendEmail, gerarCodigo } from "../../../../services/emailService"
 
 const Password_Recovery = ({setSelectForm}) => {
 
-    const { sendEmail,  loading, setMessege, setLoading } = useAuthContext();
+    const { loading, setMessege, setLoading } = useAuthContext();
     const { email, setEmail, password, setPassword, codigo, setCodigo } = useFormValue();
 
     const [simulaApi, setSimulaApi] = useState(false)
@@ -24,32 +26,26 @@ const Password_Recovery = ({setSelectForm}) => {
     const [fromPassword, setFromPassword] = useState(true)
     const [validaCodigo, setValidaCodigo] = useState(null)
 
+    // Função para enviar email, gerar codigo, e controlae campos do formulario
     const handleFormUpdate = async () => {
-        function gerarCodigo() {
-            const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?";
-            let codigo = "";
-            for (let i = 0; i < 8; i++) {
-              const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
-                codigo += caracteres[indiceAleatorio];
-            }
-            return codigo;
-        }
         
-        const codigoGerado = gerarCodigo();
-        setValidaCodigo(codigoGerado)
-        const result = await sendEmail(email, codigoGerado);
+        const codigoGerado = await gerarCodigo();
+        
+        const result = await sendEmail(email, codigoGerado, setMessege, setLoading);
         if (!result.success) {
             setMessege({success: false, title: result.title, message: result.message});
             return
         }
 
+        setValidaCodigo(codigoGerado)
         localStorage.setItem("email", email);
         setSimulaApi(true);
         setIsDisabledBtn(true);
         setControlerTime(!controlerTime)
         
     };
-    
+
+    // Função para verificar codigo
     const hendleInpassword = () => {
         setLoading(true);
         if (validaCodigo !== codigo){
@@ -108,7 +104,7 @@ const Password_Recovery = ({setSelectForm}) => {
                         $typeText="button"
                         $text={simulaApi ? ` Reenviar Codigo` : 'Enviar Codigo'}
                         $marginTop="1vh"
-                        onClick={(event) =>{ event.preventDefault();  handleFormUpdate()}} 
+                        onClick={() => handleFormUpdate() } 
                         $disabled={isDisabledBtn}
                         $opacity={isDisabledBtn}
                         $timer={coutTime}
@@ -116,7 +112,7 @@ const Password_Recovery = ({setSelectForm}) => {
                     
                     { simulaApi && 
                         <>
-                            <p className="text"> Por Favor Verifique seu Email envianos um codigo</p>
+                            <p className="text"> Por Favor Verifique seu Email, envianos um codigo</p>
                             <section className="box">
                                 <LabelComponent $text="Codigo" $htmlFor="codigo" />
                                 <InputComponent 
@@ -133,7 +129,7 @@ const Password_Recovery = ({setSelectForm}) => {
                                     $typeText="button"
                                     $text="Verificar Codigo"
                                     $marginTop="1.5vh" 
-                                    onClick={(event) => {simulaApi && event.preventDefault();  hendleInpassword()}}
+                                    onClick={() =>  hendleInpassword()}
                                 />
                             </section>
                         </>
@@ -158,10 +154,10 @@ const Password_Recovery = ({setSelectForm}) => {
                     </section>
                     <section className="box">
                         <BtnSubmit 
+                            $typeText="submit"
                             $text="Alterar Senha"
                             $marginTop="1.5vh" 
-                            $typeText="submit"
-                            onClick={(e) => {!simulaApi && e.preventDefault() ,  hendleInpassword()}}
+                            onClick={() =>  hendleInpassword() }
                         />
                     </section>
                 </>

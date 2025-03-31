@@ -5,10 +5,8 @@ import LoginForm from "../../components/forms/userForm/loginForm"
 import Register from "../../components/forms/userForm/register"
 import Password_Recovery from "../../components/forms/userForm/password_recovery"
 import Messege from "../../components/messege";
-
 // context
 import { useAuthContext } from "../../context/AuthContext";
-
 // icons
 import { FaWhatsapp, FaFacebook, FaInstagram  } from "react-icons/fa";
 

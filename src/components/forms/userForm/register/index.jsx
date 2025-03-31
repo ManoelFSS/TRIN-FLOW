@@ -8,7 +8,7 @@ import Loading from "../../../loading"
 // context
 import { useAuthContext } from "../../../../context/AuthContext"
 // hooks 
-import useFormValue from "../../../../pages/hooks/useFormValue"
+import useFormValue from "../../../../hooks/useFormValue"
 const Register = ({setSelectForm}) => {
     const { loading } = useAuthContext();
     

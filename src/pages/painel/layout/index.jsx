@@ -6,7 +6,6 @@ import Messege from "../../../components/messege"
 // context 
 import { useAuthContext } from "../../../context/AuthContext"
 
-
 const Layout = ({children, $setToogleMenu, $toogleMenu}) => {
     
     const { messege, selectForm, setSelectForm } = useAuthContext();
