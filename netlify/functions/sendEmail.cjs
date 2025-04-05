@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export const handler = (event) => {
+export const handler = async (event) => {
     try {
         // Log do corpo da requisição
         console.log("Corpo da requisição:", event.body);
