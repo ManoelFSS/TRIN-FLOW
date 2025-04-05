@@ -8,24 +8,20 @@ export const Nav = styled.nav`
     
     .logo {
         display: flex;
+        align-items: center;
         gap: 10px;
         flex-direction: column;
-        position: ;
         width:190px;
         padding-left: 55px;
         padding-top: 10px;
         padding-bottom: 10px;
 
-        @media (max-height: 530px) {
-            // display: none;
-        }
-
         img {
-            height: 70px;
+            width: 90px;
         }
 
         h3 {
-            font-size: 0.7rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var( --color-text-secondary );
             text-align: center;
@@ -46,6 +42,7 @@ export const Nav = styled.nav`
             align-items: center;
             cursor: pointer;
             font-size: 0.8rem;
+            font-weight: 400;
             gap: 30px;
             transition: color 0.3s ease;
             color: var( --color-text-secondary );

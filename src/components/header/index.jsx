@@ -1,7 +1,7 @@
 import  { Container_header } from "./styles"
 
 // components
-import Logo from "../../components/logo"
+import Logo from "../../assets/logo.png"
 import  Title from "../../components/title"
 import Btn from "../../components/btns/btnSubmit"
 // icons
@@ -17,7 +17,7 @@ const Header = ({$setToogleMenu, $toogleMenu}) => {
         <Container_header $toogleMenu={$toogleMenu} > 
             <IoMenu className="menu" onClick={() => $setToogleMenu(!$toogleMenu)} />
             <div className="title">
-                <Logo  />
+                <img src={Logo} alt="logo" />
                 <Title 
                     $text="TRIN-FLOW" 
                     $cor={"var( --color-text-primary )"} 

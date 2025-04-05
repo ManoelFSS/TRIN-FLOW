@@ -10,6 +10,9 @@ import Loading from "../../../loading"
 import { useAuthContext } from "../../../../context/AuthContext"
 // hooks
 import useFormValue from "../../../../hooks/useFormValue"
+//icons
+import { PiKeyFill } from "react-icons/pi";
+
 
 const LoginForm = ({setSelectForm}) => {
 
@@ -29,7 +32,7 @@ const LoginForm = ({setSelectForm}) => {
                     $value={email} 
                     $onchange={(e) => setEmail(e.target.value.trim())}
                     $name="email" 
-                    $placeholder="Exmplo@gmail.com" 
+                    $placeholder="Exemplo@gmail.com" 
                     $autoComplete="current-email" 
                     $required 
                 />
@@ -46,7 +49,8 @@ const LoginForm = ({setSelectForm}) => {
                     $autoComplete="current-password" 
                     $required 
                 />
-                <p onClick={() => setSelectForm("password")}>
+                <p className="forgot-password" onClick={() => setSelectForm("password")}>
+                    <PiKeyFill className="icon" />
                     Esqueci minha senha
                 </p>
             </section>

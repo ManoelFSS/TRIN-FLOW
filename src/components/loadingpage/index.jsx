@@ -1,11 +1,11 @@
 import { All_loading } from "./styles"
-import Logo from "../logo"
+import Logo from "../../assets/logo.png"
 import Loading from "../loading"
 
 const Loadingpage = () => {
     return (
         <All_loading> 
-            <Logo $width="100px" />
+            <img src={Logo} alt="logo" />
             <Loading /> 
         </All_loading>
     )

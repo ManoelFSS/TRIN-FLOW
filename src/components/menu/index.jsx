@@ -17,13 +17,13 @@ import { useAuthContext } from "../../context/AuthContext";
 
 
 const Menu = () => {
-    const {  } = useAuthContext();
+    const {user} = useAuthContext();
 
     return (
         <Nav>
             <div className="logo">
                 <Logo />
-                <h3>TRIN-FLOW</h3>
+                <h3>{user?.name.split(" ")[0]}</h3>
             </div>
             <ul>
                 <li className="active"> 

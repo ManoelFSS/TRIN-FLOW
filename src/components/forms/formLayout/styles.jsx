@@ -67,15 +67,25 @@ export const Container = styled.div`
 
     }
 
-    p {
-        text-align: right;
+    .forgot-password {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        gap: 10px;
         color: var(--color-text-primary);
         font-weight: 600;
         cursor: pointer;
         font-size: 1rem;
         trasition: color 0.3s ease;
-        boder: solid 2px var( --color-bord-btn-primary );
-        padding: 5px 0 0;
+        border-radius: 4px;
+        margin-top: 8px;
+        padding: 0 5px;
+
+        .icon {
+            color: var( --color-primary );
+            font-size: 1.2rem;
+        }
 
         &:hover {
             color: var( --color-text-hover );

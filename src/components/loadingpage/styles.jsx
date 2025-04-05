@@ -13,4 +13,8 @@ export const All_loading = styled.div`
     left: 0;
     background-color: var( --color-bg-primary );
     z-index: 9999;
+
+    img {
+        width: 140px;
+    }
 `
