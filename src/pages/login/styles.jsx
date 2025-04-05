@@ -26,6 +26,13 @@ export const Container_login = styled.section`
             width: 100%;
             margin: auto;
 
+            img {
+                width: 150px;
+                @media (min-width: 1550px) {
+                    width: 25vh;
+                }
+            }
+
             h1 {
                 font-size: 22px;
                 font-weight: 900;

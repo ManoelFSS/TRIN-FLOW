@@ -1,6 +1,6 @@
 import { Container_login} from "./styles";
 //components
-import Logo from "../../components/logo"
+import Logo from "../../assets/logo.png"
 import LoginForm from "../../components/forms/userForm/loginForm"
 import Register from "../../components/forms/userForm/register"
 import Password_Recovery from "../../components/forms/userForm/password_recovery"
@@ -17,7 +17,7 @@ const Login = () => {
         <Container_login>
             <section className="box-left">
                 <div className="box-container">
-                    <Logo  $width="20vh"/>
+                    <img src={Logo} alt="logo"/>
                     <h1>TRIN-FLOW</h1>
                     <p>Tudo que sua Empresa precisa.</p>
                     <div className="icons">
