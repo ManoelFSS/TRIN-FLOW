@@ -14,8 +14,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [authenticated, setAuthenticated] = useState(false);
     const [userId, setUserId] = useState(null);
-    const [loading, setLoading] = useState(null);
-    const [messege, setMessege] = useState(null);
+    const [loading, setLoading] = useState(null);// loading do form
+    const [messege, setMessege] = useState(null);// controle do componente messege
     const [selectForm, setSelectForm] = useState("login");
 
     // Verifica a autenticação ao carregar a página
@@ -50,18 +50,16 @@ export const AuthProvider = ({ children }) => {
             await setPersistence(auth, browserLocalPersistence); // Garante a persistência
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            getuser(user.uid);
+            getuser(user.uid);// pegar os dados do usuário
             localStorage.setItem("userId", user.uid);
             console.log("Login realizado com sucesso!");
             setAuthenticated(true);
-            // navigate("/dashboard/jogo"); // Redireciona após login
-            // return { success: true, message: "Login realizado com sucesso!" };
         } catch (error) {
             setTimeout(() => {
                 setMessege({ 
                     success: false,
                     title: "Email ou Senha Incorreto", 
-                    message: "Email ou Senha que vocé inseriu está incorreto. Por favor, tente novamente." 
+                    message: "Email ou Senha que vocé inseriu está incorreto. Por favor, Verifique seus dados e tente novamente." 
                 });
             }, 2000);
             return  {success: false};
@@ -85,12 +83,13 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Função de cadastro
     const registerUser = async (data) => {
         setLoading(true);
 
         try {
             const validatedUser =  registerSchema.parse(data); // Valida o objeto
-            if(!validatedUser) return validatedUser.errors;
+            if(!validatedUser) return validatedUser.errors;// retorn o erro do zod
 
             const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
             const user = userCredential.user;
@@ -116,16 +115,14 @@ export const AuthProvider = ({ children }) => {
                     success: false,
                     title: "Cadastro Realizado com sucesso ✅", 
                     message: `
-                        ✅ Bem-vindo ao Trin-Flow! 🎉
+                        ✅ Bem-vindo ao Trin-Flow! 🎉\n
                         Estamos felizes por ter você com a gente!
-                        Agora você faz parte de uma plataforma que vai transformar sua experiência.
-                        Explore, aproveite e conte conosco nessa jornada.
+                        Agora você faz parte de uma plataforma que vai transformar sua experiência.\n
+                        Explore, aproveite e conte conosco nessa jornada.\n
                         💚 Vamos começar? 😉
                     `
                 });
             }, 2000);
-
-            // logoutUser()
             return { success: true };
         } catch (error) {
 
@@ -134,8 +131,8 @@ export const AuthProvider = ({ children }) => {
                 setTimeout(() => {
                     setMessege({ 
                         success: false,
-                        title: "Erro ao Cadastrar", 
-                        message: "O e-mail já está em uso! Tente fazer login ou recuperar sua senha."
+                        title: "❌ Erro ao Cadastrar", 
+                        message: "O e-mail já está em uso!\n\n Tente fazer login ou recuperar sua senha."
                     });
                 }, 2000);
             }else {
@@ -143,7 +140,7 @@ export const AuthProvider = ({ children }) => {
                     console.error("Erro de validação:", error);
                     setMessege({ 
                         success: false,
-                        title: "Erro ao Cadastrar", 
+                        title: "❌ Erro ao Cadastrar", 
                         message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
                     });
                 }, 2000);
@@ -157,73 +154,73 @@ export const AuthProvider = ({ children }) => {
     }
 
     // Função para buscar o usuário e alterar a senha
-const updateUserPassword = async (data) => {
-    setLoading(true);
+    const updateUserPassword = async (data) => {
+        setLoading(true);
 
-    try {
+        try {
 
-        const validatedUserRecovery =  recoverySchema.parse(data); // Valida o objeto
-        if(!validatedUserRecovery) return validatedUserRecovery.errors;
+            const validatedUserRecovery =  recoverySchema.parse(data); // Valida o objeto
+            if(!validatedUserRecovery) return validatedUserRecovery.errors;
 
-        // 1️⃣ Buscar o usuário pelo e-mail no Firestore
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, where("email", "==", data.email));
-        const querySnapshot = await getDocs(q);
-        
-        if (querySnapshot.empty) {
-            return console.log("Usuário nao encontrado.");
+            // 1️⃣ Buscar o usuário pelo e-mail no Firestore
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, where("email", "==", data.email));
+            const querySnapshot = await getDocs(q);
+            
+            if (querySnapshot.empty) {
+                return console.log("❌ Usuário não encontrado.");
+            }
+            
+            const userDoc = querySnapshot.docs[0]; // Pegamos o primeiro usuário encontrado
+            const userData = userDoc.data();
+            
+            if (!userData.password) {
+                return console.log("❌ Senha não encontrada.");
+            }
+
+            // 2️⃣ Autenticar o usuário com a senha antiga
+            const getDecryptedPassword = decryptPassword( userData.password ); // Senha descriptografada
+            const userCredential = await signInWithEmailAndPassword(auth, data.email, getDecryptedPassword);
+            const user = userCredential.user;
+            
+            // 3️⃣ Atualizar a senha no Firebase Authentication
+            await updatePassword(user, data.password);
+
+            // 4️⃣ Atualizar a senha no Firestore
+            const getEncryptedPassword = await encryptPassword( data.password );
+            const userDocRef = doc(db, "users", userDoc.id);
+            await updateDoc(userDocRef, { password: getEncryptedPassword });
+
+            setTimeout(() => {
+                setMessege({ 
+                    success: false,
+                    title: "Senha Redefinida com sucesso ! ✅", 
+                    message: `
+                        🔒 Sua senha foi atualizada com sucesso!\n
+                        Agora você pode acessar sua conta com segurança e tranquilidade.\n
+                        Atenciosamente Equipe  ➡️ Trin-Flow!
+                    `
+                });
+            }, 2000);
+
+            return { success: true };
+        } catch (error) {
+            console.error("Erro ao atualizar a senha:", error);
+            setTimeout(() => {
+                setMessege({ 
+                    success: false,
+                    title: "❌ Erro ao atualizar a senha", 
+                    message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
+                });
+            }, 2000);
+            return { success: false};
+        }finally {
+            // logoutUser()
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         }
-        
-        const userDoc = querySnapshot.docs[0]; // Pegamos o primeiro usuário encontrado
-        const userData = userDoc.data();
-        
-        if (!userData.password) {
-            return console.log("Senha não encontrada.");
-        }
-
-        // 2️⃣ Autenticar o usuário com a senha antiga
-        const getDecryptedPassword = decryptPassword( userData.password ); // Senha descriptografada
-        const userCredential = await signInWithEmailAndPassword(auth, data.email, getDecryptedPassword);
-        const user = userCredential.user;
-        
-        // 3️⃣ Atualizar a senha no Firebase Authentication
-        await updatePassword(user, data.password);
-
-        // 4️⃣ Atualizar a senha no Firestore
-        const getEncryptedPassword = await encryptPassword( data.password );
-        const userDocRef = doc(db, "users", userDoc.id);
-        await updateDoc(userDocRef, { password: getEncryptedPassword });
-
-        setTimeout(() => {
-            setMessege({ 
-                success: false,
-                title: "Senha Redefinida com sucesso ! ✅", 
-                message: `
-                    🔒 Sua senha foi atualizada com sucesso!
-                    Agora você pode acessar sua conta com segurança e tranquilidade.
-                    Atenciosamente Equipe  ➡️ Trin-Flow!
-                `
-            });
-        }, 2000);
-
-        return { success: true };
-    } catch (error) {
-        console.error("Erro ao atualizar a senha:", error);
-        setTimeout(() => {
-            setMessege({ 
-                success: false,
-                title: "Erro ao atualizar a senha", 
-                message: error.errors[0]?.message || "Erro de validação" // Pegando a primeira mensagem de erro
-            });
-        }, 2000);
-        return { success: false};
-    }finally {
-        // logoutUser()
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    }
-};
+    };
     
     // Função para obter os dados do usuário
     const getuser = async (userId) => {
@@ -236,9 +233,8 @@ const updateUserPassword = async (data) => {
             setAuthenticated(true);
             setUserId(userId);
             setUser(userDoc.data());
-            // setIsAdmin(user.isAdmin);
         } else {
-            console.log("Usuário não encontrado.");
+            console.log("❌ Usuário não encontrado.");
             return { success: false, message: "Usuário não encontrado." };
         }
     }   

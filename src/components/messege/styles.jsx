@@ -47,6 +47,7 @@ export const Container_messege = styled.div`
             color:rgb(99, 99, 99);
             width: 100%;
             text-align: center;
+            white-space: pre-line;
         }
 
         @media (max-width: 500px) {

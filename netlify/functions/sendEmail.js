@@ -58,3 +58,74 @@ export async function handler(event) {
         };
     }
 }
+
+
+import nodemailer from "nodemailer";
+
+export async function handler(event) {
+    // Permitir requisições de outros domínios
+    const corsHeaders = {
+        'Access-Control-Allow-Origin': '*', // ou use 'https://localhost:3200' para restringir
+        'Access-Control-Allow-Headers': 'Content-Type',
+    };
+
+    // Responder a preflight OPTIONS request (CORS)
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: corsHeaders,
+            body: 'OK',
+        };
+    }
+
+    try {
+        console.log("Corpo da requisição:", event.body);
+
+        if (!event.body) {
+            throw new Error("Corpo da requisição está vazio!");
+        }
+
+        const { from, to, subject, html } = JSON.parse(event.body);
+
+        if (!from || !to || !subject || !html) {
+            throw new Error("Faltando parâmetros essenciais!");
+        }
+
+        const emailUser = process.env.VITE_EMAIL_USER;
+        const emailPass = process.env.VITE_EMAIL_PASS;
+
+        if (!emailUser || !emailPass) {
+            throw new Error("As variáveis de ambiente não estão configuradas corretamente...");
+        }
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: emailUser,
+                pass: emailPass,
+            },
+        });
+
+        let mailOptions = {
+            from: emailUser,
+            to,
+            subject,
+            html,
+        };
+
+        let info = await transporter.sendMail(mailOptions);
+
+        return {
+            statusCode: 200,
+            headers: corsHeaders,
+            body: JSON.stringify({ message: "E-mail enviado com sucesso!", info }),
+        };
+    } catch (error) {
+        console.error("Erro ao enviar e-mail:", error.message);
+        return {
+            statusCode: 500,
+            headers: corsHeaders,
+            body: JSON.stringify({ message: "Erro ao enviar e-mail", error: error.message }),
+        };
+    }
+}
