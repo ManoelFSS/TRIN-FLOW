@@ -34,7 +34,6 @@ export const Container = styled.div`
     width: 100%;
     position: relative;
     
-
     .icon {
         position: absolute;
         top: 9px;

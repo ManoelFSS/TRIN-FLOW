@@ -31,6 +31,10 @@ export const Container_login = styled.section`
                 @media (min-width: 1550px) {
                     width: 25vh;
                 }
+
+                @media (max-width: 340px) {
+                    width: 100px;
+                }
             }
 
             h1 {
@@ -95,6 +99,10 @@ export const Container_login = styled.section`
             max-height: 36svh;
         }
 
+        @media (max-width: 340px) {
+            height:30svh;
+        }
+
         @media (orientation: landscape) {
             min-height: 50svh;
         }
@@ -107,7 +115,11 @@ export const Container_login = styled.section`
         position: relative;
 
         @media (max-width: 550px) {
-            min-height: 64svh;
+            height: 64svh;
+        }
+
+        @media (max-width: 340px) {
+            height: 70svh;
         }
 
         .box-blu {
@@ -118,12 +130,16 @@ export const Container_login = styled.section`
             overflow: auto;
             padding: 10px 10px 20px;
             position: relative;
-
+            
             @media (max-width: 550px) {
-                min-height: 64svh;
+                height: 64svh;
+            }
+            
+            @media (max-width: 340px) {
+                height: 70svh;
             }
         }
-
+        
         .copyright {   
             font-size: 1.7vh;
             font-weight: 600;

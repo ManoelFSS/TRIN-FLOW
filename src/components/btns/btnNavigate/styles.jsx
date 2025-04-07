@@ -21,4 +21,5 @@ export const Button = styled.button`
         padding: 1vh;
         border: solid 0.4vh var( --color-bord-btn-primary );
     }
+
 `

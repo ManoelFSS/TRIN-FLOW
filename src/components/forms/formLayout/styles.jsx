@@ -9,6 +9,10 @@ export const Container = styled.div`
     position: relative;
     margin: auto;
 
+    @media (max-width: 340px) {
+        min-width: 260px;
+    }
+
     .logo {
         display: flex;
         justify-content: center;
