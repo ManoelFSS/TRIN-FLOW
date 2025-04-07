@@ -6,10 +6,13 @@ import { auth, db } from "../services/firebase";
 import { registerSchema, recoverySchema  } from "../validationSchemas/Schemas"
 // services
 import { encryptPassword, decryptPassword } from "../services/encryptionService";
+import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState(null);
     const [authenticated, setAuthenticated] = useState(false);
@@ -78,6 +81,7 @@ export const AuthProvider = ({ children }) => {
             setAuthenticated(false);
             localStorage.clear();
             setSelectForm("login")
+            navigate("/");
         } catch (error) {
             console.log("Erro ao deslogar:", error);
         }

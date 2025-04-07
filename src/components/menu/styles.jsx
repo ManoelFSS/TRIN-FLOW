@@ -13,11 +13,11 @@ export const Nav = styled.nav`
         flex-direction: column;
         width:190px;
         padding-left: 55px;
-        padding-top: 10px;
+        padding-top: 15px;
         padding-bottom: 10px;
 
         img {
-            width: 90px;
+            width: 80px;
         }
 
         h3 {
