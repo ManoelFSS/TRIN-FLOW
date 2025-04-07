@@ -20,7 +20,6 @@ export const Container = styled.div`
 
     .content {
         width: 100%;
-        height: 100svh;
         
         .main {
             display: flex;
@@ -31,7 +30,7 @@ export const Container = styled.div`
             width: 100%;
             background-color: var( --color-bg-secondary );
             overflow: auto;
-            padding: ${props => props.$toogleMenu ? "10px 10px 10px 190px" : "10px 10px 10px 50px" };
+            padding: ${props => props.$toogleMenu ? "10px 0px 10px 190px" : "10px 0px 10px 50px" };
 
         }
 

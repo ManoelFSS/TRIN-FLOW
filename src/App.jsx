@@ -8,6 +8,8 @@ import Loadingpage from "./components/loadingpage"
 import useToogleMenu from "./hooks/useToogleMenu"
 // context  
 import { useAuthContext } from "./context/AuthContext"
+// Routes
+import AppRouters from "./appRouters"
 
 
 function App() {
@@ -25,7 +27,10 @@ function App() {
   
   return (
     <>
-      {authenticated ? <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}></Layout> : <Login />}
+      {authenticated ? 
+        <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}> 
+          <AppRouters />
+        </Layout> : <Login />}
       {loading && <Loadingpage />}
     </>
   )
