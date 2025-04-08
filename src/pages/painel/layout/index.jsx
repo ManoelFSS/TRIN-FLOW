@@ -21,7 +21,7 @@ const Layout = ({children, $setToogleMenu, $toogleMenu}) => {
                 <div className="main">
                     {children}
                 </div>
-                <footer><p>© 2024 - {Year} Trin-Flow | Todos os direitos reservados - Trin-Codex</p></footer>
+                {/* <footer><p>© 2024 - {Year} Trin-Flow | Todos os direitos reservados - Trin-Codex</p></footer> */}
             </section>
             { messege && <Messege $title={messege.title} $text={messege.message} /> }
         </Container>

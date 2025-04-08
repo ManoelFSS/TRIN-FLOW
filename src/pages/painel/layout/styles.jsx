@@ -4,7 +4,6 @@ export const Container = styled.div`
     display: flex;
     height: 100svh;
     width: 100%;
-    background-color: #fff;
     
     .sidebar {
         transition: width 0.3s ease;
@@ -19,18 +18,17 @@ export const Container = styled.div`
     }
 
     .content {
+        height: 100svh;
         width: 100%;
         
         .main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             transition: padding 0.3s ease;
-            height: 100svh ;
+            height: calc( 100svh - 45px );
+            margin-top: 45px;
             width: 100%;
-            background-color: var( --color-bg-secondary );
+            background-color: var( --color-bg-secondary);
             overflow: auto;
-            padding: ${props => props.$toogleMenu ? "10px 0px 10px 190px" : "10px 0px 10px 50px" };
+            padding: ${props => props.$toogleMenu ? "0px 0px 10px 190px" : "0px 0px 10px 50px" };
 
         }
 
