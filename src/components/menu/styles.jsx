@@ -36,6 +36,10 @@ export const Nav = styled.nav`
         max-width: 170px;
         flex-direction: column;
 
+        .link {
+            text-decoration: none;
+        }
+
         li {
             display: flex;
             width: 190px;

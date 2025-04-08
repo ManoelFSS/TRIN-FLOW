@@ -33,61 +33,61 @@ const Menu = () => {
                 <h3>{user?.name.split(" ")[0]}</h3>
             </div>
             <ul>
-                <Link to="/dashboard">
+                <Link className="link" to="/dashboard">
                     <li className={activeLink === "/" || activeLink === "/dashboard" ? "active" : ""}> 
                         <MdDashboardCustomize className="icon" /> 
                         Dashboard
                     </li>
                 </Link>
-                <Link to="/clients">
+                <Link className="link" to="/clients">
                     <li className={activeLink === "/clients" ? "active" : ""} >
                         <MdGroupAdd className="icon" />
                         Clientes
                     </li>
                 </Link>
-                <Link to="/drivers">
+                <Link className="link" to="/drivers">
                     <li className={activeLink === "/drivers" ? "active" : ""}>
                         <FaTruckFast className="icon" />
                         Transportadores
                     </li>
                 </Link>
-                <Link to="/rastreamento">
+                <Link className="link" to="/rastreamento">
                     <li className={activeLink === "/rastreamento" ? "active" : ""}>
                         <FaMapLocationDot className="icon" />
                         Rastreamento
                     </li>
                 </Link>
-                <Link to="/products">
+                <Link className="link" to="/products">
                     <li className={activeLink === "/products" ? "active" : ""}>
                         <FaProductHunt className="icon" />
                         Produtos
                     </li>
                 </Link>
-                <Link to="/sales">
+                <Link className="link" to="/sales">
                     <li className={activeLink === "/sales" ? "active" : ""}>
                         <FaLayerGroup className="icon" />
                         Vendas
                     </li>
                 </Link>
-                <Link to="/finances">
+                <Link className="link" to="/finances">
                     <li className={activeLink === "/finances" ? "active" : ""}>
                         <FaMoneyBillTransfer className="icon" />
                         Finanças
                     </li>
                 </Link>
-                <Link to="/reports">
+                <Link  className="link" to="/reports">
                     <li className={activeLink === "/reports" ? "active" : ""}>
                         <FaSquarePollVertical className="icon" />
                         Relatórios
                     </li>
                 </Link>
-                <Link to="/settings">
+                <Link className="link" to="/settings">
                     <li className={activeLink === "/settings" ? "active" : ""}>
                         <FaBuildingCircleExclamation className="icon" />
                         Empresa
                     </li>
                 </Link>
-                <Link to="/users">
+                <Link className="link" to="/users">
                     <li className={activeLink === "/users" ? "active" : ""}>
                         <MdAdminPanelSettings className="icon" />
                         Administrador
