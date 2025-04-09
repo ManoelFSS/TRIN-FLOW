@@ -22,8 +22,6 @@ function App() {
       const largura = window.innerWidth;
       if (largura <= 600) {
         setToogleMenu(false); // Fecha o menu em telas pequenas
-      } else {
-        setToogleMenu(true); // Abre o menu em telas grandes
       }
     };
 
