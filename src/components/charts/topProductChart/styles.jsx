@@ -9,7 +9,7 @@ export const Container = styled.div`
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
     @media (max-width: 420px) {
-        width: 250px;
+        width: 230px;
     }
 
     .chart-header {

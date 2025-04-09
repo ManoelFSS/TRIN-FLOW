@@ -11,6 +11,11 @@ export const Container = styled.div`
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 
+    @media screen and (orientation: landscape) and (max-width: 680px) {
+        flex: 1;
+        min-width: 240px;
+    }
+
     .card-header {
         display: flex;
         justify-content: space-between;

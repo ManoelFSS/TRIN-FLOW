@@ -17,18 +17,21 @@ export const Container_dashboard = styled.div`
         gap: 10px;
         justify-content: center;
 
+        @media screen and (orientation: landscape) and (max-width: 680px) {
+            width: 100%;
+        }
+
         @media (max-width: 570px) {
             width: 100%;
         }
     }
 
     .charts {
-        flex: 1;
         display: flex;
         flex-wrap: wrap;
-        width: 100%;
         gap: 10px;
         justify-content: center;
+        border:solid 1px red;
     }
     
 `
