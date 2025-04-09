@@ -13,13 +13,13 @@ export const Container_bar_x = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 3px 0px;
+        padding: 1.2px 0px;
         position: relative;
         cursor: pointer;
 
         .bar {
             width: 100px;
-            height: 10px;
+            height: 6px;
             background-color: var( --color-bg-secondary-element);
             border-radius: 5px;
             margin-right: 10px;
@@ -54,7 +54,7 @@ export const Container_bar_x = styled.div`
             }
             100% {
                 opacity: 1;
-                width: 60px;
+                width: 40px;
             }
         }
 
@@ -71,7 +71,7 @@ export const Container_bar_x = styled.div`
             z-index: 3;
             cursor: pointer;
             top: -6px;
-            left: 190px;
+            left: 175px;
             transition: display 1s ease;
 
             p {

@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const Container_dashboard = styled.div`
     display: flex;
-    min-height: calc(100vh - 60px);
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     width: 100%;

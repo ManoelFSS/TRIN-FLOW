@@ -29,11 +29,10 @@ const BarChart_x = () => {
         <Container_bar_x>
                 {data.sort((a, b) => b.value - a.value).map((item, i) => {
                     const percent = (item.value / maxValue) * 100;
-                    console.log(percent);
                     return (
-                        <>
+                        <div key={i}>
                             <h3>{item.name}</h3>
-                            <section className="bar-area" $delay={i * 0.1}>
+                            <section className="bar-area">
                                 <div className="value-hover">
                                     <p>{item.value}</p>
                                 </div>
@@ -44,7 +43,7 @@ const BarChart_x = () => {
                                 </div>
                                 <p className="value">{formatValue(item.value)}</p>
                             </section>    
-                        </>                 
+                        </div>                 
                     );
                 })}
         </Container_bar_x>
