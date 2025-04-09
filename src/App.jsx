@@ -13,9 +13,26 @@ import AppRouters from "./appRouters"
 
 
 function App() {
-  const { toogleMenu, setToogleMenu } = useToogleMenu()
+  const { toogleMenu, setToogleMenu } = useToogleMenu(false)
   const { authenticated } = useAuthContext()
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const largura = window.innerWidth;
+      if (largura <= 600) {
+        setToogleMenu(false); // Fecha o menu em telas pequenas
+      } else {
+        setToogleMenu(true); // Abre o menu em telas grandes
+      }
+    };
+
+    handleResize(); // Verifica ao carregar
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [setToogleMenu]);
 
   useEffect(() => {
       setLoading(true);

@@ -1,14 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #fff;
     border-radius: 8px;
-    width: 170px;
-    height: 430px;
+    width: 200px;
+    height: 440px;
     padding: 10px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
+        width: 180px;
+    }
+
+    @media (max-width: 440px) {
         width: 230px;
     }
 
@@ -23,6 +30,10 @@ export const Container = styled.div`
             font-size: 0.9rem;
             font-weight: 700;
             color: var( --color-text-secondary );
+
+            @media (max-width: 481px) {
+                font-size: 0.7rem;
+            }
         }
 
         p {

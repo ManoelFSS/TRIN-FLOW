@@ -7,14 +7,20 @@ export const Container = styled.div`
     align-items: center;
     height: 100px;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 
-    @media screen and (orientation: landscape) and (max-width: 680px) {
+    @media screen and (orientation: landscape) and (max-width: 1370px) {
         flex: 1;
-        min-width: 240px;
+        min-width: 430px;
     }
+
+    @media screen and (orientation: landscape) and (max-width: 940px) {
+        flex: 1;
+        min-width: 230px;
+    }
+
 
     .card-header {
         display: flex;
@@ -28,7 +34,6 @@ export const Container = styled.div`
         @media (max-width: 570px) {
             justify-content: space-between;
         }
-        
 
         h3 {
             font-size: 1rem;
@@ -37,8 +42,8 @@ export const Container = styled.div`
         }
 
         .icon {
-            height: 60px;
-            width: 60px;
+            height: 40px;
+            width: 40px;
         }
 
         .rotate-icon {
@@ -55,7 +60,6 @@ export const Container = styled.div`
         font-size: 0.8rem;
         font-weight: 600;
         color: var( --color-text-secondary );
-        
     }
 
 `

@@ -1,14 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { Container_chart_pizza } from "./styles";
-
-const data = [
-    { name: 'Total', value: 200},
-    { name: 'Entregues', value: 50 },
-    { name: 'Acaminho', value: 70 },
-    { name: 'No prazo', value: 35 },
-    { name: 'Atrasadas', value: 25 },
-    { name: 'Canceladas', value: 15 },
-];
+import { entrega } from "../../../DB";
 
 const COLORS = [
     'rgb(0, 179, 0)',
@@ -43,31 +35,30 @@ const renderLabel = ({ cx, cy, midAngle, outerRadius, value }) => {
         );
 };
 
-
 const ChartPizza = () => {
     return (
         <Container_chart_pizza>
             <PieChart width={170} height={170}>
                 <Pie
-                data={data}
-                cx="48%"
-                cy="50%"
-                innerRadius={25}
-                outerRadius={50}
-                paddingAngle={3}
-                dataKey="value"
-                label={renderLabel} // 👈 usando o label customizado
-                labelLine={false}
+                    data={entrega}
+                    cx="48%"
+                    cy="50%"
+                    innerRadius={25}
+                    outerRadius={50}
+                    paddingAngle={3}
+                    dataKey="value"
+                    label={renderLabel} // 👈 usando o label customizado
+                    labelLine={false}
                 >
-                {data.map((entry, index) => (
-                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
+                    {entrega.map((entry, index) => (
+                        <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                    ))}
                 </Pie>
                 <Tooltip />
             </PieChart>
 
             <ul style={{width: '90%', fontSize: '14px', marginTop: '12px', listStyle: 'none', padding: 0 }}>
-                {data.map((entry, index) => (
+                {entrega.map((entry, index) => (
                 <li
                     key={index}
                     style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}

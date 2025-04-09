@@ -13,11 +13,10 @@ export const Container_dashboard = styled.div`
     .cards {
         display: flex;
         flex-wrap: wrap;
-        width: 250px;
+        width: 230px;
         gap: 10px;
-        justify-content: center;
 
-        @media screen and (orientation: landscape) and (max-width: 680px) {
+        @media screen and (orientation: landscape) and (max-width: 1370px) {
             width: 100%;
         }
 
@@ -31,7 +30,6 @@ export const Container_dashboard = styled.div`
         flex-wrap: wrap;
         gap: 10px;
         justify-content: center;
-        border:solid 1px red;
     }
     
 `

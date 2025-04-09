@@ -13,19 +13,19 @@ export const Container_bar_x = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.2px 0px;
+        padding: 1.6px 0px;
         position: relative;
         cursor: pointer;
 
         .bar {
             width: 100px;
-            height: 6px;
+            height: 10px;
             background-color: var( --color-bg-secondary-element);
             border-radius: 5px;
             margin-right: 10px;
             cursor: pointer;
 
-            @media (max-width: 420px) {
+            @media (max-width: 440px) {
                 height: 10px;
                 width: 150px;
             }

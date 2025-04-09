@@ -1,19 +1,8 @@
 import { Container_bar_x, BarActive  } from "./styles"
+// db 
+import { produtos } from "../../../DB"
 
-const data = [
-    { name: 'Placa 50 x 50', value: 10000 },
-    { name: 'Placa 60 x 60', value: 8000 },
-    { name: 'Gesso Lento', value: 6700 },
-    { name: 'Gesso Rapido', value: 5700 },
-    { name: 'Gesso Cola', value: 4400 },
-    { name: 'Bloco 20 x 40', value: 2400 },
-    { name: 'Bloquete 50 x 100', value: 900 },
-    { name: 'Gesso Projetado', value: 5700 },
-    { name: 'Bag 4500 kg', value: 4400 },
-    { name: 'Cinzal 20 kg', value: 4400 },
-];
-
-const maxValue = Math.max(...data.map(item => item.value)) || 1;
+const maxValue = Math.max(...produtos .map(item => item.value)) || 1;
 
 const BarChart_x = () => {
 
@@ -27,7 +16,7 @@ const BarChart_x = () => {
 
     return (
         <Container_bar_x>
-                {data.sort((a, b) => b.value - a.value).map((item, i) => {
+                {produtos.sort((a, b) => b.value - a.value).map((item, i) => {
                     const percent = (item.value / maxValue) * 100;
                     return (
                         <div key={i}>
