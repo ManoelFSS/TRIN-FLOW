@@ -8,5 +8,5 @@ export const Container_dashboard = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 10px;
+    padding: 20px 10px;
 `
