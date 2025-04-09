@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     background-color: #fff;
     border-radius: 8px;
-    width: 170px;
+    width: 190px;
     padding: 10px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
 
@@ -33,7 +33,7 @@ export const Container = styled.div`
     }
 
     .chart-main {
-        padding: 20px 0px;
+        padding: 10px 0px;
     }
 
     .chart-footer {
@@ -47,5 +47,10 @@ export const Container = styled.div`
         color: var( --color-text-secondary );
         font-weight: 900;
         font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #000;
+        }
     }
 `;

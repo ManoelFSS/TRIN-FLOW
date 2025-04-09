@@ -1,4 +1,4 @@
-import { Container_bar_x } from "./styles"
+import { Container_bar_x, BarActive  } from "./styles"
 
 const data = [
     { name: 'Placa 50 x 50', value: 10000 },
@@ -29,16 +29,20 @@ const BarChart_x = () => {
         <Container_bar_x>
                 {data.sort((a, b) => b.value - a.value).map((item, i) => {
                     const percent = (item.value / maxValue) * 100;
+                    console.log(percent);
                     return (
                         <>
                             <h3>{item.name}</h3>
-                            <section className="bar-area">
+                            <section className="bar-area" $delay={i * 0.1}>
+                                <div className="value-hover">
+                                    <p>{item.value}</p>
+                                </div>
                                 <div className="bar">
                                     <div className="bar-fill">
-                                        <div className="bar-fill-active" style={{ width: `${percent}%` }} ></div>
+                                        <BarActive style={{ width: `${percent}%` }} $delay={i * 0.1} ></BarActive>
                                     </div>
                                 </div>
-                                <p>{formatValue(item.value)}</p>
+                                <p className="value">{formatValue(item.value)}</p>
                             </section>    
                         </>                 
                     );

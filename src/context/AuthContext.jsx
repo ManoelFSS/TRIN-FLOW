@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("userId", user.uid);
             console.log("Login realizado com sucesso!");
             setAuthenticated(true);
+            navigate("/dashboard");
         } catch (error) {
             setTimeout(() => {
                 setMessege({ 

@@ -14,7 +14,7 @@ import Dashboard from "./pages/painel/dashboard"
 const AppRouters = () => {
     return (
         <Routes>
-            <Route path="/" element={<Dashboard />}/>
+            <Route exact path="/dashboard" element={<Dashboard />}/>
         </Routes>
     )
 }
