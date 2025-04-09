@@ -75,10 +75,21 @@ export const Container_bar_x = styled.div`
             font-size: 0.8rem;
             font-weight: 700;
             z-index: 3;
-            cursor: pointer;
-            top: -6px;
-            left: 175px;
+            top: -8px;
+            left: 200px;
             transition: display 1s ease;
+            animation: animatebefore 0.2s linear ;
+
+            @keyframes animatebefore {
+                0%{ 
+                    opacity: 0;
+                    top: -20px;
+                }
+                100% {
+                    opacity: 1;
+                    top: -8px;
+                }
+            }
 
             p {
                 font-size: 0.8rem;
@@ -98,7 +109,7 @@ export const Container_bar_x = styled.div`
                 border-top: 5px solid transparent;
                 border-bottom: 5px solid transparent;
                 border-right: 10px solid var( --color-bg-secondary-element);
-            }
+                z-index: 3;            }
         }
 
         &:hover  .value-hover {
@@ -116,7 +127,6 @@ export const BarActive = styled.div`
     background-color: var(  --color-primary );
     position: absolute;
     z-index: 2;
-    cursor: pointer;
     animation: animate 0.5s  linear forwards;
     animation-delay: ${props => props.$delay }s;
 

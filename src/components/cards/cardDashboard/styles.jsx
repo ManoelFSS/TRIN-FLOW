@@ -13,14 +13,17 @@ export const Container = styled.div`
 
     @media screen and (orientation: landscape) and (max-width: 1370px) {
         flex: 1;
-        min-width: 430px;
     }
 
-    @media screen and (orientation: landscape) and (max-width: 940px) {
+    @media screen and (orientation: landscape) and (max-width: 1000px) {
         flex: 1;
-        min-width: 230px;
+        min-width: 310px;
     }
 
+    @media (max-width: 700px) {
+        
+        min-width: 210px;
+    }
 
     .card-header {
         display: flex;

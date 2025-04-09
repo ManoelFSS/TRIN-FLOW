@@ -10,8 +10,8 @@ import { FaHandHoldingUsd, FaCartArrowDown  } from "react-icons/fa";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { TbSteeringWheel } from "react-icons/tb";
-
-
+//db
+import { entregas, vendas, clientes, Transportadores } from "../../../DB";
 
 const data = [{value:235687}]
 
@@ -80,13 +80,13 @@ const Dashboard = () => {
                 >
                     <BarChart_x />
                 </TopProductsChart>
-
+                    {/* {chartpizza} */}
                 <TopProductsChart 
                     title="Entregas" 
                     text="do Mês"
                     icon={<FaTruckFast className="icon" />}
                 >
-                    <ChartPizza />
+                    <ChartPizza data={entregas} />
                 </TopProductsChart>
 
                 <TopProductsChart 
@@ -94,7 +94,7 @@ const Dashboard = () => {
                     text="do Mês"
                     icon={<FaCartArrowDown  className="icon" />}
                 >
-                    <ChartPizza />
+                    <ChartPizza data={vendas} />
                 </TopProductsChart>
 
                 <TopProductsChart 
@@ -102,7 +102,7 @@ const Dashboard = () => {
                     text="Total"
                     icon={<BsFillPersonLinesFill   className="icon" />}
                 >
-                    <ChartPizza />
+                    <ChartPizza data={clientes} />
                 </TopProductsChart>
 
                 <TopProductsChart 
@@ -110,7 +110,7 @@ const Dashboard = () => {
                     text="Total"
                     icon={<TbSteeringWheel   className="icon" />}
                 >
-                    <ChartPizza />
+                    <ChartPizza data={Transportadores} />
                 </TopProductsChart>
             </section>
         </Container_dashboard>

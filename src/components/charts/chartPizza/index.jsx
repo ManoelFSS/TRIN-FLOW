@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { Container_chart_pizza } from "./styles";
-import { entrega } from "../../../DB";
+import IndicadorColor from "../../indicadorColor";
 
 const COLORS = [
     'rgb(0, 179, 0)',
@@ -15,12 +15,12 @@ const COLORS = [
 const renderLabel = ({ cx, cy, midAngle, outerRadius, value }) => {
     if (value === 0) return null;
     
-        const RADIAN = Math.PI / 180;
-        const radius = outerRadius + 10; // 👈 desloca 5px pra fora da fatia
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-    
-        return (
+    const RADIAN = Math.PI / 180;
+    const radius = outerRadius + 10; // 👈 desloca 5px pra fora da fatia
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
         <text
             x={x}
             y={y}
@@ -32,15 +32,15 @@ const renderLabel = ({ cx, cy, midAngle, outerRadius, value }) => {
         >
             {value}
         </text>
-        );
+    );
 };
 
-const ChartPizza = () => {
+const ChartPizza = ({data}) => {
     return (
         <Container_chart_pizza>
             <PieChart width={170} height={170}>
                 <Pie
-                    data={entrega}
+                    data={data}
                     cx="48%"
                     cy="50%"
                     innerRadius={25}
@@ -50,32 +50,22 @@ const ChartPizza = () => {
                     label={renderLabel} // 👈 usando o label customizado
                     labelLine={false}
                 >
-                    {entrega.map((entry, index) => (
+                    {data.map((entry, index) => (
                         <Cell key={index} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>
                 <Tooltip />
             </PieChart>
 
-            <ul style={{width: '90%', fontSize: '14px', marginTop: '12px', listStyle: 'none', padding: 0 }}>
-                {entrega.map((entry, index) => (
-                <li
-                    key={index}
-                    style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}
-                >
-                    <span
-                    style={{
-                        width: '15px',
-                        height: '15px',
-                        borderRadius: '50%',
-                        backgroundColor: COLORS[index],
-                        display: 'inline-block',
-                        fontSize: '10px',
-                        fontWeight: 'bold',
-                    }}
+            <ul style={{ width: "100%" }}>
+                {data.map((entry, index) => (
+                    <IndicadorColor
+                        color={COLORS[index % COLORS.length]}
+                        width="15px"
+                        height="15px"
+                        text={entry.name}
+                        key={index}
                     />
-                    <span style={{ fontWeight: 'bold' }}>{entry.name}</span>
-                </li>
                 ))}
             </ul>
         </Container_chart_pizza>

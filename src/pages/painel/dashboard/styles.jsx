@@ -8,7 +8,6 @@ export const Container_dashboard = styled.div`
     justify-content: center;
     width: 100%;
     padding: 15px 10px 50px 10px;
-    cursor: pointer;
 
     .cards {
         display: flex;
