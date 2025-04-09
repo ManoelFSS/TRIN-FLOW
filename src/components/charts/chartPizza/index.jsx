@@ -2,11 +2,11 @@ import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 
 const data = [
     { name: 'Total', value: 200},
-    { name: 'Entregues', value: 100 },
+    { name: 'Entregues', value: 50 },
     { name: 'Acaminho', value: 70 },
-    { name: 'No prazo', value: 10 },
-    { name: 'Atrasadas', value: 5 },
-    { name: 'Canceladas', value: 5 },
+    { name: 'No prazo', value: 35 },
+    { name: 'Atrasadas', value: 25 },
+    { name: 'Canceladas', value: 15 },
 ];
 
 const COLORS = [
@@ -23,7 +23,7 @@ const renderLabel = ({ cx, cy, midAngle, outerRadius, value }) => {
     if (value === 0) return null;
     
         const RADIAN = Math.PI / 180;
-        const radius = outerRadius + 16; // 👈 desloca 5px pra fora da fatia
+        const radius = outerRadius + 14; // 👈 desloca 5px pra fora da fatia
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
     
@@ -46,14 +46,14 @@ const renderLabel = ({ cx, cy, midAngle, outerRadius, value }) => {
 const ChartPizza = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <PieChart width={170} height={150}>
+        <PieChart width={170} height={170}>
             <Pie
             data={data}
             cx="48%"
             cy="50%"
-            innerRadius={20}
-            outerRadius={50}
-            paddingAngle={10}
+            innerRadius={30}
+            outerRadius={60}
+            paddingAngle={3}
             dataKey="value"
             label={renderLabel} // 👈 usando o label customizado
             labelLine={false}
@@ -64,11 +64,14 @@ const ChartPizza = () => {
             </Pie>
             <Tooltip
             formatter={(value, name) => [`${value}`, name]}
-            contentStyle={{
-                backgroundColor: '#fff',
-                border: '1px solid #ccc',
-                fontSize: '12px',
-            }}
+                contentStyle={{
+                    backgroundColor: '#f2f2f2',
+                    border: 'none',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    borderRadius: '5px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                }}
             />
         </PieChart>
 

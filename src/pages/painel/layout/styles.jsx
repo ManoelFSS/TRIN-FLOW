@@ -18,7 +18,7 @@ export const Container = styled.div`
     }
 
     .content {
-        height: 100svh;
+        min-height: 100svh;
         width: 100%;
         
         .main {
