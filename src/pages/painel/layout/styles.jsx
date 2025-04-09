@@ -18,12 +18,12 @@ export const Container = styled.div`
     }
 
     .content {
-        min-height: 100svh;
+        height: 100vh;
         width: 100%;
         
         .main {
             transition: padding 0.3s ease;
-            height: calc( 100svh - 45px );
+            height: calc( 100vh - 45px );
             margin-top: 45px;
             width: 100%;
             background-color: var( --color-bg-secondary);

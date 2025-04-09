@@ -4,7 +4,7 @@ export const Nav = styled.nav`
     display: flex;
     trasition: width 0.3s ease;
     flex-direction: column;
-    height: 100svh;
+    height: 100vh;
     
     .logo {
         display: flex;
