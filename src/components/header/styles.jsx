@@ -12,6 +12,7 @@ export const Container_header = styled.div`
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
     background-color: var( --color-bg-primary );
     right: 0;
+    z-index: 99;
 
     @media (min-width:  1910px) {
         height: 5vh;

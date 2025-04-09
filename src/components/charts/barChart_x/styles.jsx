@@ -25,6 +25,12 @@ export const Container_bar_x = styled.div`
             margin-right: 10px;
             cursor: pointer;
 
+            @media (max-width: 420px) {
+                height: 10px;
+                width: 150px;
+            }
+
+
             .bar-fill {
                 width: 100%;
                 height: 100%;

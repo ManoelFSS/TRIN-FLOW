@@ -35,6 +35,7 @@ export const Nav = styled.nav`
         width: 170px;
         max-width: 170px;
         flex-direction: column;
+        padding-bottom: 10px;
 
         .link {
             text-decoration: none;

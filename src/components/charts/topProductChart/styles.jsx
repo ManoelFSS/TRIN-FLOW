@@ -4,13 +4,18 @@ export const Container = styled.div`
     background-color: #fff;
     border-radius: 8px;
     width: 170px;
+    height: 430px;
     padding: 10px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 420px) {
+        width: 250px;
+    }
 
     .chart-header {
         display: flex;
         justify-content: space-between;
-        padding: 15px;
+        padding: 10px;
         background-color: var( --color-bg-secondary-element);
         border-radius: 8px 8px 0px 0px;
 

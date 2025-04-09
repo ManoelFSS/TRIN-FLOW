@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
-    height: 100vh;
     width: 100%;
     
     .sidebar {
@@ -12,24 +11,22 @@ export const Container = styled.div`
         background: linear-gradient(90deg, var( --color-primary) 0px, var( --color-primary ) 50px, var(  --color-secondary ) 50px, var( --color-secondary ) 100%);
         box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
         z-index: 99;
-        position: absolute;
+        position: fixed;
         overflow: hidden;
         overflow-y: auto;
     }
 
     .content {
-        height: 100vh;
         width: 100%;
         
         .main {
+            min-height: calc( 100vh - 45px );
             transition: padding 0.3s ease;
-            height: calc( 100vh - 45px );
             margin-top: 45px;
             width: 100%;
             background-color: var( --color-bg-secondary);
             overflow: auto;
             padding: ${props => props.$toogleMenu ? "0px 0px 10px 190px" : "0px 0px 10px 50px" };
-
         }
 
         footer {

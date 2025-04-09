@@ -6,7 +6,29 @@ export const Container_dashboard = styled.div`
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    padding: 20px 10px;
+    padding: 15px 10px 50px 10px;
+    cursor: pointer;
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        width: 250px;
+        gap: 10px;
+        justify-content: center;
+
+        @media (max-width: 570px) {
+            width: 100%;
+        }
+    }
+
+    .charts {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 10px;
+        justify-content: center;
+    }
+    
 `
