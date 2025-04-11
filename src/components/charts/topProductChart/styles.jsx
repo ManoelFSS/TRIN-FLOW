@@ -6,14 +6,9 @@ export const Container = styled.div`
     justify-content: space-between;
     background-color: #fff;
     border-radius: 8px;
-    width: 200px;
-    height: 440px;
+    width: 190px;
     padding: 10px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-
-    @media (max-width: 480px) {
-        width: 180px;
-    }
 
     @media (max-width: 440px) {
         width: 230px;
@@ -27,7 +22,7 @@ export const Container = styled.div`
         border-radius: 8px 8px 0px 0px;
 
         h3 {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var( --color-text-secondary );
 

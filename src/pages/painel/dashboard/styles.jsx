@@ -12,22 +12,15 @@ export const Container_dashboard = styled.div`
     .cards {
         display: flex;
         flex-wrap: wrap;
-        width: 230px;
-        gap: 10px;
-
-        @media screen and (orientation: landscape) and (max-width: 1370px) {
-            width: 100%;
-        }
-
-        @media (max-width: 570px) {
-            width: 100%;
-        }
+        justify-content: center;
+        width: 100%;
+        gap: 20px;
     }
 
     .charts {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 15px;
         justify-content: center;
     }
     

@@ -1,9 +1,9 @@
 import { Container } from "./styles"
 
-const TopProductChart= ({children, title, text, icon}) => {
+const TopProductChart= ({children, title, text, icon, width,  height}) => {
     
     return (
-        <Container>
+        <Container >
             <div className="chart-header">
                 <div>
                     <h3>{title}</h3>

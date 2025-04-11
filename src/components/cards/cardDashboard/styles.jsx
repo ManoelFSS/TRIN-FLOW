@@ -1,28 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100px;
-    width: 100%;
+    min-width: 220px;
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 
-    @media screen and (orientation: landscape) and (max-width: 1370px) {
-        flex: 1;
-    }
-
-    @media screen and (orientation: landscape) and (max-width: 1000px) {
-        flex: 1;
-        min-width: 310px;
-    }
-
-    @media (max-width: 700px) {
-        
-        min-width: 210px;
+    @media (max-width: 539px) {
+        width: 100%;
     }
 
     .card-header {

@@ -85,6 +85,8 @@ const Dashboard = () => {
                     title="Entregas" 
                     text="do Mês"
                     icon={<FaTruckFast className="icon" />}
+                    width="250px"
+                    height="290px"
                 >
                     <ChartPizza data={entregas} />
                 </TopProductsChart>
@@ -93,6 +95,8 @@ const Dashboard = () => {
                     title="Vendas" 
                     text="do Mês"
                     icon={<FaCartArrowDown  className="icon" />}
+                    width="250px"
+                    height="290px"
                 >
                     <ChartPizza data={vendas} />
                 </TopProductsChart>
@@ -101,6 +105,8 @@ const Dashboard = () => {
                     title="Clientes" 
                     text="Total"
                     icon={<BsFillPersonLinesFill   className="icon" />}
+                     width="250px"
+                    height="290px"
                 >
                     <ChartPizza data={clientes} />
                 </TopProductsChart>
@@ -109,6 +115,8 @@ const Dashboard = () => {
                     title="Transportadores" 
                     text="Total"
                     icon={<TbSteeringWheel   className="icon" />}
+                     width="250px"
+                    height="290px"
                 >
                     <ChartPizza data={Transportadores} />
                 </TopProductsChart>

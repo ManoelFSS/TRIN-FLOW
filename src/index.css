@@ -37,10 +37,24 @@
 
   --color-bg-input: #e5e2e2;
   --color-bg-input-hover: #d9d9d9;
+
+  --col--01: #388A7E;
+  --col--02: #2D4A46;
+  --col--03: #0F2723;
   
 
 }
 
 body {
   min-height: 100svh;
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+  background-color: var( --color-bg-primary );
+
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var( --color-bg-primary-element );
 }

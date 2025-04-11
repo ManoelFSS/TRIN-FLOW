@@ -61,8 +61,8 @@ const ChartPizza = ({data}) => {
                 {data.map((entry, index) => (
                     <IndicadorColor
                         color={COLORS[index % COLORS.length]}
-                        width="15px"
-                        height="15px"
+                        width="10px"
+                        height="10px"
                         text={entry.name}
                         key={index}
                     />
