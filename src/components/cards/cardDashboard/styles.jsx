@@ -10,7 +10,7 @@ export const Container = styled.div`
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1320px) {
         flex: 1;
     }
 

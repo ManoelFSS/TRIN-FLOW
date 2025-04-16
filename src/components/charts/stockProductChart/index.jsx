@@ -121,6 +121,7 @@ const StockProductChart = () => {
                 data: esgotado,
                 backgroundColor: ' #c70606',
                 minBarLength: 5,
+                
             },
         ],
     };
@@ -168,12 +169,12 @@ const StockProductChart = () => {
                 label: function (context) {
                     const label = context.dataset.label || '';
                     const value = context.raw;
-        
+                    
                     // Se for o dataset "Esgotado", mostra valor negativo
                     if (label === 'Esgotado') {
                     return `${label}: -${value}`;
                     }
-        
+                    
                     // Outros normais
                     return `${label}: ${value}`;
                 },
@@ -181,17 +182,18 @@ const StockProductChart = () => {
             },
         },
         scales: {
-        x: {
-            ticks: {
-            display:false, // esconde os nomes padrões
+            x: {
+                ticks: {
+                    display:false, // esconde os nomes padrões
+                },
+                grid: {
+                    display: false,
+                },
+                
             },
-            grid: {
-            display: false,
+            y: {
+                beginAtZero:true,
             },
-        },
-        y: {
-            beginAtZero:true,
-        },
         },
     };
 

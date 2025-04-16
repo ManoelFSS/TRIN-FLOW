@@ -49,6 +49,10 @@ export const Container = styled.div`
         width: 100%;
         padding: 10px 10px 0px;
         border-top: solid 2px #ccc;
+
+        @media (max-width: 1320px) {
+            height: 200px;
+        }
     }
 
 `

@@ -16,14 +16,13 @@ export const Container_dashboard = styled.div`
         width: 240px;
         gap: 10px;
 
-        @media (max-width: 1310px) {
+        @media (max-width: 1320px) {
             width: 100%;
         }
     }
 
     .charts-container {
         width: 1000px;
-        gap: 10px;
         overflow: hidden;
 
         .charts {
@@ -31,6 +30,7 @@ export const Container_dashboard = styled.div`
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
+            padding-bottom: 20px;
         }
         
         .chart-stock {
