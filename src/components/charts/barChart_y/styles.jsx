@@ -13,7 +13,7 @@ export const Card = styled.div`
     background: white;
     padding: 0px 0px 0px 20px;
     position: relative;
-    min-width: 35px;
+    min-width: 40px;
     border: solid 1px #ccc;
 `;
 
