@@ -22,10 +22,9 @@ export const Container_dashboard = styled.div`
     }
 
     .charts-container {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
+        width: 1000px;
         gap: 10px;
+        overflow: hidden;
 
         .charts {
             display: flex;
@@ -35,8 +34,9 @@ export const Container_dashboard = styled.div`
         }
         
         .chart-stock {
-            width: 100%;
+            flex: 1;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+            overflow: auto;
         }
     }
     
