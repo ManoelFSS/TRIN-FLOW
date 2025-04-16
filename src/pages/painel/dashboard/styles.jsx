@@ -7,7 +7,7 @@ export const Container_dashboard = styled.div`
     gap: 10px;
     justify-content: center;
     width: 100%;
-    padding: 15px 10px 50px 10px;
+    padding: 15px 10px 10px 10px;
 
     .cards {
         display: flex;
@@ -30,7 +30,7 @@ export const Container_dashboard = styled.div`
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
-            padding-bottom: 20px;
+            padding-bottom: 10px;
         }
         
         .chart-stock {

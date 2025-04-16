@@ -20,7 +20,7 @@ export const Container = styled.div`
         width: 100%;
         
         .main {
-            min-height: calc( 100vh - 45px );
+            height: calc( 100vh - 45px );
             transition: padding 0.3s ease;
             margin-top: 45px;
             width: 100%;
