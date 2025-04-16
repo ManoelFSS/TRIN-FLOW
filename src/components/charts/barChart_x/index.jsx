@@ -27,7 +27,7 @@ const BarChart_x = () => {
                                 </div>
                                 <div className="bar">
                                     <div className="bar-fill">
-                                        <BarActive style={{ width: `${percent}%` }} $delay={i * 0.1} ></BarActive>
+                                        <BarActive style={{ width: `${percent}%` }} $delay={i * 0.2} ></BarActive>
                                     </div>
                                 </div>
                                 <p className="value">{formatValue(item.value)}</p>

@@ -8,7 +8,7 @@ export const Li = styled.li`
     margin-bottom: 5px;
 
     p {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         font-weight: 900;
     }
     

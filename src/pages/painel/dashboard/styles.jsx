@@ -13,15 +13,31 @@ export const Container_dashboard = styled.div`
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        width: 100%;
-        gap: 20px;
+        width: 240px;
+        gap: 10px;
+
+        @media (max-width: 1310px) {
+            width: 100%;
+        }
     }
 
-    .charts {
+    .charts-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+
+        .charts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .chart-stock {
+            width: 100%;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
     }
     
 `

@@ -13,13 +13,13 @@ export const Container_bar_x = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.6px 0px;
+        padding: 1px 0px;
         position: relative;
         cursor: pointer;
 
         .bar {
             width: 100px;
-            height: 10px;
+            height: 8px;
             background-color: var( --color-bg-secondary-element);
             border-radius: 5px;
             margin-right: 10px;
@@ -29,7 +29,6 @@ export const Container_bar_x = styled.div`
                 height: 10px;
                 width: 150px;
             }
-
 
             .bar-fill {
                 width: 100%;
@@ -127,7 +126,7 @@ export const BarActive = styled.div`
     background-color: var(  --color-primary );
     position: absolute;
     z-index: 2;
-    animation: animate 0.5s  linear forwards;
+    animation: animate 0.3s   linear forwards;
     animation-delay: ${props => props.$delay }s;
 
     @keyframes animate {
