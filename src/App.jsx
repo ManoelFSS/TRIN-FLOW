@@ -39,6 +39,10 @@ function App() {
         setLoading(false); 
       }, 3000);
   }, [authenticated]);
+
+  if (loading) {
+    return <Loadingpage />;
+  }
   
   return (
     <>
@@ -46,7 +50,6 @@ function App() {
         <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}> 
           <AppRouters $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}  />
         </Layout> : <Login />}
-      {loading && <Loadingpage />}
     </>
   )
 }

@@ -7,8 +7,8 @@ export const Container = styled.div`
     background-color: #fff;
     border-radius: 8px;
     width: 190px;
-    height: 360px;
-    padding: 10px;
+    height: 370px;
+    padding: 8px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
     @media (max-width: 440px) {
@@ -18,7 +18,7 @@ export const Container = styled.div`
     .chart-header {
         display: flex;
         justify-content: space-between;
-        padding: 10px;
+        padding: 8px;
         background-color:  #f2f2f2;
         border-radius: 8px 8px 0px 0px;
 

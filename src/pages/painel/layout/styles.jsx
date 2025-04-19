@@ -27,7 +27,7 @@ export const Container = styled.div`
             width: 100%;
             background-color: var( --color-bg-secondary);
             overflow: auto;
-            padding: ${props => props.$toogleMenu ? "0px 0px 10px 190px" : "0px 0px 10px 50px" };
+            padding: ${props => props.$toogleMenu ? "0px 0px 0px 190px" : "0px 0px 0px 50px" };
         }
 
         footer {
