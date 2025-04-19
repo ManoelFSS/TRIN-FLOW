@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     background-color: #fff;
 
-    @media (max-width: 768px) {
-        width: 700px;
+    @media (max-width: 1068px) {
+        width: 990px;
     }
 
     .chart-header {

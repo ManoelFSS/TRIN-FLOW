@@ -54,7 +54,7 @@ const StockProductChart = () => {
         { name: 'Placa 60 x 60', stock: 1000, sold: 3000 },
         { name: 'Gesso Lento', stock: 80, sold: 200 },
         { name: 'Gesso Rápido', stock: 5700, sold: 10000 },
-        { name: 'Gesso Cola', stock: 0, sold: 3000 },
+        { name: 'Gesso Cola', stock: 10, sold: 31000 },
         { name: 'Bloco 20 x 40', stock: 2000, sold: 4000 },
         { name: 'Bloquete 50 x 100', stock: 9000, sold: 10000 },
         { name: 'Gesso Projetado', stock: 0, sold: 2500 },
@@ -69,7 +69,7 @@ const StockProductChart = () => {
 
     ];
 
-    const labels = items.map(item => item.name);
+    const labels = items.slice(0, 12).map(item => item.name);
 
     const estoqueBaixo = items.map(item =>
         item.stock > 0 && item.stock < item.sold ? item.stock : null
@@ -96,32 +96,34 @@ const StockProductChart = () => {
                 data: estoqueBaixo,
                 backgroundColor: 'rgba(255, 157, 0, 0)',
                 minBarLength: 0, 
-                // barThickness: 10,
             },
             {
                 label: 'Estoque Baixo',
                 data: estoqueBaixo,
                 backgroundColor: ' #FF9D00',
-                minBarLength: 5, 
+                minBarLength: 8, 
+                barThickness: 15,
             },
             {
                 label: 'Vendidos',
                 data: vendidos,
                 backgroundColor: ' #00df13',
-                minBarLength: 5,
+                minBarLength: 8,
+                barThickness: 15,
             },
             {
                 label: 'Faltando',
                 data: faltando,
                 backgroundColor: 'rgb(180, 180, 180)',
-                minBarLength: 5, 
+                minBarLength: 8, 
+                barThickness: 15,
             },
             {
                 label: 'Esgotado',
                 data: esgotado,
                 backgroundColor: ' #c70606',
-                minBarLength: 5,
-                
+                minBarLength: 8,
+                barThickness: 15
             },
         ],
     };
@@ -146,7 +148,7 @@ const StockProductChart = () => {
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'left';
             ctx.fillStyle = '#000';
-            ctx.font = 'bold 11px sans-serif';
+            ctx.font = 'bold 12px sans-serif';
             ctx.fillText(label, 0, 0);
             ctx.restore();
             }

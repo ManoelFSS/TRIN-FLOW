@@ -11,11 +11,11 @@ import Dashboard from "./pages/painel/dashboard"
 // import Company from "./pages/painel/company"
 // import Adm from "./pages/painel/adm"
 
-const AppRouters = ({toogleMenu, setToogleMenu}) => {
+const AppRouters = ({$toogleMenu, $setToogleMenu}) => {
     return (
         <Routes>
-            <Route exact path="/" element={<Dashboard />}/>
-            <Route exact path="/dashboard" element={<Dashboard toogleMenu={toogleMenu} setToogleMenu={setToogleMenu} />}/>
+            <Route exact path="/" element={<Dashboard $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
+            <Route exact path="/dashboard" element={<Dashboard $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
         </Routes>
     )
 }

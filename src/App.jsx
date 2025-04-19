@@ -44,7 +44,7 @@ function App() {
     <>
       {authenticated ? 
         <Layout $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}> 
-          <AppRouters setToogleMenu={setToogleMenu} toogleMenu={toogleMenu}  />
+          <AppRouters $setToogleMenu={setToogleMenu} $toogleMenu={toogleMenu}  />
         </Layout> : <Login />}
       {loading && <Loadingpage />}
     </>

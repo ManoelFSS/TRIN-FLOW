@@ -19,28 +19,28 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         padding: 10px;
-        background-color: var( --color-bg-secondary-element);
+        background-color:  #f2f2f2;
         border-radius: 8px 8px 0px 0px;
 
         h3 {
             font-size: 0.8rem;
             font-weight: 700;
-            color: var( --color-text-secondary );
+            color: var( --color-text-primary );
 
             @media (max-width: 481px) {
-                font-size: 0.7rem;
+                font-size: 0.8rem;
             }
         }
 
         p {
             font-size: 0.7rem;
-            font-weight: 400;
-            color: var( --color-text-secondary );
+            font-weight: 500;
+            color: var( --color-text-primary );
         }
 
         .icon {
-            color: var( --color-icon-secondary );
-            font-size: 1.6rem;
+            color: var( --color-text-primary );
+            font-size: 2rem;
         }
     }
 
@@ -55,14 +55,14 @@ export const Container = styled.div`
         border-radius: 0px 0px 8px 8px;
         cursor: pointer;
         padding: 5px 0px;
-        background-color: var( --color-bg-secondary-element);
-        color: var( --color-text-secondary );
+        background-color:  #f2f2f2;
+        color: var( --color-text-primary );
         font-weight: 900;
         font-size: 0.9rem;
         transition: background-color 0.3s ease;
 
         &:hover {
-            background-color: #000;
+            background-color:rgb(210, 210, 210);
         }
     }
 `;

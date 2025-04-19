@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     width: 100%;
+
     
     .sidebar {
         transition: width 0.3s ease;

@@ -17,12 +17,13 @@ import { entregas, vendas, clientes, Transportadores } from "../../../DB";
 
 const data = [{value:235687}]
 
-const Dashboard = ({toogleMenu, setToogleMenu}) => {
+const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
+
     return (
         <Container_dashboard >
-            <section className="cards" style={{width: toogleMenu ? "100%" : ""}}>
+            <section className="cards" style={{width: $toogleMenu ? "100%" : ""}}>
                 <CardDashboard 
-                    toogleMenu={toogleMenu}
+                    $toogleMenu={$toogleMenu}
                     money={data[0]?.value} 
                     text="Vendas Total | Mês" 
                     cor={"rgba(26, 144, 91, 0.1)"}
@@ -36,7 +37,7 @@ const Dashboard = ({toogleMenu, setToogleMenu}) => {
                 />
 
                 <CardDashboard 
-                    toogleMenu={toogleMenu}
+                    $toogleMenu={$toogleMenu}
                     money={data[0]?.value} 
                     text="Despesas Total | Mês" 
                     cor={"rgba(135, 0, 0, 0.12)"}
@@ -50,7 +51,7 @@ const Dashboard = ({toogleMenu, setToogleMenu}) => {
                 />
 
                 <CardDashboard 
-                    toogleMenu={toogleMenu}
+                    $toogleMenu={$toogleMenu}
                     money={data[0]?.value} 
                     text="Pagar Hoje" 
                     cor={"rgba(255, 157, 0, 0.09)"}
@@ -64,7 +65,7 @@ const Dashboard = ({toogleMenu, setToogleMenu}) => {
                 />
                 
                 <CardDashboard 
-                    toogleMenu={toogleMenu}
+                    $toogleMenu={$toogleMenu}
                     money={data[0]?.value} 
                     text="Receber Hoje" 
                     cor={"rgba(18, 124, 205, 0.1)"}

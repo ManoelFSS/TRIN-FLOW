@@ -7,7 +7,7 @@ export const Container_dashboard = styled.div`
     gap: 10px;
     justify-content: center;
     width: 100%;
-    padding: 15px 10px 10px 10px;
+    padding: 15px 10px;
 
     .cards {
         display: flex;
@@ -37,6 +37,7 @@ export const Container_dashboard = styled.div`
             flex: 1;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
             overflow: auto;
+            padding-bottom: 10px;
         }
     }
     
