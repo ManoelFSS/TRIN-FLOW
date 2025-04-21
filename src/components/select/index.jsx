@@ -29,7 +29,7 @@ const Select = ({data, setSelect, select}) => {
             ref={selectRef}
             onClick={(e) => {
                 e.stopPropagation();
-                setselect_heigth(select_heigth === "0px" ? (data.length * 35) + "px" : "0px");
+                setselect_heigth(select_heigth === "0px" ? ([...new Set(data.map(item => item.category))].length * 30) + "px" : "0px");
             }}
         >        
             <div className="select_header">
@@ -41,20 +41,21 @@ const Select = ({data, setSelect, select}) => {
             </div>
             <ul     
                 className="select_list"
-                style={{height: select_heigth}}>
-                {data.map((e, id) => {
-                    return (
-                        <li 
-                            style={{backgroundColor: select === e && "#f2f2f2"}}
-                            key={id}
-                            onClick={(e) => {
-                                setSelect(e.target.innerHTML);
-                                setselect_heigth("0px");
-                            }}
-                        >{e}</li>
-                    );
-                    
-                })}
+                style={{height: select_heigth}}
+            >
+                <li onClick={() => setSelect("Todos")}>Todos</li>
+                {[...new Set(data.map(item => item.category))].map((category, id) => (
+                    <li 
+                        style={{ backgroundColor: select === category && "#f2f2f2" }}
+                        key={id}
+                        onClick={(e) => {
+                            setSelect(e.target.innerHTML);
+                            setselect_heigth("0px");
+                        }}
+                    >
+                        {category}
+                    </li>
+                ))}
             </ul>
         </Container_select>
     )

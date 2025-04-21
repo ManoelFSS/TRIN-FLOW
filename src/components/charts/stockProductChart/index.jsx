@@ -1,13 +1,10 @@
+import { useState } from "react";
 import { Container } from "./styles"
 // // componentes
 import IndicadorColor from "../../indicadorColor"
 import Select from "../../select"
 import BarChart_y from "../barChart_y"
 import useSelect from "../../../hooks/useSelect"
-// // db 
-import { estoque }from "../../../DB"
-
-const dataText = ["Todos", "A lorem", "B lorem", "C lorem"]
 
 // const StockProductChart= () => {
 
@@ -48,28 +45,44 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 const StockProductChart = () => {
 
     const { select, setSelect  } = useSelect()
+    const [paginacao, setPaginacao] = useState(0);
     
     const items = [
-        { name: 'Placa 50 x 50', stock: 3000, sold: 5000 },
-        { name: 'Placa 60 x 60', stock: 1000, sold: 3000 },
-        { name: 'Gesso Lento', stock: 80, sold: 200 },
-        { name: 'Gesso Rápido', stock: 5700, sold: 10000 },
-        { name: 'Gesso Cola', stock: 10, sold: 31000 },
-        { name: 'Bloco 20 x 40', stock: 2000, sold: 4000 },
-        { name: 'Bloquete 50 x 100', stock: 9000, sold: 10000 },
-        { name: 'Gesso Projetado', stock: 0, sold: 2500 },
-        { name: 'Bag 4500 kg', stock: 4400, sold: 7000 },
-        { name: 'Cinzal 20 kg', stock: 200, sold: 1000 },
-        { name: 'Gesso Cola', stock: 0, sold: 3000 },
-        { name: 'Bloco 20 x 40', stock: 2000, sold: 4000 },
-        { name: 'Bloquete 50 x 100', stock: 9000, sold: 10000 },
-        { name: 'Gesso Projetado', stock: 0, sold: 2500 },
-        { name: 'Bag 4500 kg', stock: 4400, sold: 7000 },
-        { name: 'Cinzal 20 kg', stock: 200, sold: 1000 },
+        { name: 'Placa 50 x 50', stock: 3000, sold: 5000, minStock: 1000, category: 'Placas' },
+        { name: 'Placa 60 x 60', stock: 1000, sold: 3000, minStock: 1000, category: 'Placas' },
+        { name: 'Gesso Lento', stock: 80, sold: 200, minStock: 1000, category: 'Gesso' },
+        { name: 'Gesso Rápido', stock: 5700, sold: 10000, minStock: 1000, category: 'Gesso'  },
+        { name: 'Gesso Cola', stock: 10, sold: 3100, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bloco 20 x 40', stock: 2000, sold: 4000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Bloquete 50 x 100', stock: 9000, sold: 10000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Gesso Projetado', stock: 0, sold: 2500, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bag 4500 kg', stock: 4400, sold: 7000, minStock: 1000, category: 'Gesso'   },
+        { name: 'Cinzal 20 kg', stock: 2000, sold: 1500, minStock: 1000, category: 'Fibras'   },
+        { name: 'Gesso Cola', stock: 0, sold: 3000, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bloco 25 x 50', stock: 2000, sold: 4000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Bloquete 60 x 120', stock: 9000, sold: 10000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Gesso Fibra', stock: 0, sold: 2500, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bag 4500 kg', stock: 4400, sold: 7000, minStock: 1000, category: 'Gesso'  },
 
+        { name: 'Placa 50 x 50', stock: 3000, sold: 5000, minStock: 1000, category: 'Placas' },
+        { name: 'Placa 60 x 60', stock: 1000, sold: 3000, minStock: 1000, category: 'Placas' },
+        { name: 'Gesso Lento', stock: 80, sold: 200, minStock: 1000, category: 'Gesso' },
+        { name: 'Gesso Rápido', stock: 5700, sold: 10000, minStock: 1000, category: 'Gesso'  },
+        { name: 'Gesso Cola', stock: 10, sold: 3100, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bloco 20 x 40', stock: 2000, sold: 4000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Bloquete 50 x 100', stock: 9000, sold: 10000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Gesso Projetado', stock: 0, sold: 2500, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bag 4500 kg', stock: 4400, sold: 7000, minStock: 1000, category: 'Gesso'   },
+        { name: 'Cinzal 20 kg', stock: 2000, sold: 1500, minStock: 1000, category: 'Fibras'   },
+        { name: 'Gesso Cola', stock: 0, sold: 3000, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bloco 25 x 50', stock: 2000, sold: 4000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Bloquete 60 x 120', stock: 9000, sold: 10000, minStock: 1000, category: 'Blocos'  },
+        { name: 'Gesso Fibra', stock: 0, sold: 2500, minStock: 1000, category: 'Gesso'  },
+        { name: 'Bag 4500 kg', stock: 4400, sold: 7000, minStock: 1000, category: 'Gesso'  },
     ];
 
-    const labels = items.slice(0, 12).map(item => item.name);
+    // fiter e mimite 12 items
+    const labels = items.filter(item => select !== "Todos" ? item.category === select : item).slice(paginacao, paginacao + 12).map(item => item.name);
 
     const estoqueBaixo = items.map(item =>
         item.stock > 0 && item.stock < item.sold ? item.stock : null
@@ -114,7 +127,7 @@ const StockProductChart = () => {
             {
                 label: 'Faltando',
                 data: faltando,
-                backgroundColor: 'rgb(180, 180, 180)',
+                backgroundColor: 'rgb(203, 203, 203)',    
                 minBarLength: 8, 
                 barThickness: 15,
             },
@@ -202,20 +215,20 @@ const StockProductChart = () => {
     return (
         <Container >
             <div className="chart-header">
-                <Select data={dataText} select={select} setSelect={setSelect}/>
+                <Select data={items} select={select} setSelect={setSelect}/>
                 <h3>Controle de Estoque</h3>
-
+                
                 <div className="custom-legend">
                     {data.datasets.map((dataset, index) => (
-                    dataset.label && (
-                        <div key={index} className="legend-item">
-                        <span
-                            className="legend-color"
-                            style={{ backgroundColor: dataset.backgroundColor }}
-                        ></span>
-                        {dataset.label}
-                        </div>
-                    )
+                        dataset.label && (
+                            <div key={index} className="legend-item">
+                            <span
+                                className="legend-color"
+                                style={{ backgroundColor: dataset.backgroundColor }}
+                            ></span>
+                            {dataset.label}
+                            </div>
+                        )
                     ))}
                 </div>
 

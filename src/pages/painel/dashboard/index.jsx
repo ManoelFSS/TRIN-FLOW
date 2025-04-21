@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Container_dashboard } from "./styles";
 //companents
 import TopProductsChart from "../../../components/charts/topProductChart";
@@ -5,28 +6,73 @@ import BarChart_x from "../../../components/charts/barChart_x";
 import ChartPizza from "../../../components/charts/chartPizza";
 import CardDashboard from "../../../components/cards/cardDashboard";
 import StockProductChart from "../../../components/charts/stockProductChart";
-import Select from "../../../components/select";
 // icons
 import { FaChartSimple, FaTruckFast, FaArrowUpRightDots  } from "react-icons/fa6";
 import { FaHandHoldingUsd, FaCartArrowDown  } from "react-icons/fa";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { TbSteeringWheel } from "react-icons/tb";
+import { GoAlertFill } from "react-icons/go";
 //db
 import { entregas, vendas, clientes, Transportadores } from "../../../DB";
 
-const data = [{value:235687}]
+const data = [{value:1000000}]
 
 const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
+
+    const [alert, setAlert] = useState(
+        [
+            {
+                id: 1,
+                view: false,
+                creatDate: "2025-04-21T10:00:00",
+                menssage: " O motor do forno  de 30cv queimou! ",
+                name: "Felipe",
+                level: "Alto",
+                userId: 1,
+            },
+            {
+                id: 2,
+                view: false,
+                creatDate: "2025-04-21T10:00:00",
+                menssage: " O motor do forno  de 30cv queimou! ",
+                name: "Felipe",
+                level: "Alto",
+                userId: 1,
+            },
+            {
+                id: 3,
+                view: false,
+                creatDate: "2025-04-21T10:00:00",
+                menssage: " O motor do forno  de 30cv queimou! ",
+                name: "Felipe",
+                level: "Alto",
+                userId: 1,
+            },
+        ]);
 
     return (
         <Container_dashboard >
             <section className="cards" style={{width: $toogleMenu ? "100%" : ""}}>
                 <CardDashboard 
                     $toogleMenu={$toogleMenu}
-                    money={data[0]?.value} 
+                    $money={`${alert.length}`} 
+                    text="Ver Alertas" 
+                    cor={"rgb(255, 255, 255)"}
+                    cor2={"rgb(219, 19, 19)"}
+                    icon={
+                        <GoAlertFill    
+                            className="icon"
+                            style={{ color:"rgb(219, 19, 19)"}}
+                        />
+                    } 
+                />
+                
+                <CardDashboard 
+                    $toogleMenu={$toogleMenu}
+                    $money={data[0]?.value} 
                     text="Vendas Total | Mês" 
-                    cor={"rgba(26, 144, 91, 0.1)"}
+                    cor={"rgb(255, 255, 255)"}
                     cor2={" #1A905A"}
                     icon={
                         <FaArrowUpRightDots  
@@ -38,42 +84,42 @@ const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
 
                 <CardDashboard 
                     $toogleMenu={$toogleMenu}
-                    money={data[0]?.value} 
+                    $money={data[0]?.value} 
                     text="Despesas Total | Mês" 
-                    cor={"rgba(135, 0, 0, 0.12)"}
-                    cor2={" #a70303"}
+                    cor={"rgb(255, 255, 255)"}
+                    cor2={" #FF9D00"}
                     icon={
                         <FaArrowUpRightDots  
                             className="icon rotate-icon"
-                            style={{ color: " #a70303" }}
+                            style={{ color: " #FF9D00" }}
                         />
                     } 
                 />
 
                 <CardDashboard 
                     $toogleMenu={$toogleMenu}
-                    money={data[0]?.value} 
+                    $money={data[0]?.value} 
                     text="Pagar Hoje" 
-                    cor={"rgba(255, 157, 0, 0.09)"}
-                    cor2={" #FF9D00"}
+                    cor={"rgb(255, 255, 255)"}
+                    cor2={"rgb(0, 10, 206)"}
                     icon={
                         <RiMoneyDollarCircleFill  
                             className="icon"
-                            style={{ color: " #FF9D00" }}
+                            style={{ color: "rgb(0, 10, 206" }}
                         />
                     } 
                 />
                 
                 <CardDashboard 
                     $toogleMenu={$toogleMenu}
-                    money={data[0]?.value} 
+                    $money={data[0]?.value} 
                     text="Receber Hoje" 
-                    cor={"rgba(18, 124, 205, 0.1)"}
-                    cor2={" #127CCD"}
+                    cor={"rgb(255, 255, 255)"}
+                    cor2={"rgb(102, 119, 104)"}
                     icon={
                         <FaHandHoldingUsd   
                             className="icon"
-                            style={{ color: " #127CCD" }}
+                            style={{ color: "rgb(102, 119, 104)"}}
                         />
                     } 
                 />
