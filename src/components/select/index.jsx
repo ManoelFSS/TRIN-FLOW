@@ -3,7 +3,7 @@ import { Container_select } from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-const Select = ({data, setSelect, select}) => {
+const Select = ({data, setSelect, select,  $setPaginacao}) => {
 
     const [select_heigth, setselect_heigth] = useState("0px")
     const selectRef = useRef(null);
@@ -51,6 +51,7 @@ const Select = ({data, setSelect, select}) => {
                         onClick={(e) => {
                             setSelect(e.target.innerHTML);
                             setselect_heigth("0px");
+                            $setPaginacao(1)
                         }}
                     >
                         {category}

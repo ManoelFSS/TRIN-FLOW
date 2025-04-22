@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Container_dashboard } from "./styles";
 //companents
 import TopProductsChart from "../../../components/charts/topProductChart";
@@ -12,7 +11,6 @@ import { FaHandHoldingUsd, FaCartArrowDown  } from "react-icons/fa";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { TbSteeringWheel } from "react-icons/tb";
-import { GoAlertFill } from "react-icons/go";
 //db
 import { entregas, vendas, clientes, Transportadores } from "../../../DB";
 
@@ -20,60 +18,15 @@ const data = [{value:1000000}]
 
 const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
 
-    const [alert, setAlert] = useState(
-        [
-            {
-                id: 1,
-                view: false,
-                creatDate: "2025-04-21T10:00:00",
-                menssage: " O motor do forno  de 30cv queimou! ",
-                name: "Felipe",
-                level: "Alto",
-                userId: 1,
-            },
-            {
-                id: 2,
-                view: false,
-                creatDate: "2025-04-21T10:00:00",
-                menssage: " O motor do forno  de 30cv queimou! ",
-                name: "Felipe",
-                level: "Alto",
-                userId: 1,
-            },
-            {
-                id: 3,
-                view: false,
-                creatDate: "2025-04-21T10:00:00",
-                menssage: " O motor do forno  de 30cv queimou! ",
-                name: "Felipe",
-                level: "Alto",
-                userId: 1,
-            },
-        ]);
-
     return (
         <Container_dashboard >
             <section className="cards" style={{width: $toogleMenu ? "100%" : ""}}>
                 <CardDashboard 
                     $toogleMenu={$toogleMenu}
-                    $money={`${alert.length}`} 
-                    text="Ver Alertas" 
-                    cor={"rgb(255, 255, 255)"}
-                    cor2={"rgb(219, 19, 19)"}
-                    icon={
-                        <GoAlertFill    
-                            className="icon"
-                            style={{ color:"rgb(219, 19, 19)"}}
-                        />
-                    } 
-                />
-                
-                <CardDashboard 
-                    $toogleMenu={$toogleMenu}
                     $money={data[0]?.value} 
                     text="Vendas Total | Mês" 
                     cor={"rgb(255, 255, 255)"}
-                    cor2={" #1A905A"}
+                    cor2={"rgb(4, 181, 101)"}
                     icon={
                         <FaArrowUpRightDots  
                             className="icon "
@@ -115,11 +68,11 @@ const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
                     $money={data[0]?.value} 
                     text="Receber Hoje" 
                     cor={"rgb(255, 255, 255)"}
-                    cor2={"rgb(102, 119, 104)"}
+                    cor2={"rgb(2, 119, 16)"}
                     icon={
                         <FaHandHoldingUsd   
                             className="icon"
-                            style={{ color: "rgb(102, 119, 104)"}}
+                            style={{ color:"rgb(2, 119, 16)"}}
                         />
                     } 
                 />

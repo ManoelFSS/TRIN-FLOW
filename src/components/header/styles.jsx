@@ -49,6 +49,25 @@ export const Container_header = styled.div`
         align-items: center;
         gap: 30px;
 
+        .notification {
+            
+            .icon-notification {
+                color: var(--color-text-primary);
+                width: 25px;
+                height: 25px;
+                animation: ${props => props.$alert > 0 ? "notification" : "none"} 1s linear infinite;
+                cursor: pointer;
+            }
+
+            @keyframes notification {
+                0%   { transform: rotate(0deg); color: rgb(0, 13, 255); }
+                25%  { transform: rotate(10deg); color: rgb(255, 0, 0); }
+                50%  { transform: rotate(-10deg); color: rgb(255, 221, 0); }
+                75%  { transform: rotate(10deg); color: rgb(0, 255, 255); }
+                100% { transform: rotate(0deg); color: rgb(0, 13, 255); }
+            }
+        }
+
         .exit {
             display: flex;
             align-items: center;

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
     @media (max-width: 1068px) {
         width: 990px;
@@ -13,7 +15,7 @@ export const Container = styled.div`
         justify-content: space-between;
         align-items: center;
         padding: 8px 20px;
-        gap: 20px;
+        gap: 10px;
 
         h3 {
             font-size: 1rem;
@@ -24,13 +26,20 @@ export const Container = styled.div`
 
         .custom-legend {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            width: 200px;
+            gap: 3px;
 
             .legend-item {
                 display: flex;
                 align-items: center;
                 font-weight: 600;
                 font-size: 0.7rem;
+                margin-right: 10px;
+            }
+
+            .legend-item:nth-child(2) {
+                margin-left: 4px;
             }
 
             .legend-color {
