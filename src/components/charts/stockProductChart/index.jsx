@@ -142,28 +142,28 @@ const StockProductChart = () => {
                 data: estoque,
                 backgroundColor: 'hsl(37, 100.00%, 50.00%)',
                 minBarLength: 3, 
-                barThickness: 10,
+                // barThickness: 10,
             },
             {
                 label: 'Vendidos',
                 data: vendidos,
                 backgroundColor: ' #00df13',
                 minBarLength: 3,
-                barThickness: 10,
+                // barThickness: 10,
             },
             {
                 label: 'Faltando',
                 data: faltando,
                 backgroundColor: 'rgb(187, 186, 186)',    
                 minBarLength: 3, 
-                barThickness: 10,
+                // barThickness: 10,
             },
             {
                 label: 'Esgotado',
                 data: esgotado,
                 backgroundColor: ' #c70606',
                 minBarLength: 3,
-                barThickness: 10,
+                // barThickness: 10,
             },
         ],
     };
@@ -231,10 +231,14 @@ const StockProductChart = () => {
                 grid: {
                     display: false,
                 },
-                
+                barPercentage: 1.0,
+                categoryPercentage: 0.8,
             },
             y: {
-                beginAtZero:true,
+                beginAtZero: true,
+                grid: {
+                    display: true,
+                },
             },
         },
     };
@@ -252,7 +256,6 @@ const StockProductChart = () => {
                     $totalPages={totalPages} 
                     $paginacao={paginacao} 
                     $setPaginacao={setPaginacao}
-                    $paginacao={paginacao}
                 />
                 <h3>Controle de Estoque</h3>
                 
