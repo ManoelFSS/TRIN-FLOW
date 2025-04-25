@@ -69,6 +69,10 @@ export const ContainerTable = styled.section`
         width: 100%;
         min-width: 1040px;
         height: calc(100vh - 130px);
+
+        @media (max-width: 1065px) {
+            height: calc(100vh - 170px);
+        }
         
         .header {
             display: flex;
