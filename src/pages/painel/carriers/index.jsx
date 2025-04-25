@@ -77,7 +77,7 @@ const Carriers = () => {
                 <BtnNavigate 
                     $text="Cadastrar Cliente" 
                     icon={<FaUserPlus className="icon" />} 
-                    $width={"200px"}
+                    // $width={"200px"}
                 />
                 <div className="box-icon">
                     <LuSquareEqual className="icon-square" />
