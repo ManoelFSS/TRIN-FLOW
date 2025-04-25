@@ -73,6 +73,18 @@ export const ContainerTable = styled.section`
         @media (max-width: 1065px) {
             height: calc(100vh - 170px);
         }
+
+        @media (max-width: 605px) {
+            height: calc(100vh - 213px);
+        }
+
+        @media (max-width: 433px) {
+            height: calc(100vh - 258px);
+        }
+
+        @media (max-width: 309px) {
+            height: calc(100vh - 299px);
+        }
         
         .header {
             display: flex;

@@ -4,7 +4,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     width: 290px;
     user-select: none;
 
@@ -22,14 +22,14 @@ export const Container = styled.div`
     }
 
     button {
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
-        font-size: 1rem;
+        font-size: 0.8rem;
         border: none;
         transition: background-color 0.3s ease;
         font-weight: 700;
