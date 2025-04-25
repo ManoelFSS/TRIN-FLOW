@@ -53,7 +53,7 @@ export const Container = styled.div`
 
     .chart-main {
         display: flex;
-        height: 130px;
+        height: 135px;
         justify-content: center;
         width: 100%;
         padding: 10px 10px 0px;

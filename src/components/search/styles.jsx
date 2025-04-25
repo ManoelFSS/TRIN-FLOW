@@ -4,7 +4,7 @@ export const Container_search = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 260px;
+    width: 200px;
     height: 30px;
     padding-right:10px;
     background: #fff;
@@ -27,6 +27,7 @@ export const Container_search = styled.div`
         padding: 0 10px;
         color: #000;
         box-shadow: inset 1px 1px 4px #7979797c;
+        border-radius: 4px;
     }
 
     input::placeholder {

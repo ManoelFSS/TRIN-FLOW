@@ -26,11 +26,11 @@ const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
                     $money={data[0]?.value} 
                     text="Vendas Total | Mês" 
                     cor={"rgb(255, 255, 255)"}
-                    cor2={"rgb(4, 181, 101)"}
+                    cor2={"rgb(3, 205, 114)"}
                     icon={
                         <FaArrowUpRightDots  
                             className="icon "
-                            style={{ color: " #1A905A" }}
+                            style={{ color: "rgb(3, 205, 114)" }}
                         />
                     } 
                 />
@@ -40,11 +40,11 @@ const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
                     $money={data[0]?.value} 
                     text="Despesas Total | Mês" 
                     cor={"rgb(255, 255, 255)"}
-                    cor2={" #FF9D00"}
+                    cor2={"rgb(206, 12, 12)"}
                     icon={
                         <FaArrowUpRightDots  
                             className="icon rotate-icon"
-                            style={{ color: " #FF9D00" }}
+                            style={{ color: "rgb(206, 12, 12)" }}
                         />
                     } 
                 />
@@ -54,11 +54,11 @@ const Dashboard = ({$toogleMenu, $setToogleMenu}) => {
                     $money={data[0]?.value} 
                     text="Pagar Hoje" 
                     cor={"rgb(255, 255, 255)"}
-                    cor2={"rgb(0, 10, 206)"}
+                    cor2={" #FF9D00"}
                     icon={
                         <RiMoneyDollarCircleFill  
                             className="icon"
-                            style={{ color: "rgb(0, 10, 206" }}
+                            style={{ color: " #FF9D00" }}
                         />
                     } 
                 />

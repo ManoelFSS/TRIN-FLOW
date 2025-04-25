@@ -34,8 +34,8 @@ export const Container = styled.div`
         }
 
         .icon {
-            height: 50px;
-            width: 50px;
+            height: 40px;
+            width: 40px;
         }
 
         .rotate-icon {

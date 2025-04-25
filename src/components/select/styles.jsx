@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Container_select = styled.div`
     cursor: pointer;
     position: relative;
-    max-width: 180px;
-    min-width: 250px;
 
     .select_header {
         display: flex;
@@ -14,7 +12,7 @@ export const Container_select = styled.div`
         width: 100%;
         height: 30px;
         background: #fff;
-        padding: 0px 15px;
+        padding: 0px 10px;
         border-radius: 4px;
         box-shadow: inset 1px 1px 4px #7979797c;
     }
@@ -29,8 +27,7 @@ export const Container_select = styled.div`
         overflow-y:auto;
         transition: all 0.5s;
         position: absolute;
-        min-width: 250px;
-        max-height: 125px;
+        max-height: 110px;
         top: 35px;
         left: 0px;
         background-color: #fff;
@@ -38,7 +35,7 @@ export const Container_select = styled.div`
         z-index: 99;
 
         &::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
 
         &::-webkit-scrollbar-track {
@@ -53,7 +50,7 @@ export const Container_select = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0px 14px;
+            padding: 0px 10px;
             width: 100%;
             height: 30px;
             font-size: 0.9rem;

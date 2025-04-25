@@ -45,8 +45,8 @@ const Menu = () => {
                         Clientes
                     </li>
                 </Link>
-                <Link className="link" to="/drivers">
-                    <li className={activeLink === "/drivers" ? "active" : ""}>
+                <Link className="link" to="/carriers">
+                    <li className={activeLink === "/carriers" ? "active" : ""}>
                         <FaTruckFast className="icon" />
                         Transportadores
                     </li>

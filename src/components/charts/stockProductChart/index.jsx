@@ -188,7 +188,7 @@ const StockProductChart = () => {
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'left';
             ctx.fillStyle = '#000';
-            ctx.font = 'bold 12px sans-serif';
+            ctx.font = 'bold 10px sans-serif';
             ctx.fillText(label, 0, 0);
             ctx.restore();
             }
@@ -251,6 +251,7 @@ const StockProductChart = () => {
                     select={select} 
                     setSelect={setSelect}
                     $setPaginacao={setPaginacao}
+                    $width={"245px"}
                 />
                 <Pagination 
                     $totalPages={totalPages} 
@@ -263,16 +264,16 @@ const StockProductChart = () => {
                     {data.datasets.map((dataset, index) => (
                         dataset.label && (
                             <div key={index} className="legend-item">
-                            <span
-                                className="legend-color"
-                                style={{ backgroundColor: dataset.backgroundColor }}
-                            ></span>
-                            {dataset.label}
+                                <span
+                                    className="legend-color"
+                                    style={{ backgroundColor: dataset.backgroundColor }}
+                                ></span>
+                                {dataset.label}
                             </div>
                         )
                     ))}
                 </div>
-
+                
             </div>
             <div className="chart-main">
                 <Bar data={data} options={options} plugins={[verticalLabelPlugin]} />

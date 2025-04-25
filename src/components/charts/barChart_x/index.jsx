@@ -16,10 +16,10 @@ const BarChart_x = () => {
 
     return (
         <Container_bar_x>
-                {produtos.sort((a, b) => b.value - a.value).map((item, i) => {
+                {produtos.sort((a, b) => b.value - a.value).map((item, index) => {
                     const percent = (item.value / maxValue) * 100;
                     return (
-                        <div key={i}>
+                        <div key={index}>
                             <h3>{item.name}</h3>
                             <section className="bar-area">
                                 <div className="value-hover">
@@ -27,7 +27,7 @@ const BarChart_x = () => {
                                 </div>
                                 <div className="bar">
                                     <div className="bar-fill">
-                                        <BarActive style={{ width: `${percent}%` }} $delay={i * 0.2} ></BarActive>
+                                        <BarActive style={{ width: `${percent}%` }} $delay={index * 0.2} ></BarActive>
                                     </div>
                                 </div>
                                 <p className="value">{formatValue(item.value)}</p>

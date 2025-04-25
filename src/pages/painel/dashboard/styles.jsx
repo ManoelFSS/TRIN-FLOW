@@ -7,7 +7,7 @@ export const Container_dashboard = styled.div`
     gap: 10px;
     justify-content: center;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
 
     .cards {
         display: flex;

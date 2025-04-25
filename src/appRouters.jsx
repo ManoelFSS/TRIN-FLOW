@@ -1,8 +1,8 @@
 import {Routes, Route} from "react-router-dom"
 // pages
 import Dashboard from "./pages/painel/dashboard"
-// import Client from "./pages/painel/client"
-// import Carriers from "./pages/painel/carriers"
+import Client from "./pages/painel/client"
+import Carriers from "./pages/painel/carriers"
 // import Tracking from "./pages/painel/tracking"
 // import Product from "./pages/painel/products"
 // import Sales from "./pages/painel/sales"
@@ -16,6 +16,8 @@ const AppRouters = ({$toogleMenu, $setToogleMenu}) => {
         <Routes>
             <Route exact path="/" element={<Dashboard $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
             <Route exact path="/dashboard" element={<Dashboard $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
+            <Route exact path="/clients" element={<Client $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
+            <Route exact path="/carriers" element={<Carriers $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
         </Routes>
     )
 }
