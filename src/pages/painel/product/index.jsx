@@ -17,6 +17,8 @@ import { GiWeight } from "react-icons/gi";
 import { GrMoney } from "react-icons/gr";
 import { AiOutlineAlignRight } from "react-icons/ai";
 import { IoBagHandleSharp } from "react-icons/io5";
+import { FaCartPlus } from "react-icons/fa6";
+
 // hooks
 import useSelect from "../../../hooks/useSelect"
 
@@ -71,8 +73,8 @@ const Client = () => {
         <Container>
             <section className="box-filter">
                 <BtnNavigate 
-                    $text="Cadastrar Cliente" 
-                    icon={<FaUserPlus className="icon" />} 
+                    $text="Cadastrar Produto" 
+                    icon={<FaCartPlus className="icon" />} 
                     // $width={"200px"}
                 />
                 <div className="box-icon">

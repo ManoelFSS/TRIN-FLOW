@@ -14,6 +14,8 @@ import { FaAddressCard } from "react-icons/fa6";
 import { BsCreditCard,  BsFillTelephonePlusFill } from "react-icons/bs";
 import { BiSolidCity } from "react-icons/bi";
 import { HiMiniStar } from "react-icons/hi2";
+import { GiSteeringWheel } from "react-icons/gi";
+
 
 import { FaEdit, FaInfoCircle  } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -75,8 +77,8 @@ const Carriers = () => {
         <Container>
             <section className="box-filter">
                 <BtnNavigate 
-                    $text="Cadastrar Cliente" 
-                    icon={<FaUserPlus className="icon" />} 
+                    $text="Cadastrar Motorista" 
+                    icon={<GiSteeringWheel  className="icon" />} 
                     // $width={"200px"}
                 />
                 <div className="box-icon">
