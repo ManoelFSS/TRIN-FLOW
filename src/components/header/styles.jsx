@@ -56,7 +56,7 @@ export const Container_header = styled.div`
                 width: 25px;
                 height: 25px;
                 animation: ${props => props.$alert > 0 ? "notification" : "none"} 1s linear infinite;
-                cursor: pointer;
+                cursor: pointer; 
             }
 
             @keyframes notification {
@@ -66,6 +66,10 @@ export const Container_header = styled.div`
                 75%  { transform: rotate(10deg); color: rgb(0, 255, 255); }
                 100% { transform: rotate(0deg); color: rgb(0, 13, 255); }
             }
+        }
+
+        .notification:hover  {
+            transform: scale(1.1);
         }
 
         .exit {

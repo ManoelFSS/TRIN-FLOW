@@ -90,7 +90,7 @@ export const ContainerTable = styled.section`
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 98.5%;
+            width: 98.3%;
             border-radius: 6px;
             box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
             background-color: #302F2F;
@@ -193,6 +193,7 @@ export const ContainerTable = styled.section`
                 li {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     padding: 0 10px;
                     font-weight: 600;
                     font-size: 0.8rem;
@@ -202,7 +203,6 @@ export const ContainerTable = styled.section`
                 
                 li:nth-child(1) {
                     display: flex;
-                    justify-content: center;
                     align-items: center;
                     width: 50px;
                     padding: 0;
@@ -211,6 +211,7 @@ export const ContainerTable = styled.section`
                         width: 35px;
                         height: 35px;
                         border-radius: 50%;
+                        background-color: #fff;
                     }
                 }
                 
@@ -230,8 +231,7 @@ export const ContainerTable = styled.section`
                     width: 120px;
                 }
                 
-                li:nth-child(7) {
-                    justify-content: center;
+                li:nth-child(8) {
                     
                     span {    
                         font-weight: 900;
@@ -240,7 +240,6 @@ export const ContainerTable = styled.section`
                 }
                 
                 .icons {
-                    justify-content: center;
                     gap: 10px;
                     
                     .icon {
