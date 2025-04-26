@@ -92,8 +92,6 @@ export const ContainerTable = styled.section`
             align-items: center;
             width: 98.3%;
             border-radius: 6px;
-            box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
-            background-color: #302F2F;
             
             .header-list {
                 display: flex;
@@ -114,9 +112,10 @@ export const ContainerTable = styled.section`
                     font-weight: 600;
                     font-size: 0.8rem;
                     color: #000;
-                    background-color:rgb(0, 0, 0);
+                    background-color: #FF9D00;
                     border-radius: 4px;
                     color: var( --color-text-secondary );
+                    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
                     
                     
                     .icon  {
