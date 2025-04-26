@@ -67,7 +67,7 @@ export const ContainerTable = styled.section`
         flex-direction: column;
         align-items: center;
         width: 100%;
-        min-width: 1040px;
+        min-width: 1140px;
         height: calc(100vh - 130px);
 
         @media (max-width: 1065px) {
@@ -90,7 +90,7 @@ export const ContainerTable = styled.section`
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 98.3%;
+            width: 100%;
             border-radius: 6px;
             
             .header-list {
@@ -181,7 +181,7 @@ export const ContainerTable = styled.section`
                 background-color: #f2f2f2;     
                 border-radius: 6px;    
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.22);
-                padding: 5px 10px;
+                padding: 5px 0px;
 
                 &:nth-child(even) {
                     background-color:rgba(208, 205, 205, 0.95);
