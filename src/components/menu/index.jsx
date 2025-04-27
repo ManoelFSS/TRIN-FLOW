@@ -51,8 +51,8 @@ const Menu = () => {
                         Transportadores
                     </li>
                 </Link>
-                <Link className="link" to="/rastreamento">
-                    <li className={activeLink === "/rastreamento" ? "active" : ""}>
+                <Link className="link" to="/tracking">
+                    <li className={activeLink === "/tracking" ? "active" : ""}>
                         <FaMapLocationDot className="icon" />
                         Rastreamento
                     </li>

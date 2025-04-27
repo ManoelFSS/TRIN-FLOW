@@ -3,7 +3,7 @@ import {Routes, Route} from "react-router-dom"
 import Dashboard from "./pages/painel/dashboard"
 import Client from "./pages/painel/client"
 import Carriers from "./pages/painel/carriers"
-// import Tracking from "./pages/painel/tracking"
+import Tracking from "./pages/painel/tracking"
 import Product from "./pages/painel/product"
 // import Sales from "./pages/painel/sales"
 // import Finances from "./pages/painel/finances"
@@ -19,6 +19,7 @@ const AppRouters = ({$toogleMenu, $setToogleMenu}) => {
             <Route  path="/clients" element={<Client $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
             <Route  path="/carriers" element={<Carriers $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
             <Route  path="/products" element={<Product $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
+            <Route  path="/tracking" element={<Tracking $toogleMenu={$toogleMenu} $setToogleMenu={$setToogleMenu} />}/>
         </Routes>
     )
 }
