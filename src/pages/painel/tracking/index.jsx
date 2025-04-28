@@ -9,17 +9,18 @@ import { useState, useEffect } from "react";
 // img
 import CartRight from "../../../assets/cartRigth3.png";
 
-// Dados fictícios dos veículos
-const vehicleData = [
-    { id: 1, vehicle: "Veículo A", latitude: -7.763414, longitude: -40.287167, rotation: 0 },
-    { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
-    { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
-];
-
 const Tracking = () => {
     const [positImage, setPositImage] = useState(CartRight); // Imagem do veículo (cabine do carro)
-    const [vehicles, setVehicles] = useState(vehicleData);
     const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
+
+    // Dados fictícios dos veículos
+    const vehicleData = [
+      { id: 1, vehicle: "Veículo A", latitude: currentLocation.latitude, longitude:currentLocation.longitude, rotation: 0 },
+      { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
+      { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
+    ];
+    
+    const [vehicles, setVehicles] = useState(vehicleData);
 
     // style do GeoJSON
     const customStyle = {
