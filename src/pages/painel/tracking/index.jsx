@@ -61,7 +61,7 @@ const Tracking = () => {
                 (error) => {
                     console.error("Erro ao obter localização", error);
                 },
-                { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
+                { enableHighAccuracy: true, maximumAge: 100, timeout: 100 }
             );
         }
     };
