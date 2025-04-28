@@ -135,7 +135,7 @@ const Tracking = () => {
                         vehicle.longitude,
                         currentLocation.latitude,
                         currentLocation.longitude,
-                        10 // Avançar 10 metros
+                        1 // Avançar 10 metros
                     );
 
                     // Atualiza a rotação com base nas novas coordenadas
