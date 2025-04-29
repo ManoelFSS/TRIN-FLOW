@@ -42,7 +42,7 @@ const Tracking = () => {
       let metros = R * c // Distância em metros
       console.log(metros);
       if (metros <= 1) {
-        return 1000; // Retorna 200ms se a distância for menor ou igual a 1 metro
+        return 0; // Retorna 200ms se a distância for menor ou igual a 1 metro
       }
 
       const distance = metros / 5; // Distância dividida por 5 quantidade de metros que vai se mover por intervalo
