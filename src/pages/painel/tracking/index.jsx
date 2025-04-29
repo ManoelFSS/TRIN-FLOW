@@ -41,10 +41,10 @@ const Tracking = () => {
       
       let metros = R * c // Distância em metros
       console.log(metros);
-      
-      if (metros <= 1) {
-        metros = 1;
-      }
+
+      // if (metros <= 1) {
+      //   metros = 1;
+      // }
 
       const distance = metros / 5; // Distância dividida por 5 quantidade de metros que vai se mover por intervalo
       console.log(distance);
