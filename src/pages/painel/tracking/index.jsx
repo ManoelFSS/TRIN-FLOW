@@ -41,16 +41,13 @@ const Tracking = () => {
       
       let metros = R * c // Distância em metros
       console.log(metros);
-
-      // if (metros <= 1) {
-      //   metros = 1;
-      // }
+      if (metros <= 1) {
+        return 0; // Retorna 200ms se a distância for menor ou igual a 1 metro
+      }
 
       const distance = metros / 5; // Distância dividida por 5 quantidade de metros que vai se mover por intervalo
       console.log(distance);
-
       const  milisegundos = 3000 / distance; // Distância em milisegundos
-      console.log(milisegundos);
 
       return  milisegundos  // velocidade do setInterval
     }
@@ -168,8 +165,13 @@ const Tracking = () => {
         const hendleLocationChange = async () => {
 
           const milisegundos = await calcularDistanciaEmMetros(locationAnterior, currentLocation);
+          if (milisegundos <= 1) {
+            console.log("Distância muito pequena, setInterval não iniciado.");
+            return; // Não inicia o setInterval
+          }
 
           const interval = setInterval(() => {
+              
               setVehicles((prevVehicles) =>
                   prevVehicles.map((vehicle) => {
                       if (vehicle.id !== 1) return vehicle;
