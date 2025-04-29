@@ -250,19 +250,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Container_tracking } from "./styles";
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -272,14 +259,14 @@ import { useState, useEffect } from "react";
 import CartRight from "../../../assets/cartRigth3.png";
 
 const Tracking = () => {
-    const [positImage, setPositImage] = useState(CartRight);
+    const [positImage] = useState(CartRight);
     const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
     const [previousLocation, setPreviousLocation] = useState(null);
     const [lastUpdateTime, setLastUpdateTime] = useState(null);
-    const [isTracking, setIsTracking] = useState(false); // Controle de rastreamento
-    const [errorMessage, setErrorMessage] = useState(null); // Mensagem de erro
+    const [isTracking, setIsTracking] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    // Dados fictícios dos veículos com propriedade speed
+    // Dados fictícios dos veículos
     const vehicleData = [
         { id: 1, vehicle: "Veículo A", latitude: -7.763437, longitude: -40.287224, rotation: 0, speed: 0 },
         { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0, speed: 0 },
@@ -297,9 +284,9 @@ const Tracking = () => {
         fillOpacity: 0,
     };
 
-    const { center, zoom } = { center: [-12.432558, -51.772750], zoom: 10 }; // Zoom ajustado para viagens
+    const { center, zoom } = { center: [-12.432558, -51.772750], zoom: 10 };
 
-    // Função para obter a localização atual do dispositivo
+    // Função para obter a localização inicial
     const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -309,48 +296,35 @@ const Tracking = () => {
                     setPreviousLocation({ latitude, longitude });
                     setLastUpdateTime(Date.now());
                     setErrorMessage(null);
-                    console.log("Localização inicial obtida:", { latitude, longitude });
+                    console.log("Localização inicial:", { latitude, longitude });
                 },
                 (error) => {
                     handleGeolocationError(error);
                 },
-                { enableHighAccuracy: true }
+                { enableHighAccuracy: true, timeout: 10000 }
             );
         } else {
             setErrorMessage("Geolocalização não suportada pelo navegador.");
         }
     };
 
-    // Função para calcular o próximo ponto e a distância total
-    const moveTowards = (currentLat, currentLng, targetLat, targetLng, distanceMeters) => {
+    // Função para calcular distância entre dois pontos
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const toRad = (value) => (value * Math.PI) / 180;
-
         const R = 6378137; // Raio da Terra em metros
-        const dLat = toRad(targetLat - currentLat);
-        const dLng = toRad(targetLng - currentLng);
-
+        const dLat = toRad(lat2 - lat1);
+        const dLon = toRad(lon2 - lon1);
         const a =
             Math.sin(dLat / 2) ** 2 +
-            Math.cos(toRad(currentLat)) * Math.cos(toRad(targetLat)) * Math.sin(dLng / 2) ** 2;
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const totalDistance = R * c; // Distância total em metros
-
-        if (distanceMeters >= totalDistance) {
-            return { lat: targetLat, lng: targetLng, totalDistance };
-        }
-
-        const ratio = distanceMeters / totalDistance;
-        const newLat = currentLat + (targetLat - currentLat) * ratio;
-        const newLng = currentLng + (targetLng - currentLng) * ratio;
-
-        return { lat: newLat, lng: newLng, totalDistance };
+        return R * c; // Distância em metros
     };
 
-    // Função para calcular o ângulo de rotação
+    // Função para calcular rotação
     const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
         const diffLat = targetLat - currentLat;
         const diffLng = targetLng - currentLng;
-
         const angleRad = Math.atan2(diffLng, diffLat);
         let angleDeg = (angleRad * 180) / Math.PI;
 
@@ -369,7 +343,7 @@ const Tracking = () => {
         return angleDeg;
     };
 
-    // Função para lidar com erros de geolocalização
+    // Função para lidar com erros
     const handleGeolocationError = (error) => {
         let message;
         switch (error.code) {
@@ -380,50 +354,45 @@ const Tracking = () => {
                 message = "Posição indisponível. Verifique o sinal de GPS.";
                 break;
             case error.TIMEOUT:
-                message = "Tempo esgotado para obter localização. Tente novamente.";
+                message = "Tempo esgotado para obter localização.";
                 break;
             default:
                 message = "Erro desconhecido na geolocalização.";
                 break;
         }
         setErrorMessage(message);
-        setIsTracking(false);
         console.error("Erro de geolocalização:", message);
     };
 
-    // Função para monitorar a mudança de posição em tempo real
-    const watchLocation = (speedKmh) => {
+    // Função para monitorar posição
+    const watchLocation = () => {
         if (navigator.geolocation) {
-            // Ajustar frequência com base na velocidade
-            const updateFrequency = speedKmh >= 80 ? 1000 : speedKmh < 10 ? 3000 : 2000;
-
             const watchId = navigator.geolocation.watchPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     const currentTime = Date.now();
 
-                    // Calcular velocidade se houver localização anterior
+                    // Calcular velocidade
                     let calculatedSpeed = 0;
                     if (previousLocation && lastUpdateTime) {
-                        const { totalDistance } = moveTowards(
+                        const distance = calculateDistance(
                             previousLocation.latitude,
                             previousLocation.longitude,
                             latitude,
-                            longitude,
-                            0
+                            longitude
                         );
                         const timeElapsed = (currentTime - lastUpdateTime) / 1000;
-                        const speedMs = timeElapsed > 0 ? totalDistance / timeElapsed : 0;
+                        const speedMs = timeElapsed > 0 ? distance / timeElapsed : 0;
                         calculatedSpeed = speedMs * 3.6;
                         console.log(
                             `Nova localização: Lat=${latitude}, Lng=${longitude}, ` +
-                            `Distância=${totalDistance.toFixed(2)}m, ` +
+                            `Distância=${distance.toFixed(2)}m, ` +
                             `Tempo=${timeElapsed.toFixed(2)}s, ` +
                             `Velocidade=${calculatedSpeed.toFixed(1)}km/h`
                         );
                     }
 
-                    // Atualizar estado
+                    // Atualizar estados
                     setCurrentLocation({ latitude, longitude });
                     setPreviousLocation({ latitude, longitude });
                     setLastUpdateTime(currentTime);
@@ -441,8 +410,8 @@ const Tracking = () => {
                 },
                 {
                     enableHighAccuracy: true,
-                    maximumAge: updateFrequency,
-                    timeout: updateFrequency + 5000, // Timeout aumentado
+                    maximumAge: 2000,
+                    timeout: 10000,
                 }
             );
             console.log("watchLocation iniciado, watchId:", watchId);
@@ -452,7 +421,7 @@ const Tracking = () => {
         return null;
     };
 
-    // Função para criar o ícone com rotação dinâmica
+    // Função para criar ícone
     const createVehicleIcon = (rotation) =>
         new L.DivIcon({
             html: `<div
@@ -482,69 +451,63 @@ const Tracking = () => {
     };
 
     useEffect(() => {
-        let lastTarget = { latitude: 0, longitude: 0 };
         let watchId = null;
         let movementInterval = null;
 
         if (isTracking) {
             // Iniciar watchLocation
-            watchId = watchLocation(vehicles.find((v) => v.id === 1)?.speed || 0);
+            watchId = watchLocation();
 
-            // Intervalo para movimento do veículo
-            const intervalTimeMs = 100; // 100 ms para suavidade
+            // Intervalo para movimento
+            const intervalTimeMs = 100;
             movementInterval = setInterval(() => {
                 setVehicles((prevVehicles) =>
                     prevVehicles.map((vehicle) => {
                         if (vehicle.id !== 1) return vehicle;
 
-                        // Atualizar lastTarget se a localização mudou
-                        if (
-                            currentLocation.latitude !== lastTarget.latitude ||
-                            currentLocation.longitude !== lastTarget.longitude
-                        ) {
-                            lastTarget = { ...currentLocation };
-                            console.log("lastTarget atualizado:", lastTarget);
-                        }
-
-                        // Calcular distância com base na velocidade atual
-                        const vehicleSpeedMs = (vehicle.speed * 1000) / 3600; // Converter km/h para m/s
-                        const distancePerInterval = vehicleSpeedMs * (intervalTimeMs / 1000); // Distância por intervalo
-
-                        // Parar o movimento apenas se a velocidade for praticamente 0
-                        if (vehicle.speed < 0.1) {
-                            console.log("Velocidade < 0.1 km/h, ícone parado:", vehicle.speed);
+                        // Mover diretamente para currentLocation
+                        if (currentLocation.latitude === 0 && currentLocation.longitude === 0) {
+                            console.log("Localização inválida, mantendo posição atual");
                             return vehicle;
                         }
-
-                        // Mover em direção à última posição conhecida
-                        const { lat, lng, totalDistance } = moveTowards(
-                            vehicle.latitude,
-                            vehicle.longitude,
-                            lastTarget.latitude,
-                            lastTarget.longitude,
-                            distancePerInterval
-                        );
-
-                        // Log para depuração
-                        console.log(
-                            `Movendo ícone: Lat=${lat.toFixed(6)}, Lng=${lng.toFixed(6)}, ` +
-                            `Velocidade=${vehicle.speed.toFixed(1)}km/h, ` +
-                            `Distância por intervalo=${distancePerInterval.toFixed(2)}m`
-                        );
 
                         // Calcular rotação
                         const direction = calculateDirection(
                             vehicle.latitude,
                             vehicle.longitude,
-                            lat,
-                            lng,
+                            currentLocation.latitude,
+                            currentLocation.longitude,
                             vehicle.rotation
                         );
 
-                        return { ...vehicle, latitude: lat, longitude: lng, rotation: direction };
+                        // Log de movimento
+                        console.log(
+                            `Movendo ícone: Lat=${currentLocation.latitude.toFixed(6)}, ` +
+                            `Lng=${currentLocation.longitude.toFixed(6)}, ` +
+                            `Velocidade=${vehicle.speed.toFixed(1)}km/h`
+                        );
+
+                        return {
+                            ...vehicle,
+                            latitude: currentLocation.latitude,
+                            longitude: currentLocation.longitude,
+                            rotation: direction,
+                        };
                     })
                 );
             }, intervalTimeMs);
+
+            // Reconexão automática
+            const retryInterval = setInterval(() => {
+                if (errorMessage && isTracking) {
+                    console.log("Tentando reconectar...");
+                    getLocation();
+                }
+            }, 5000);
+
+            return () => {
+                clearInterval(retryInterval);
+            };
         }
 
         // Limpeza
@@ -641,7 +604,6 @@ const Tracking = () => {
                 ))}
             </MapContainer>
 
-            {/* Botão para iniciar/parar rastreamento */}
             <button
                 onClick={toggleTracking}
                 style={{
@@ -661,7 +623,6 @@ const Tracking = () => {
                 {isTracking ? "Parar Rastreamento" : "Iniciar Rastreamento"}
             </button>
 
-            {/* Exibir mensagem de erro */}
             {errorMessage && (
                 <div
                     style={{
@@ -684,10 +645,3 @@ const Tracking = () => {
 };
 
 export default Tracking;
-
-
-
-
-
-
-
