@@ -164,11 +164,8 @@ const Tracking = () => {
         watchLocation(); // Monitorar mudanças de posição
         const hendleLocationChange = async () => {
 
-            let metragem = 5;
-
             const milisegundos = await calcularDistanciaEmMetros(locationAnterior, currentLocation);
             if (milisegundos <= 1) {
-              metragem = 1;
               console.log("Distância muito pequena, setInterval não iniciado.");
               return; // Não inicia o setInterval
             }
@@ -185,7 +182,7 @@ const Tracking = () => {
                           vehicle.longitude,
                           currentLocation.latitude,
                           currentLocation.longitude,
-                          metragem // Avançar  metros
+                          5 // Avançar  metros
                       );
   
                       // Atualiza a rotação com base nas novas coordenadas
