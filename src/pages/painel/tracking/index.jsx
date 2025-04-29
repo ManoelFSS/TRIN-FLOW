@@ -241,15 +241,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 import { Container_tracking } from "./styles";
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -265,8 +256,9 @@ const Tracking = () => {
     const [lastUpdateTime, setLastUpdateTime] = useState(null);
     const [isTracking, setIsTracking] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [watchId, setWatchId] = useState(null); // Armazenar watchId
 
-    // Dados fictícios dos veículos
+    // Dados fictícios dos veículos com propriedade speed
     const vehicleData = [
         { id: 1, vehicle: "Veículo A", latitude: -7.763437, longitude: -40.287224, rotation: 0, speed: 0 },
         { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0, speed: 0 },
@@ -286,7 +278,20 @@ const Tracking = () => {
 
     const { center, zoom } = { center: [-12.432558, -51.772750], zoom: 10 };
 
-    // Função para obter a localização inicial
+    // Função para calcular distância entre dois pontos
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+        const toRad = (value) => (value * Math.PI) / 180;
+        const R = 6378137; // Raio da Terra em metros
+        const dLat = toRad(lat2 - lat1);
+        const dLon = toRad(lon2 - lon1);
+        const a =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distância em metros
+    };
+
+    // Função para obter localização inicial
     const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -308,74 +313,19 @@ const Tracking = () => {
         }
     };
 
-    // Função para calcular distância entre dois pontos
-    const calculateDistance = (lat1, lon1, lat2, lon2) => {
-        const toRad = (value) => (value * Math.PI) / 180;
-        const R = 6378137; // Raio da Terra em metros
-        const dLat = toRad(lat2 - lat1);
-        const dLon = toRad(lon2 - lon1);
-        const a =
-            Math.sin(dLat / 2) ** 2 +
-            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c; // Distância em metros
-    };
-
-    // Função para calcular rotação
-    const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
-        const diffLat = targetLat - currentLat;
-        const diffLng = targetLng - currentLng;
-        const angleRad = Math.atan2(diffLng, diffLat);
-        let angleDeg = (angleRad * 180) / Math.PI;
-
-        let deltaAngle = angleDeg - currentRotation;
-        if (Math.abs(deltaAngle) > 180) {
-            if (deltaAngle > 0) {
-                angleDeg -= 360;
-            } else {
-                angleDeg += 360;
-            }
-        }
-
-        if (angleDeg >= 360) angleDeg -= 360;
-        if (angleDeg < 0) angleDeg += 360;
-
-        return angleDeg;
-    };
-
-    // Função para lidar com erros
-    const handleGeolocationError = (error) => {
-        let message;
-        switch (error.code) {
-            case error.PERMISSION_DENIED:
-                message = "Permissão de geolocalização negada.";
-                break;
-            case error.POSITION_UNAVAILABLE:
-                message = "Posição indisponível. Verifique o sinal de GPS.";
-                break;
-            case error.TIMEOUT:
-                message = "Tempo esgotado para obter localização.";
-                break;
-            default:
-                message = "Erro desconhecido na geolocalização.";
-                break;
-        }
-        setErrorMessage(message);
-        console.error("Erro de geolocalização:", message);
-    };
-
     // Função para monitorar posição
     const watchLocation = () => {
         if (navigator.geolocation) {
-            const watchId = navigator.geolocation.watchPosition(
+            const id = navigator.geolocation.watchPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     const currentTime = Date.now();
 
-                    // Calcular velocidade
+                    // Calcular distância e velocidade
+                    let distance = 0;
                     let calculatedSpeed = 0;
                     if (previousLocation && lastUpdateTime) {
-                        const distance = calculateDistance(
+                        distance = calculateDistance(
                             previousLocation.latitude,
                             previousLocation.longitude,
                             latitude,
@@ -414,11 +364,87 @@ const Tracking = () => {
                     timeout: 10000,
                 }
             );
-            console.log("watchLocation iniciado, watchId:", watchId);
-            return watchId;
+            console.log("watchLocation iniciado, watchId:", id);
+            return id;
         }
         setErrorMessage("Geolocalização não suportada.");
         return null;
+    };
+
+    // Função para parar rastreamento
+    const stopTracking = () => {
+        if (watchId) {
+            navigator.geolocation.clearWatch(watchId);
+            setWatchId(null);
+            console.log("watchLocation parado, watchId:", watchId);
+        }
+    };
+
+    // Função para lidar com erros
+    const handleGeolocationError = (error) => {
+        let message;
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                message = "Permissão de geolocalização negada.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = "Posição indisponível. Verifique o sinal de GPS.";
+                break;
+            case error.TIMEOUT:
+                message = "Tempo esgotado para obter localização.";
+                break;
+            default:
+                message = "Erro desconhecido na geolocalização.";
+                break;
+        }
+        setErrorMessage(message);
+        console.error("Erro de geolocalização:", message);
+    };
+
+    // Função para calcular o próximo ponto
+    const moveTowards = (currentLat, currentLng, targetLat, targetLng, distanceMeters) => {
+        const toRad = (value) => (value * Math.PI) / 180;
+        const R = 6378137;
+        const dLat = toRad(targetLat - currentLat);
+        const dLng = toRad(targetLng - currentLng);
+
+        const a =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos(toRad(currentLat)) * Math.cos(toRad(targetLat)) * Math.sin(dLng / 2) ** 2;
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const totalDistance = R * c;
+
+        if (distanceMeters >= totalDistance) {
+            return { lat: targetLat, lng: targetLng, totalDistance };
+        }
+
+        const ratio = distanceMeters / totalDistance;
+        const newLat = currentLat + (targetLat - currentLat) * ratio;
+        const newLng = currentLng + (targetLng - currentLng) * ratio;
+
+        return { lat: newLat, lng: newLng, totalDistance };
+    };
+
+    // Função para calcular rotação
+    const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
+        const diffLat = targetLat - currentLat;
+        const diffLng = targetLng - currentLng;
+        const angleRad = Math.atan2(diffLng, diffLat);
+        let angleDeg = (angleRad * 180) / Math.PI;
+
+        let deltaAngle = angleDeg - currentRotation;
+        if (Math.abs(deltaAngle) > 180) {
+            if (deltaAngle > 0) {
+                angleDeg -= 360;
+            } else {
+                angleDeg += 360;
+            }
+        }
+
+        if (angleDeg >= 360) angleDeg -= 360;
+        if (angleDeg < 0) angleDeg += 360;
+
+        return angleDeg;
     };
 
     // Função para criar ícone
@@ -445,19 +471,19 @@ const Tracking = () => {
     const toggleTracking = () => {
         if (!isTracking) {
             getLocation();
+            const id = watchLocation();
+            setWatchId(id);
+        } else {
+            stopTracking();
         }
         setIsTracking(!isTracking);
         setErrorMessage(null);
     };
 
     useEffect(() => {
-        let watchId = null;
         let movementInterval = null;
 
         if (isTracking) {
-            // Iniciar watchLocation
-            watchId = watchLocation();
-
             // Intervalo para movimento
             const intervalTimeMs = 100;
             movementInterval = setInterval(() => {
@@ -465,43 +491,48 @@ const Tracking = () => {
                     prevVehicles.map((vehicle) => {
                         if (vehicle.id !== 1) return vehicle;
 
-                        // Mover diretamente para currentLocation
                         if (currentLocation.latitude === 0 && currentLocation.longitude === 0) {
-                            console.log("Localização inválida, mantendo posição atual");
+                            console.log("Localização inválida, mantendo posição");
                             return vehicle;
                         }
 
-                        // Calcular rotação
-                        const direction = calculateDirection(
+                        const vehicleSpeedMs = (vehicle.speed * 1000) / 3600;
+                        const distancePerInterval = vehicleSpeedMs * (intervalTimeMs / 1000);
+
+                        const { lat, lng, totalDistance } = moveTowards(
                             vehicle.latitude,
                             vehicle.longitude,
                             currentLocation.latitude,
                             currentLocation.longitude,
+                            distancePerInterval
+                        );
+
+                        const direction = calculateDirection(
+                            vehicle.latitude,
+                            vehicle.longitude,
+                            lat,
+                            lng,
                             vehicle.rotation
                         );
 
-                        // Log de movimento
                         console.log(
-                            `Movendo ícone: Lat=${currentLocation.latitude.toFixed(6)}, ` +
-                            `Lng=${currentLocation.longitude.toFixed(6)}, ` +
-                            `Velocidade=${vehicle.speed.toFixed(1)}km/h`
+                            `Movendo ícone: Lat=${lat.toFixed(6)}, Lng=${lng.toFixed(6)}, ` +
+                            `Velocidade=${vehicle.speed.toFixed(1)}km/h, ` +
+                            `Distância por intervalo=${distancePerInterval.toFixed(2)}m, ` +
+                            `Distância total=${totalDistance.toFixed(2)}m`
                         );
 
-                        return {
-                            ...vehicle,
-                            latitude: currentLocation.latitude,
-                            longitude: currentLocation.longitude,
-                            rotation: direction,
-                        };
+                        return { ...vehicle, latitude: lat, longitude: lng, rotation: direction };
                     })
                 );
             }, intervalTimeMs);
 
             // Reconexão automática
             const retryInterval = setInterval(() => {
-                if (errorMessage && isTracking) {
+                if (errorMessage && isTracking && !watchId) {
                     console.log("Tentando reconectar...");
-                    getLocation();
+                    const id = watchLocation();
+                    setWatchId(id);
                 }
             }, 5000);
 
@@ -512,10 +543,9 @@ const Tracking = () => {
 
         // Limpeza
         return () => {
-            if (movementInterval) clearInterval(movementInterval);
-            if (watchId) {
-                navigator.geolocation.clearWatch(watchId);
-                console.log("watchLocation finalizado, watchId:", watchId);
+            if (movementInterval) {
+                clearInterval(movementInterval);
+                console.log("movementInterval parado");
             }
         };
     }, [isTracking]);
