@@ -1,4 +1,4 @@
-// // esse e o original 
+// // // esse e o original 
 
 // import { Container_tracking } from "./styles";
 // import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
@@ -15,7 +15,7 @@
 
 //     // Dados fictícios dos veículos
 //     const vehicleData = [
-//       { id: 1, vehicle: "Veículo A", latitude: currentLocation.latitude, longitude:currentLocation.longitude, rotation: 0 },
+//       { id: 1, vehicle: "Veículo A", latitude: -7.763437, longitude:-40.287224, rotation: 0 },
 //       { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
 //       { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
 //     ];
@@ -61,9 +61,10 @@
 //                     setCurrentLocation({ latitude, longitude });
 //                 },
 //                 (error) => {
-//                     console.error("Erro ao obter localização", error);
-//                     setCurrentLocation({ latitude: 0, longitude: 0 });
-                  
+//                     setTimeout(() => {
+//                       console.log("Erro ao obter localização");
+//                       setCurrentLocation({ latitude: 0, longitude: 0 });
+//                     }, 5000);
 //                 },
 //                 { enableHighAccuracy: true, maximumAge: 5000, timeout: 5000 }
 //             );
@@ -236,439 +237,20 @@
 
 
 
-// esse codigo secundary para test com varios veiculos
-
-// import { Container_tracking } from "./styles";
-// import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
-// import "leaflet/dist/leaflet.css";
-// import americaDoSul from "../../../geojson/custom.geo.json";
-// import L from "leaflet";
-// import { useState, useEffect } from "react";
-// // img
-// import CartRight from "../../../assets/cartRigth3.png";
-
-// const Tracking = () => {
-//     const [positImage, setPositImage] = useState(CartRight);
-//     const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
-
-    
-//     // Dados fictícios iniciais dos veículos
-//     const vehicleData = [
-//       { id: 1, vehicle: "Veículo A", latitude: -7.763414, longitude: -40.287167, rotation: 0 },
-//       { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
-//       { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
-//     ];
-//     const [vehicles, setVehicles] = useState(vehicleData);
-
-//     // Style do GeoJSON
-//     const customStyle = {
-//         fillColor: "transparent",
-//         weight: 0,
-//         color: "blue",
-//         opacity: 1,
-//         fillOpacity: 0,
-//     };
-
-//     const { center, zoom } = { center: [-12.432558, -51.772750], zoom: 4 };
-
-//     // Função para obter a localização atual do dispositivo (mantida para compatibilidade)
-//     const getLocation = () => {
-//         if (navigator.geolocation) {
-//             navigator.geolocation.getCurrentPosition(
-//                 (position) => {
-//                     const { latitude, longitude } = position.coords;
-//                     setCurrentLocation({ latitude, longitude });
-//                 },
-//                 (error) => {
-//                     console.error("Erro ao obter localização", error);
-//                 },
-//                 { enableHighAccuracy: true }
-//             );
-//         } else {
-//             alert("Geolocalização não é suportada pelo navegador.");
-//         }
-//     };
-
-//     // Função para monitorar a mudança de posição em tempo real (mantida para compatibilidade)
-//     const watchLocation = () => {
-//         if (navigator.geolocation) {
-//             navigator.geolocation.watchPosition(
-//                 (position) => {
-//                     const { latitude, longitude } = position.coords;
-//                     setCurrentLocation({ latitude, longitude });
-//                 },
-//                 (error) => {
-//                     console.error("Erro ao obter localização", error);
-//                 },
-//                 { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
-//             );
-//         }
-//     };
-
-//     // Função para calcular o ângulo de rotação com base na direção do movimento
-//     const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
-//         const diffLat = targetLat - currentLat;
-//         const diffLng = targetLng - currentLng;
-
-//         const angleRad = Math.atan2(diffLng, diffLat);
-//         let angleDeg = (angleRad * 180) / Math.PI;
-
-//         angleDeg = angleDeg;
-
-//         let deltaAngle = angleDeg - currentRotation;
-//         if (Math.abs(deltaAngle) > 180) {
-//             if (deltaAngle > 0) {
-//                 angleDeg -= 360;
-//             } else {
-//                 angleDeg += 360;
-//             }
-//         }
-
-//         if (angleDeg >= 360) angleDeg -= 360;
-//         if (angleDeg < 0) angleDeg += 360;
-
-//         return angleDeg;
-//     };
-
-//     // Função fictícia para buscar dados do banco de dados
-//     const fetchVehicleData = async () => {
-//         // Simulação de chamada ao banco de dados
-//         // Substitua por sua lógica real de API (ex.: fetch, axios)
-//         return [
-//             { id: 1, vehicle: "Veículo A", latitude: currentLocation.latitude, longitude: currentLocation.longitude, rotation: 0 },
-//             { id: 2, vehicle: "Veículo B", latitude: -15.7805 , longitude: -47.9295 , rotation: 0 },
-//             { id: 3, vehicle: "Veículo C", latitude: -15.7810 , longitude: -47.9300 , rotation: 0 },
-//         ];
-//     };
-
-//     useEffect(() => {
-//         // Obter localização inicial do dispositivo
-//         getLocation();
-//         watchLocation();
-
-//         // Atualizar veículos com dados do banco a cada 500ms
-//         const interval = setInterval(async () => {
-//             const newVehicleData = await fetchVehicleData(); // Busca dados do banco
-//             setVehicles((prevVehicles) =>
-//                 prevVehicles.map((vehicle) => {
-//                     const newData = newVehicleData.find((v) => v.id === vehicle.id);
-//                     if (!newData) return vehicle;
-
-//                     // Calcular rotação com base na posição anterior e nova
-//                     const rotation = calculateDirection(
-//                         vehicle.latitude,
-//                         vehicle.longitude,
-//                         newData.latitude,
-//                         newData.longitude,
-//                         vehicle.rotation
-//                     );
-
-//                     return {
-//                         ...vehicle,
-//                         latitude: newData.latitude,
-//                         longitude: newData.longitude,
-//                         rotation: rotation > 0 ? rotation : vehicle.rotation, // Mantém rotação anterior se inválida
-//                     };
-//                 })
-//             );
-//         }, 100); // Atualiza a cada 500ms
-
-//         return () => clearInterval(interval);
-//     }, []);
-
-//     // Função para criar o ícone com rotação dinâmica
-//     const createVehicleIcon = (rotation) => new L.DivIcon({
-//         html: `<div
-//               class="vehicle-icon"
-//               style="
-//                 transition: all 0.3s linear;
-//                 width: 25px;
-//                 height: 50px;
-//                 background: url(${positImage}) no-repeat center center / cover;
-//                 transform: rotate(${rotation}deg);
-//                 user-select: none;
-//                 pointer-events: none;
-//               "></div>`,
-//         iconSize: [50, 40],
-//         iconAnchor: [7, 20],
-//         popupAnchor: [0, -25],
-//         className: ''
-//     });
-
-//     const safeGeoJSON = americaDoSul || { type: "FeatureCollection", features: [] };
-
-//     return (
-//         <Container_tracking>
-//             <MapContainer
-//                 center={center}
-//                 zoom={zoom}
-//                 style={{ height: "100vh", width: "100%" }}
-//                 scrollWheelZoom={true}
-//                 minZoom={4}
-//                 maxZoom={18}
-//             >
-//                 <TileLayer
-//                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//                     attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//                 />
-//                 <GeoJSON data={safeGeoJSON} style={customStyle} />
-                
-//                 {vehicles.map((vehicle) => (
-//                     <Marker
-//                         key={vehicle.id}
-//                         position={[vehicle.latitude, vehicle.longitude]}
-//                         icon={createVehicleIcon(vehicle.rotation)}
-//                     >
-//                         <Popup>
-//                             <div>
-//                                 <div style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '15px', marginBottom: '8px' }}>{vehicle.vehicle}</div>
-//                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-//                                     <span style={{ fontWeight: 'bold' }}>Localização</span>
-//                                     {vehicle.latitude.toFixed(6)}, {vehicle.longitude.toFixed(6)}
-//                                 </div>
-//                                 <button
-//                                     onClick={() => window.open(`https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}`, '_blank')}
-//                                     style={{
-//                                         marginTop: '8px',
-//                                         padding: '6px 10px',
-//                                         backgroundColor: '#FF9D00',
-//                                         color: 'white',
-//                                         border: 'none',
-//                                         borderRadius: '4px',
-//                                         cursor: 'pointer',
-//                                         fontSize: '12px',
-//                                         fontWeight: 'bold'
-//                                     }}
-//                                 >
-//                                     Abrir no Google Maps
-//                                 </button>
-//                             </div>
-//                         </Popup>
-//                     </Marker>
-//                 ))}
-//             </MapContainer>
-//         </Container_tracking>
-//     );
-// };
-
-// export default Tracking;
 
 
 
 
 
 
-// ultimo a ser usado 
 
-// import { Container_tracking } from "./styles";
-// import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
-// import "leaflet/dist/leaflet.css";
-// import americaDoSul from "../../../geojson/custom.geo.json";
-// import L from "leaflet";
-// import { useState, useEffect } from "react";
-// // img
-// import CartRight from "../../../assets/cartRigth3.png";
 
-// // Dados fictícios iniciais dos veículos
-// const vehicleData = [
-//     { id: 1, vehicle: "Veículo A", latitude: -7.763414, longitude: -40.287167, rotation: 0 },
-//     { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
-//     { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
-// ];
 
-// const Tracking = () => {
-//     const [positImage, setPositImage] = useState(CartRight);
-//     const [vehicles, setVehicles] = useState(vehicleData);
-//     const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
-//     const [lastLocation, setLastLocation] = useState({ latitude: 0, longitude: 0 });
 
-//     // Style do GeoJSON
-//     const customStyle = {
-//         fillColor: "transparent",
-//         weight: 0,
-//         color: "blue",
-//         opacity: 1,
-//         fillOpacity: 0,
-//     };
 
-//     const { center, zoom } = { center: [-12.432558, -51.772750], zoom: 4 };
 
-//     // Função para obter a localização atual do dispositivo
-//     const getLocation = () => {
-//         if (navigator.geolocation) {
-//             navigator.geolocation.getCurrentPosition(
-//                 (position) => {
-//                     const { latitude, longitude } = position.coords;
-//                     setCurrentLocation({ latitude, longitude });
-//                     setLastLocation({ latitude, longitude });
-//                     console.log(`Localização inicial: ${latitude}, ${longitude}`);
-//                 },
-//                 (error) => {
-//                     console.error("Erro ao obter localização inicial", error);
-//                 },
-//                 { enableHighAccuracy: true, maximumAge: 100, timeout: 10000 }
-//             );
-//         } else {
-//             alert("Geolocalização não é suportada pelo navegador.");
-//         }
-//     };
 
-//     // Função para monitorar a mudança de posição em tempo real
-//     const watchLocation = () => {
-//         if (navigator.geolocation) {
-//             navigator.geolocation.watchPosition(
-//                 (position) => {
-//                     const { latitude, longitude } = position.coords;
-//                     setCurrentLocation({ latitude, longitude });
-//                     console.log(`Nova localização: ${latitude}, ${longitude}`);
-//                 },
-//                 (error) => {
-//                     console.error("Erro ao obter localização", error);
-//                 },
-//                 { enableHighAccuracy: true, maximumAge: 1000, timeout: 10000 }
-//             );
-//         }
-//     };
 
-//     // Função para calcular o ângulo de rotação com base na direção do movimento
-//     const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
-//         const diffLat = targetLat - currentLat;
-//         const diffLng = targetLng - currentLng;
-
-//         const angleRad = Math.atan2(diffLng, diffLat);
-//         let angleDeg = (angleRad * 180) / Math.PI;
-
-//         angleDeg = angleDeg;
-
-//         let deltaAngle = angleDeg - currentRotation;
-//         if (Math.abs(deltaAngle) > 180) {
-//             if (deltaAngle > 0) {
-//                 angleDeg -= 360;
-//             } else {
-//                 angleDeg += 360;
-//             }
-//         }
-
-//         if (angleDeg >= 360) angleDeg -= 360;
-//         if (angleDeg < 0) angleDeg += 360;
-
-//         return angleDeg;
-//     };
-
-//     useEffect(() => {
-//         // Obter localização inicial
-//         getLocation();
-//         // Monitorar mudanças de posição
-//         watchLocation();
-
-//         // Atualizar a posição do Veículo A com base em currentLocation
-//         const interval = setInterval(() => {
-//             setVehicles((prevVehicles) =>
-//                 prevVehicles.map((vehicle) => {
-//                     if (vehicle.id !== 1) return vehicle;
-
-//                     // Usar a posição diretamente de currentLocation
-//                     const lat = currentLocation.latitude;
-//                     const lng = currentLocation.longitude;
-
-//                     // Calcular rotação com base na posição anterior (lastLocation)
-//                     const rotation = calculateDirection(
-//                         lastLocation.latitude,
-//                         lastLocation.longitude,
-//                         lat,
-//                         lng,
-//                         vehicle.rotation
-//                     );
-
-//                     // Atualizar lastLocation para a próxima iteração
-//                     setLastLocation({ latitude: lat, longitude: lng });
-
-//                     return { ...vehicle, latitude: lat, longitude: lng, rotation: rotation > 0 ? rotation : vehicle.rotation };
-//                 })
-//             );
-//         }, 100); // Atualiza a cada 100ms para suavidade
-
-//         return () => clearInterval(interval);
-//     }, [currentLocation, lastLocation]);
-
-//     // Função para criar o ícone com rotação dinâmica
-//     const createVehicleIcon = (rotation) => new L.DivIcon({
-//         html: `<div
-//               class="vehicle-icon"
-//               style="
-//                 transition: all 0.3s linear;
-//                 width: 25px;
-//                 height: 50px;
-//                 background: url(${positImage}) no-repeat center center / cover;
-//                 transform: rotate(${rotation}deg);
-//                 user-select: none;
-//                 pointer-events: none;
-//               "></div>`,
-//         iconSize: [50, 40],
-//         iconAnchor: [7, 20],
-//         popupAnchor: [0, -25],
-//         className: "",
-//     });
-
-//     const safeGeoJSON = americaDoSul || { type: "FeatureCollection", features: [] };
-
-//     return (
-//         <Container_tracking>
-//             <MapContainer
-//                 center={center}
-//                 zoom={zoom}
-//                 style={{ height: "100vh", width: "100%" }}
-//                 scrollWheelZoom={true}
-//                 minZoom={4}
-//                 maxZoom={18}
-//             >
-//                 <TileLayer
-//                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//                     attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//                 />
-//                 <GeoJSON data={safeGeoJSON} style={customStyle} />
-
-//                 {vehicles.map((vehicle) => (
-//                     <Marker
-//                         key={vehicle.id}
-//                         position={[vehicle.latitude, vehicle.longitude]}
-//                         icon={createVehicleIcon(vehicle.rotation)}
-//                     >
-//                         <Popup>
-//                             <div>
-//                                 <div style={{ fontWeight: "bold", textAlign: "center", fontSize: "15px", marginBottom: "8px" }}>
-//                                     {vehicle.vehicle}
-//                                 </div>
-//                                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-//                                     <span style={{ fontWeight: "bold" }}>Localização</span>
-//                                     {vehicle.latitude.toFixed(6)}, {vehicle.longitude.toFixed(6)}
-//                                 </div>
-//                                 <button
-//                                     onClick={() => window.open(`https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}`, "_blank")}
-//                                     style={{
-//                                         marginTop: "8px",
-//                                         padding: "6px 10px",
-//                                         backgroundColor: "#FF9D00",
-//                                         color: "white",
-//                                         border: "none",
-//                                         borderRadius: "4px",
-//                                         cursor: "pointer",
-//                                         fontSize: "12px",
-//                                         fontWeight: "bold",
-//                                     }}
-//                                 >
-//                                     Abrir no Google Maps
-//                                 </button>
-//                             </div>
-//                         </Popup>
-//                     </Marker>
-//                 ))}
-//             </MapContainer>
-//         </Container_tracking>
-//     );
-// };
-
-// export default Tracking;
 
 
 import { Container_tracking } from "./styles";
@@ -677,21 +259,22 @@ import "leaflet/dist/leaflet.css";
 import americaDoSul from "../../../geojson/custom.geo.json";
 import L from "leaflet";
 import { useState, useEffect } from "react";
-// img
 import CartRight from "../../../assets/cartRigth3.png";
-
-// Dados fictícios iniciais dos veículos
-const vehicleData = [
-    { id: 1, vehicle: "Veículo A", latitude: -7.763414, longitude: -40.287167, rotation: 0 },
-    { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
-    { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
-];
 
 const Tracking = () => {
     const [positImage, setPositImage] = useState(CartRight);
-    const [vehicles, setVehicles] = useState(vehicleData);
     const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
-    const [lastLocation, setLastLocation] = useState({ latitude: 0, longitude: 0 });
+    const [previousLocation, setPreviousLocation] = useState(null);
+    const [lastUpdateTime, setLastUpdateTime] = useState(null);
+
+    // Dados fictícios dos veículos com propriedade speed
+    const vehicleData = [
+        { id: 1, vehicle: "Veículo A", latitude: -7.763437, longitude: -40.287224, rotation: 0, speed: 0 },
+        { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0, speed: 0 },
+        { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0, speed: 0 },
+    ];
+
+    const [vehicles, setVehicles] = useState(vehicleData);
 
     // Style do GeoJSON
     const customStyle = {
@@ -711,45 +294,51 @@ const Tracking = () => {
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     setCurrentLocation({ latitude, longitude });
-                    setLastLocation({ latitude, longitude });
-                    console.log(`Localização inicial: ${latitude}, ${longitude}`);
+                    setPreviousLocation({ latitude, longitude });
+                    setLastUpdateTime(Date.now());
                 },
                 (error) => {
-                    console.error("Erro ao obter localização inicial", error);
+                    console.error("Erro ao obter localização", error);
                 },
-                { enableHighAccuracy: true, maximumAge: 100, timeout: 10000 }
+                { enableHighAccuracy: true }
             );
         } else {
             alert("Geolocalização não é suportada pelo navegador.");
         }
     };
 
-    // Função para monitorar a mudança de posição em tempo real
-    const watchLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    setCurrentLocation({ latitude, longitude });
-                    console.log(`Nova localização: ${latitude}, ${longitude}`);
-                },
-                (error) => {
-                    console.error("Erro ao obter localização", error);
-                },
-                { enableHighAccuracy: true, maximumAge: 1000, timeout: 10000 }
-            );
+    // Função para calcular o próximo ponto e a distância total
+    const moveTowards = (currentLat, currentLng, targetLat, targetLng, distanceMeters) => {
+        const toRad = (value) => (value * Math.PI) / 180;
+
+        const R = 6378137; // Raio da Terra em metros
+        const dLat = toRad(targetLat - currentLat);
+        const dLng = toRad(targetLng - currentLng);
+
+        const a =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos(toRad(currentLat)) * Math.cos(toRad(targetLat)) * Math.sin(dLng / 2) ** 2;
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const totalDistance = R * c; // Distância total em metros
+
+        if (distanceMeters >= totalDistance) {
+            return { lat: targetLat, lng: targetLng, totalDistance };
         }
+
+        const ratio = distanceMeters / totalDistance;
+        const newLat = currentLat + (targetLat - currentLat) * ratio;
+        const newLng = currentLng + (targetLng - currentLng) * ratio;
+
+        return { lat: newLat, lng: newLng, totalDistance };
     };
 
-    // Função para calcular o ângulo de rotação com base na direção do movimento
+    // Função para calcular o ângulo de rotação
     const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
         const diffLat = targetLat - currentLat;
         const diffLng = targetLng - currentLng;
 
         const angleRad = Math.atan2(diffLng, diffLat);
         let angleDeg = (angleRad * 180) / Math.PI;
-
-        angleDeg = angleDeg;
 
         let deltaAngle = angleDeg - currentRotation;
         if (Math.abs(deltaAngle) > 180) {
@@ -766,45 +355,65 @@ const Tracking = () => {
         return angleDeg;
     };
 
-    useEffect(() => {
-        // Obter localização inicial
-        getLocation();
-        // Monitorar mudanças de posição
-        watchLocation();
+    // Função para monitorar a mudança de posição em tempo real
+    const watchLocation = (speedKmh) => {
+        if (navigator.geolocation) {
+            // Ajustar frequência com base na velocidade
+            const updateFrequency = speedKmh >= 80 ? 1000 : 2000;
 
-        // Atualizar a posição do Veículo A com base em currentLocation
-        const interval = setInterval(() => {
-            setVehicles((prevVehicles) =>
-                prevVehicles.map((vehicle) => {
-                    if (vehicle.id !== 1) return vehicle;
+            const watchId = navigator.geolocation.watchPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    const currentTime = Date.now();
 
-                    // Usar a posição diretamente de currentLocation
-                    const lat = currentLocation.latitude;
-                    const lng = currentLocation.longitude;
+                    // Calcular velocidade se houver localização anterior
+                    let calculatedSpeed = 0;
+                    if (previousLocation && lastUpdateTime) {
+                        const { totalDistance } = moveTowards(
+                            previousLocation.latitude,
+                            previousLocation.longitude,
+                            latitude,
+                            longitude,
+                            0 // Passar 0 para obter apenas a distância total
+                        );
+                        const timeElapsed = (currentTime - lastUpdateTime) / 1000; // Tempo em segundos
+                        const speedMs = timeElapsed > 0 ? totalDistance / timeElapsed : 0; // Velocidade em m/s
+                        calculatedSpeed = speedMs * 3.6; // Converter para km/h
+                    }
 
-                    // Calcular rotação com base na posição anterior (lastLocation)
-                    const rotation = calculateDirection(
-                        lastLocation.latitude,
-                        lastLocation.longitude,
-                        lat,
-                        lng,
-                        vehicle.rotation
+                    // Atualizar estado
+                    setCurrentLocation({ latitude, longitude });
+                    setPreviousLocation({ latitude, longitude });
+                    setLastUpdateTime(currentTime);
+
+                    // Atualizar velocidade do veículo
+                    setVehicles((prevVehicles) =>
+                        prevVehicles.map((vehicle) =>
+                            vehicle.id === 1 ? { ...vehicle, speed: calculatedSpeed } : vehicle
+                        )
                     );
-
-                    // Atualizar lastLocation para a próxima iteração
-                    setLastLocation({ latitude: lat, longitude: lng });
-
-                    return { ...vehicle, latitude: lat, longitude: lng, rotation: rotation > 0 ? rotation : vehicle.rotation };
-                })
+                },
+                (error) => {
+                    console.log("Erro ao obter localização", error);
+                    setTimeout(() => {
+                        setCurrentLocation({ latitude: 0, longitude: 0 });
+                    }, 5000);
+                },
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: updateFrequency,
+                    timeout: updateFrequency,
+                }
             );
-        }, 100); // Atualiza a cada 100ms para suavidade
-
-        return () => clearInterval(interval);
-    }, [currentLocation, lastLocation]);
+            return watchId;
+        }
+        return null;
+    };
 
     // Função para criar o ícone com rotação dinâmica
-    const createVehicleIcon = (rotation) => new L.DivIcon({
-        html: `<div
+    const createVehicleIcon = (rotation) =>
+        new L.DivIcon({
+            html: `<div
               class="vehicle-icon"
               style="
                 transition: all 0.3s linear;
@@ -815,11 +424,82 @@ const Tracking = () => {
                 user-select: none;
                 pointer-events: none;
               "></div>`,
-        iconSize: [50, 40],
-        iconAnchor: [7, 20],
-        popupAnchor: [0, -25],
-        className: "",
-    });
+            iconSize: [50, 40],
+            iconAnchor: [7, 20],
+            popupAnchor: [0, -25],
+            className: "",
+        });
+
+    useEffect(() => {
+        getLocation();
+
+        let lastTarget = { latitude: 0, longitude: 0 };
+        let watchId = null;
+
+        // Intervalo para movimento do veículo
+        const intervalTimeMs = 100; // 100 ms para suavidade
+        const movementInterval = setInterval(() => {
+            setVehicles((prevVehicles) =>
+                prevVehicles.map((vehicle) => {
+                    if (vehicle.id !== 1) return vehicle; // Corrigido: sintaxe válida
+
+                    // Inicializar watchLocation na primeira execução
+                    if (!watchId) {
+                        watchId = watchLocation(vehicle.speed || 0);
+                    }
+
+                    // Atualizar watchLocation com a velocidade atual
+                    if (watchId) {
+                        navigator.geolocation.clearWatch(watchId);
+                        watchId = watchLocation(vehicle.speed || 0);
+                    }
+
+                    // Atualizar lastTarget se a localização mudou
+                    if (
+                        currentLocation.latitude !== lastTarget.latitude ||
+                        currentLocation.longitude !== lastTarget.longitude
+                    ) {
+                        lastTarget = { ...currentLocation };
+                    }
+
+                    // Calcular distância com base na velocidade atual
+                    const vehicleSpeedMs = (vehicle.speed * 1000) / 3600; // Converter km/h para m/s
+                    const distancePerInterval = vehicleSpeedMs * (intervalTimeMs / 1000); // Distância por intervalo
+
+                    // Parar o movimento se a velocidade for muito baixa
+                    if (vehicle.speed < 1) {
+                        return vehicle; // Não mover se a velocidade for < 1 km/h
+                    }
+
+                    // Mover em direção à última posição conhecida
+                    const { lat, lng } = moveTowards(
+                        vehicle.latitude,
+                        vehicle.longitude,
+                        lastTarget.latitude,
+                        lastTarget.longitude,
+                        distancePerInterval
+                    );
+
+                    // Calcular rotação
+                    const direction = calculateDirection(
+                        vehicle.latitude,
+                        vehicle.longitude,
+                        lat,
+                        lng,
+                        vehicle.rotation
+                    );
+
+                    return { ...vehicle, latitude: lat, longitude: lng, rotation: direction };
+                })
+            );
+        }, intervalTimeMs);
+
+        // Limpeza
+        return () => {
+            clearInterval(movementInterval);
+            if (watchId) navigator.geolocation.clearWatch(watchId);
+        };
+    }, [currentLocation]);
 
     const safeGeoJSON = americaDoSul || { type: "FeatureCollection", features: [] };
 
@@ -847,15 +527,44 @@ const Tracking = () => {
                     >
                         <Popup>
                             <div>
-                                <div style={{ fontWeight: "bold", textAlign: "center", fontSize: "15px", marginBottom: "8px" }}>
+                                <div
+                                    style={{
+                                        fontWeight: "bold",
+                                        textAlign: "center",
+                                        fontSize: "15px",
+                                        marginBottom: "8px",
+                                    }}
+                                >
                                     {vehicle.vehicle}
                                 </div>
-                                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                    }}
+                                >
                                     <span style={{ fontWeight: "bold" }}>Localização</span>
                                     {vehicle.latitude.toFixed(6)}, {vehicle.longitude.toFixed(6)}
                                 </div>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        marginTop: "8px",
+                                    }}
+                                >
+                                    <span style={{ fontWeight: "bold" }}>Velocidade</span>
+                                    {vehicle.speed.toFixed(1)} km/h
+                                </div>
                                 <button
-                                    onClick={() => window.open(`https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}`, "_blank")}
+                                    onClick={() =>
+                                        window.open(
+                                            `https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}`,
+                                            "_blank"
+                                        )
+                                    }
                                     style={{
                                         marginTop: "8px",
                                         padding: "6px 10px",
