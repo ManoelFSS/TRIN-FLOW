@@ -251,7 +251,7 @@
 
 
 
-
+// codigo novo que estar em produçao 
 
 import { Container_tracking } from "./styles";
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
@@ -439,6 +439,7 @@ const Tracking = () => {
         // Intervalo para movimento do veículo
         const intervalTimeMs = 100; // 100 ms para suavidade
         const movementInterval = setInterval(() => {
+          console.log("Executando intervalo de movimento");
             setVehicles((prevVehicles) =>
                 prevVehicles.map((vehicle) => {
                     if (vehicle.id !== 1) return vehicle; // Corrigido: sintaxe válida
@@ -467,9 +468,9 @@ const Tracking = () => {
                     const distancePerInterval = vehicleSpeedMs * (intervalTimeMs / 1000); // Distância por intervalo
 
                     // Parar o movimento se a velocidade for muito baixa
-                    if (vehicle.speed < 1) {
-                        return vehicle; // Não mover se a velocidade for < 1 km/h
-                    }
+                    // if (vehicle.speed < 1) {
+                    //     return vehicle; // Não mover se a velocidade for < 1 km/h
+                    // }
 
                     // Mover em direção à última posição conhecida
                     const { lat, lng } = moveTowards(
@@ -589,3 +590,495 @@ const Tracking = () => {
 };
 
 export default Tracking;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// codigo com venssagens na tela  a baixo 
+
+
+// import { Container_tracking } from "./styles";
+// import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
+// import "leaflet/dist/leaflet.css";
+// import americaDoSul from "../../../geojson/custom.geo.json";
+// import L from "leaflet";
+// import { useState, useEffect } from "react";
+// import CartRight from "../../../assets/cartRigth3.png";
+
+// const Tracking = () => {
+//     const [positImage, setPositImage] = useState(CartRight);
+//     const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
+//     const [previousLocation, setPreviousLocation] = useState(null);
+//     const [lastUpdateTime, setLastUpdateTime] = useState(null);
+//     const [isTracking, setIsTracking] = useState(false);
+//     const [errorMessage, setErrorMessage] = useState(null);
+//     const [isAppVisible, setIsAppVisible] = useState(true);
+//     const [gpsStatus, setGpsStatus] = useState("Desconectado"); // Indicador de status
+
+//     // Dados fictícios dos veículos
+//     const vehicleData = [
+//         { id: 1, vehicle: "Veículo A", latitude: -7.763437, longitude: -40.287224, rotation: 0, speed: 0 },
+//         { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0, speed: 0 },
+//         { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0, speed: 0 },
+//     ];
+
+//     const [vehicles, setVehicles] = useState(vehicleData);
+
+//     // Style do GeoJSON
+//     const customStyle = {
+//         fillColor: "transparent",
+//         weight: 0,
+//         color: "blue",
+//         opacity: 1,
+//         fillOpacity: 0,
+//     };
+
+//     const { center, zoom } = { center: [-12.432558, -51.772750], zoom: 10 }; // Zoom ajustado
+
+//     // Função para obter a localização inicial
+//     const getLocation = () => {
+//         if (navigator.geolocation) {
+//             navigator.geolocation.getCurrentPosition(
+//                 (position) => {
+//                     const { latitude, longitude } = position.coords;
+//                     setCurrentLocation({ latitude, longitude });
+//                     setPreviousLocation({ latitude, longitude });
+//                     setLastUpdateTime(Date.now());
+//                     setErrorMessage(null);
+//                     setGpsStatus("Conectado");
+//                     console.log("Localização inicial obtida:", { latitude, longitude });
+//                 },
+//                 (error) => {
+//                     handleGeolocationError(error);
+//                 },
+//                 { enableHighAccuracy: true }
+//             );
+//         } else {
+//             setErrorMessage("Geolocalização não suportada pelo navegador.");
+//             setGpsStatus("Desconectado");
+//         }
+//     };
+
+//     // Função para calcular o próximo ponto e a distância total
+//     const moveTowards = (currentLat, currentLng, targetLat, targetLng, distanceMeters) => {
+//         const toRad = (value) => (value * Math.PI) / 180;
+
+//         const R = 6378137;
+//         const dLat = toRad(targetLat - currentLat);
+//         const dLng = toRad(targetLng - currentLng);
+
+//         const a =
+//             Math.sin(dLat / 2) ** 2 +
+//             Math.cos(toRad(currentLat)) * Math.cos(toRad(targetLat)) * Math.sin(dLng / 2) ** 2;
+//         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//         const totalDistance = R * c;
+
+//         if (distanceMeters >= totalDistance) {
+//             return { lat: targetLat, lng: targetLng, totalDistance };
+//         }
+
+//         const ratio = distanceMeters / totalDistance;
+//         const newLat = currentLat + (targetLat - currentLat) * ratio;
+//         const newLng = currentLng + (targetLng - currentLng) * ratio;
+
+//         return { lat: newLat, lng: newLng, totalDistance };
+//     };
+
+//     // Função para calcular o ângulo de rotação
+//     const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
+//         const diffLat = targetLat - currentLat;
+//         const diffLng = targetLng - currentLng;
+
+//         const angleRad = Math.atan2(diffLng, diffLat);
+//         let angleDeg = (angleRad * 180) / Math.PI;
+
+//         let deltaAngle = angleDeg - currentRotation;
+//         if (Math.abs(deltaAngle) > 180) {
+//             if (deltaAngle > 0) {
+//                 angleDeg -= 360;
+//             } else {
+//                 angleDeg += 360;
+//             }
+//         }
+
+//         if (angleDeg >= 360) angleDeg -= 360;
+//         if (angleDeg < 0) angleDeg += 360;
+
+//         return angleDeg;
+//     };
+
+//     // Função para lidar com erros de geolocalização
+//     const handleGeolocationError = (error) => {
+//         let message;
+//         switch (error.code) {
+//             case error.PERMISSION_DENIED:
+//                 message = "Permissão de geolocalização negada.";
+//                 setGpsStatus("Desconectado");
+//                 break;
+//             case error.POSITION_UNAVAILABLE:
+//                 message = "Posição indisponível. Verifique o sinal de GPS.";
+//                 setGpsStatus("Sinal fraco");
+//                 break;
+//             case error.TIMEOUT:
+//                 message = "Tempo esgotado para obter localização. Tente novamente.";
+//                 setGpsStatus("Sinal fraco");
+//                 break;
+//             default:
+//                 message = "Erro desconhecido na geolocalização.";
+//                 setGpsStatus("Desconectado");
+//                 break;
+//         }
+//         setErrorMessage(message);
+//         setIsTracking(false);
+//         console.error("Erro de geolocalização:", message);
+//     };
+
+//     // Função para monitorar a mudança de posição
+//     const watchLocation = (speedKmh) => {
+//         if (navigator.geolocation) {
+//             const updateFrequency = speedKmh >= 80 ? 1000 : speedKmh < 10 ? 5000 : 2000;
+
+//             const watchId = navigator.geolocation.watchPosition(
+//                 (position) => {
+//                     const { latitude, longitude } = position.coords;
+//                     const currentTime = Date.now();
+
+//                     let calculatedSpeed = 0;
+//                     if (previousLocation && lastUpdateTime) {
+//                         const { totalDistance } = moveTowards(
+//                             previousLocation.latitude,
+//                             previousLocation.longitude,
+//                             latitude,
+//                             longitude,
+//                             0
+//                         );
+//                         const timeElapsed = (currentTime - lastUpdateTime) / 1000;
+//                         const speedMs = timeElapsed > 0 ? totalDistance / timeElapsed : 0;
+//                         calculatedSpeed = speedMs * 3.6;
+//                         console.log(
+//                             `Nova localização: Lat=${latitude}, Lng=${longitude}, ` +
+//                             `Distância=${totalDistance.toFixed(2)}m, ` +
+//                             `Tempo=${timeElapsed.toFixed(2)}s, ` +
+//                             `Velocidade=${calculatedSpeed.toFixed(1)}km/h`
+//                         );
+//                     }
+
+//                     setCurrentLocation({ latitude, longitude });
+//                     setPreviousLocation({ latitude, longitude });
+//                     setLastUpdateTime(currentTime);
+//                     setErrorMessage(null);
+//                     setGpsStatus("Conectado");
+
+//                     setVehicles((prevVehicles) =>
+//                         prevVehicles.map((vehicle) =>
+//                             vehicle.id === 1 ? { ...vehicle, speed: calculatedSpeed } : vehicle
+//                         )
+//                     );
+//                 },
+//                 (error) => {
+//                     handleGeolocationError(error);
+//                 },
+//                 {
+//                     enableHighAccuracy: true,
+//                     maximumAge: updateFrequency,
+//                     timeout: updateFrequency + 5000, // Timeout aumentado
+//                 }
+//             );
+//             console.log("watchLocation iniciado, watchId:", watchId);
+//             return watchId;
+//         }
+//         setErrorMessage("Geolocalização não suportada.");
+//         setGpsStatus("Desconectado");
+//         return null;
+//     };
+
+//     // Função para criar o ícone com rotação dinâmica
+//     const createVehicleIcon = (rotation) =>
+//         new L.DivIcon({
+//             html: `<div
+//               class="vehicle-icon"
+//               style="
+//                 transition: all 0.3s linear;
+//                 width: 25px;
+//                 height: 50px;
+//                 background: url(${positImage}) no-repeat center center / cover;
+//                 transform: rotate(${rotation}deg);
+//                 user-select: none;
+//                 pointer-events: none;
+//               "></div>`,
+//             iconSize: [50, 40],
+//             iconAnchor: [7, 20],
+//             popupAnchor: [0, -25],
+//             className: "",
+//         });
+
+//     // Função para iniciar/parar rastreamento
+//     const toggleTracking = () => {
+//         if (!isTracking) {
+//             getLocation();
+//         }
+//         setIsTracking(!isTracking);
+//         setErrorMessage(null);
+//     };
+
+//     // Detectar se o app está em segundo plano
+//     useEffect(() => {
+//         const handleVisibilityChange = () => {
+//             setIsAppVisible(document.visibilityState === "visible");
+//         };
+//         document.addEventListener("visibilitychange", handleVisibilityChange);
+//         return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+//     }, []);
+
+//     useEffect(() => {
+//         let lastTarget = { latitude: 0, longitude: 0 };
+//         let watchId = null;
+//         let movementInterval = null;
+//         let retryInterval = null;
+
+//         if (isTracking && isAppVisible) {
+//             watchId = watchLocation(vehicles.find((v) => v.id === 1)?.speed || 0);
+
+//             const intervalTimeMs = 200;
+//             movementInterval = setInterval(() => {
+//                 setVehicles((prevVehicles) =>
+//                     prevVehicles.map((vehicle) => {
+//                         if (vehicle.id !== 1) return vehicle;
+
+//                         if (
+//                             currentLocation.latitude !== lastTarget.latitude ||
+//                             currentLocation.longitude !== lastTarget.longitude
+//                         ) {
+//                             lastTarget = { ...currentLocation };
+//                         }
+
+//                         if (vehicle.speed < 1) {
+//                             return vehicle;
+//                         }
+
+//                         const vehicleSpeedMs = (vehicle.speed * 1000) / 3600;
+//                         const distancePerInterval = vehicleSpeedMs * (intervalTimeMs / 1000);
+
+//                         const { lat, lng, totalDistance } = moveTowards(
+//                             vehicle.latitude,
+//                             vehicle.longitude,
+//                             lastTarget.latitude,
+//                             lastTarget.longitude,
+//                             distancePerInterval
+//                         );
+
+//                         if (totalDistance < 1) {
+//                             return vehicle;
+//                         }
+
+//                         const direction = calculateDirection(
+//                             vehicle.latitude,
+//                             vehicle.longitude,
+//                             lat,
+//                             lng,
+//                             vehicle.rotation
+//                         );
+
+//                         return { ...vehicle, latitude: lat, longitude: lng, rotation: direction };
+//                     })
+//                 );
+//             }, intervalTimeMs);
+
+//             retryInterval = setInterval(() => {
+//                 if (errorMessage && !isTracking) {
+//                     console.log("Tentando reconectar geolocalização...");
+//                     getLocation();
+//                     setIsTracking(true);
+//                 }
+//             }, 5000);
+//         }
+
+//         return () => {
+//             if (movementInterval) clearInterval(movementInterval);
+//             if (watchId) {
+//                 navigator.geolocation.clearWatch(watchId);
+//                 console.log("watchLocation finalizado, watchId:", watchId);
+//             }
+//             if (retryInterval) clearInterval(retryInterval);
+//         };
+//     }, [isTracking, isAppVisible]);
+
+//     const safeGeoJSON = americaDoSul || { type: "FeatureCollection", features: [] };
+
+//     return (
+//         <Container_tracking>
+//             <MapContainer
+//                 center={center}
+//                 zoom={zoom}
+//                 style={{ height: "100vh", width: "100%" }}
+//                 scrollWheelZoom={true}
+//                 minZoom={4}
+//                 maxZoom={18}
+//             >
+//                 <TileLayer
+//                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+//                     attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//                 />
+//                 <GeoJSON data={safeGeoJSON} style={customStyle} />
+
+//                 {vehicles.map((vehicle) => (
+//                     <Marker
+//                         key={vehicle.id}
+//                         position={[vehicle.latitude, vehicle.longitude]}
+//                         icon={createVehicleIcon(vehicle.rotation)}
+//                     >
+//                         <Popup>
+//                             <div>
+//                                 <div
+//                                     style={{
+//                                         fontWeight: "bold",
+//                                         textAlign: "center",
+//                                         fontSize: "15px",
+//                                         marginBottom: "8px",
+//                                     }}
+//                                 >
+//                                     {vehicle.vehicle}
+//                                 </div>
+//                                 <div
+//                                     style={{
+//                                         display: "flex",
+//                                         flexDirection: "column",
+//                                         alignItems: "center",
+//                                     }}
+//                                 >
+//                                     <span style={{ fontWeight: "bold" }}>Localização</span>
+//                                     {vehicle.latitude.toFixed(6)}, {vehicle.longitude.toFixed(6)}
+//                                 </div>
+//                                 <div
+//                                     style={{
+//                                         display: "flex",
+//                                         flexDirection: "column",
+//                                         alignItems: "center",
+//                                         marginTop: "8px",
+//                                     }}
+//                                 >
+//                                     <span style={{ fontWeight: "bold" }}>Velocidade</span>
+//                                     {vehicle.speed.toFixed(1)} km/h
+//                                 </div>
+//                                 <button
+//                                     onClick={() =>
+//                                         window.open(
+//                                             `https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}`,
+//                                             "_blank"
+//                                         )
+//                                     }
+//                                     style={{
+//                                         marginTop: "8px",
+//                                         padding: "6px 10px",
+//                                         backgroundColor: "#FF9D00",
+//                                         color: "white",
+//                                         border: "none",
+//                                         borderRadius: "4px",
+//                                         cursor: "pointer",
+//                                         fontSize: "12px",
+//                                         fontWeight: "bold",
+//                                     }}
+//                                 >
+//                                     Abrir no Google Maps
+//                                 </button>
+//                             </div>
+//                         </Popup>
+//                     </Marker>
+//                 ))}
+//             </MapContainer>
+
+//             {/* Botão para iniciar/parar rastreamento */}
+//             <button
+//                 onClick={toggleTracking}
+//                 style={{
+//                     position: "absolute",
+//                     top: 10,
+//                     left: 10,
+//                     zIndex: 1000,
+//                     padding: "10px 20px",
+//                     backgroundColor: isTracking ? "#ff4444" : "#4CAF50",
+//                     color: "white",
+//                     border: "none",
+//                     borderRadius: "4px",
+//                     cursor: "pointer",
+//                     fontWeight: "bold",
+//                 }}
+//             >
+//                 {isTracking ? "Parar Rastreamento" : "Iniciar Rastreamento"}
+//             </button>
+
+//             {/* Indicador de status do GPS */}
+//             <div
+//                 style={{
+//                     position: "absolute",
+//                     top: 60,
+//                     left: 10,
+//                     zIndex: 1000,
+//                     backgroundColor:
+//                         gpsStatus === "Conectado" ? "#4CAF50" : gpsStatus === "Sinal fraco" ? "#ffeb3b" : "#ff4444",
+//                     color: gpsStatus === "Sinal fraco" ? "black" : "white",
+//                     padding: "5px 10px",
+//                     borderRadius: "4px",
+//                     fontSize: "12px",
+//                 }}
+//             >
+//                 GPS: {gpsStatus}
+//             </div>
+
+//             {/* Aviso de consumo de bateria */}
+//             {isTracking && (
+//                 <div
+//                     style={{
+//                         position: "absolute",
+//                         top: 90,
+//                         left: 10,
+//                         zIndex: 1000,
+//                         backgroundColor: "#ffeb3b",
+//                         color: "black",
+//                         padding: "10px",
+//                         borderRadius: "4px",
+//                         maxWidth: "300px",
+//                     }}
+//                 >
+//                     O rastreamento contínuo pode consumir bateria rapidamente.
+//                 </div>
+//             )}
+
+//             {/* Exibir mensagem de erro */}
+//             {errorMessage && (
+//                 <div
+//                     style={{
+//                         position: "absolute",
+//                         top: isTracking ? 140 : 90,
+//                         left: 10,
+//                         zIndex: 1000,
+//                         backgroundColor: "#ff4444",
+//                         color: "white",
+//                         padding: "10px",
+//                         borderRadius: "4px",
+//                         maxWidth: "300px",
+//                     }}
+//                 >
+//                     {errorMessage}
+//                 </div>
+//             )}
+//         </Container_tracking>
+//     );
+// };
+
+// export default Tracking;
