@@ -47,7 +47,7 @@ const Tracking = () => {
 
       const distance = metros / 5; // Distância dividida por 5 quantidade de metros que vai se mover por intervalo
       console.log(distance);
-      const  milisegundos = 3000 / distance; // Distância em milisegundos
+      const  milisegundos = 5000 / distance; // Distância em milisegundos
 
       return  milisegundos  // velocidade do setInterval
     }
@@ -99,7 +99,7 @@ const Tracking = () => {
                       setControlaError(controlaError => !controlaError);// chama o useEfect caso de erro na busca da nova localizaçao  assim evitando para a busca de novos dados
                     }, 1500);
                 },
-                { enableHighAccuracy: true, maximumAge: 3000, timeout: 10000 }
+                { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
             );
         }
     };
@@ -164,13 +164,16 @@ const Tracking = () => {
         watchLocation(); // Monitorar mudanças de posição
         const hendleLocationChange = async () => {
 
-          const milisegundos = await calcularDistanciaEmMetros(locationAnterior, currentLocation);
-          if (milisegundos <= 1) {
-            console.log("Distância muito pequena, setInterval não iniciado.");
-            return; // Não inicia o setInterval
-          }
+            let metragem = 5;
 
-          const interval = setInterval(() => {
+            const milisegundos = await calcularDistanciaEmMetros(locationAnterior, currentLocation);
+            if (milisegundos <= 1) {
+              metragem = 1;
+              console.log("Distância muito pequena, setInterval não iniciado.");
+              return; // Não inicia o setInterval
+            }
+
+            const interval = setInterval(() => {
               
               setVehicles((prevVehicles) =>
                   prevVehicles.map((vehicle) => {
@@ -182,7 +185,7 @@ const Tracking = () => {
                           vehicle.longitude,
                           currentLocation.latitude,
                           currentLocation.longitude,
-                          5 // Avançar  metros
+                          metragem // Avançar  metros
                       );
   
                       // Atualiza a rotação com base nas novas coordenadas
@@ -192,7 +195,7 @@ const Tracking = () => {
                       return { ...vehicle, latitude: lat, longitude: lng, rotation };
                   })
               );
-          }, milisegundos ); // Atualiza a cada meio segundo
+            }, milisegundos ); // Atualiza a cada meio segundo
   
           return () => clearInterval(interval); // Limpeza do intervalo quando o componente for desmontado
         }
