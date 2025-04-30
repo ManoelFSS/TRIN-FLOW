@@ -308,38 +308,40 @@ import { ContainerTracking } from "./styles";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import CartRight from "../../../assets/cartRigth5.png";
+import CartRight from "../../../assets/cartRigth3.png";
 
-// Função para calcular o ângulo de rotação
+
+// Função para calcular o ângulo de rotação com base na direção do movimento
 const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
-  const diffLat = targetLat - currentLat;
-  const diffLng = targetLng - currentLng;
+    const diffLat = targetLat - currentLat;
+    const diffLng = targetLng - currentLng;
 
-  const angleRad = Math.atan2(diffLng, diffLat);
-  let angleDeg = (angleRad * 180) / Math.PI;
+    const angleRad = Math.atan2(diffLng, diffLat);
+    let angleDeg = (angleRad * 180) / Math.PI;
 
-  let deltaAngle = angleDeg - currentRotation;
-  if (Math.abs(deltaAngle) > 180) {
-    if (deltaAngle > 0) {
-      angleDeg -= 360;
-    } else {
-      angleDeg += 360;
+    angleDeg = angleDeg; // Ajuste para compensar a imagem do veículo
+
+    let deltaAngle = angleDeg - currentRotation;
+    if (Math.abs(deltaAngle) > 180) {
+        if (deltaAngle > 0) {
+            angleDeg -= 360;
+        } else {
+            angleDeg += 360;
+        }
     }
-  }
 
-  if (angleDeg >= 360) angleDeg -= 360;
-  if (angleDeg < 0) angleDeg += 360;
+    if (angleDeg >= 360) angleDeg -= 360;
+    if (angleDeg < 0) angleDeg += 360;
 
-  return angleDeg;
+    return angleDeg;
 };
 
 
 
 const VehicleTracking = () => {
 
- 
-  const [center, setCenter] = useState([-7.763433, -40.287220]);
-  const [zoom, setZoom] = useState(19);
+  const [center, setCenter] = useState([-12.768171, -50.251635 ]);
+  const [zoom, setZoom] = useState(2);
   const wsRef = useRef(null);
   const [positImage, setPositImage] = useState(CartRight); // Imagem do veículo (cabine do carro)
   const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
@@ -396,10 +398,10 @@ const createVehicleIcon = (rotation) => new L.DivIcon({
     class="vehicle-icon"
     style="
       transition: all 0.3s linear;
-      width: 45px;
-      height: 35px;
+      width: 50px;
+      height: 40px;
       background: url(${positImage}) no-repeat center center / cover;
-      transform: rotate(${rotation}deg);
+      transform: rotate(${200}deg);
       user-select: none;
       pointer-events: none;
     "></div>`,
@@ -420,6 +422,7 @@ useEffect(() => {
       if (vehicle.id !== 1) return vehicle;
       const newLat = currentLocation.latitude;
       const newLng = currentLocation.longitude;
+
       const newRotation = calculateDirection(
         vehicle.latitude,
         vehicle.longitude,
