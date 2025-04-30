@@ -269,12 +269,46 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// esse ta funcionando bem 
+
 import React, { useState, useEffect, useRef } from 'react';
 import { ContainerTracking } from "./styles";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import CartRight from "../../../assets/cartRigth3.png";
+import CartRight from "../../../assets/cartRigth5.png";
 
 // Função para calcular o ângulo de rotação
 const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
@@ -362,8 +396,8 @@ const createVehicleIcon = (rotation) => new L.DivIcon({
     class="vehicle-icon"
     style="
       transition: all 0.3s linear;
-      width: 25px;
-      height: 50px;
+      width: 45px;
+      height: 35px;
       background: url(${positImage}) no-repeat center center / cover;
       transform: rotate(${rotation}deg);
       user-select: none;
@@ -411,7 +445,7 @@ return (
     <MapContainer
       center={center}
       zoom={zoom}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "calc(100vh - 50px)", width: "100%" }}
       scrollWheelZoom={true}
       minZoom={4}
       maxZoom={18}
@@ -466,3 +500,9 @@ return (
 };
 
 export default VehicleTracking;
+
+
+
+
+
+
