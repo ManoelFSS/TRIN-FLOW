@@ -309,13 +309,11 @@ const VehicleTracking = () => {
   const wsRef = useRef(null);
   const [positImage, setPositImage] = useState(CartRight); // Imagem do veículo (cabine do carro)
   const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
-  const [controlaError, setControlaError] = useState(false);
-
 
 
   // Dados fictícios iniciais dos veículos
   const initialVehicleData = [
-    { id: 1, vehicle: "Veículo A", latitude: currentLocation.latitude, longitude: currentLocation.longitude, rotation: 0 },
+    { id: 1, vehicle: "Veículo A", latitude: -7.763433, longitude: -40.287220, rotation: 0 },
     { id: 2, vehicle: "Veículo B", latitude: -15.7805, longitude: -47.9295, rotation: 0 },
     { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
   ];
@@ -348,11 +346,10 @@ const watchLocation =  () => {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({ latitude, longitude });
-                console.log("Nova localização obtida");
+                console.log("Nova localização obtida1", { latitude, longitude });
             },
             (error) => {
                 console.log("Erro ao obter localização");
-                setControlaError(controlaError => !controlaError);// chama o useEfect caso de erro na busca da nova localizaçao  assim evitando para a busca de novos dados
             },
             { enableHighAccuracy: true, maximumAge: 2000, timeout: 5000 }
         );
@@ -384,19 +381,11 @@ useEffect(() => {
 },[]);
 
 useEffect(() => {
-  // Supondo que você faz uma chamada à API para obter dados do banco
-  const fetchVehicleData = async () => {
-    console.log("Simulando WebSocket...");
-    // const response = await fetch('sua-api/veiculos');
-    // const data = await response.json(); // Exemplo: [{ id: 1, latitude: -15.7806, longitude: -47.9294 }, ...]
-    setVehicles(vehicles.map(vehicle => {
+  setVehicles((prevVehicles) =>
+    prevVehicles.map((vehicle) => {
       if (vehicle.id !== 1) return vehicle;
-
-      const currentLocation = { latitude: vehicle.latitude, longitude: vehicle.longitude };
-
       const newLat = currentLocation.latitude;
       const newLng = currentLocation.longitude;
-
       const newRotation = calculateDirection(
         vehicle.latitude,
         vehicle.longitude,
@@ -404,18 +393,18 @@ useEffect(() => {
         newLng,
         vehicle.rotation || 0
       );
-
+      console.log(
+        `Atualizando ${vehicle.vehicle}: Posição (${newLat.toFixed(6)}, ${newLng.toFixed(6)}), Rotação: ${newRotation.toFixed(2)}°`
+      );
       return {
         ...vehicle,
-        rotation: newRotation
+        latitude: newLat,
+        longitude: newLng,
+        rotation: newRotation,
       };
-
-    }));
-  };
-
-  const interval = setInterval(fetchVehicleData, 1000); // Atualiza a cada segundo
-  return () => clearInterval(interval);
-},[]);
+    })
+  );
+}, [currentLocation]);
 
 return (
   <ContainerTracking>
