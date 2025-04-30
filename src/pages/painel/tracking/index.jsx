@@ -305,37 +305,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ContainerTracking } from "./styles";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import CartRight from "../../../assets/cartRigth3.png";
-
-
-// Função para calcular o ângulo de rotação com base na direção do movimento
-const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
-    const diffLat = targetLat - currentLat;
-    const diffLng = targetLng - currentLng;
-
-    const angleRad = Math.atan2(diffLng, diffLat);
-    let angleDeg = (angleRad * 180) / Math.PI;
-
-    angleDeg = angleDeg; // Ajuste para compensar a imagem do veículo
-
-    let deltaAngle = angleDeg - currentRotation;
-    if (Math.abs(deltaAngle) > 180) {
-        if (deltaAngle > 0) {
-            angleDeg -= 360;
-        } else {
-            angleDeg += 360;
-        }
-    }
-
-    if (angleDeg >= 360) angleDeg -= 360;
-    if (angleDeg < 0) angleDeg += 360;
-
-    return angleDeg;
-};
-
+import americaDoSul from "../../../geojson/custom.geo.json";
 
 
 const VehicleTracking = () => {
@@ -355,7 +329,41 @@ const VehicleTracking = () => {
   ];
   const [vehicles, setVehicles] = useState(initialVehicleData);
 
+  
+// style do GeoJSON
+const customStyle = {
+    fillColor: "transparent",
+    weight: 0,
+    color: "blue",
+    opacity: 1,
+    fillOpacity: 0,
+};
 
+
+// Função para calcular o ângulo de rotação com base na direção do movimento
+const calculateDirection = (currentLat, currentLng, targetLat, targetLng, currentRotation) => {
+  const diffLat = targetLat - currentLat;
+  const diffLng = targetLng - currentLng;
+
+  const angleRad = Math.atan2(diffLng, diffLat);
+  let angleDeg = (angleRad * 180) / Math.PI;
+
+  angleDeg = angleDeg; // Ajuste para compensar a imagem do veículo
+
+  let deltaAngle = angleDeg - currentRotation;
+  if (Math.abs(deltaAngle) > 180) {
+      if (deltaAngle > 0) {
+          angleDeg -= 360;
+      } else {
+          angleDeg += 360;
+      }
+  }
+
+  if (angleDeg >= 360) angleDeg -= 360;
+  if (angleDeg < 0) angleDeg += 360;
+
+  return angleDeg;
+};
 
 // Função para obter a localização atual do dispositivo
 const getLocation = () => {
@@ -392,24 +400,25 @@ const watchLocation =  () => {
     }
 };
 
-  // Função para criar o ícone com rotação dinâmica
+// Função para criar o ícone com rotação dinâmica
 const createVehicleIcon = (rotation) => new L.DivIcon({
   html: `<div
-    class="vehicle-icon"
-    style="
-      transition: all 0.3s linear;
-      width: 50px;
-      height: 40px;
-      background: url(${positImage}) no-repeat center center / cover;
-      transform: rotate(${200}deg);
-      user-select: none;
-      pointer-events: none;
-    "></div>`,
+        class="vehicle-icon"
+        style="
+          trasition: all 0.3s linear;
+          width: 25px;
+          height: 50px;
+          background: url(${positImage}) no-repeat center center / cover;
+          transform:  rotate(${rotation}deg);
+          user-select: none;
+          pointer-events: none;
+        "></div>`,
   iconSize: [50, 40],
-  iconAnchor: [25, 20],
-  popupAnchor: [0, -25],
-  className: ''
+  iconAnchor: [7, 20], // Centro da div
+  popupAnchor: [0, -25], // Ajuste para o popup
+  className: '' // Remove a classe padrão do Leaflet
 });
+
 
 useEffect(() => {
   getLocation();
@@ -443,6 +452,8 @@ useEffect(() => {
   );
 }, [currentLocation]);
 
+const safeGeoJSON = americaDoSul || { type: "FeatureCollection", features: [] };
+
 return (
   <ContainerTracking>
     <MapContainer
@@ -461,6 +472,8 @@ return (
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"                    
         attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+      
+      <GeoJSON data={safeGeoJSON} style={customStyle} />
       
       {vehicles.map((vehicle) => (
         <Marker
