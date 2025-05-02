@@ -61,6 +61,13 @@ export const MenuTracking = styled.section`
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.34);
         padding: 5px;
         gap: 5px;
+        cursor: pointer;
+        transform: scale(0.9);
+        trasition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1);
+        }
 
         &:nth-child(even) {
             background-color:rgba(0, 0, 0, 0.09);

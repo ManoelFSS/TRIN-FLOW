@@ -117,6 +117,17 @@ const VehicleTracking = () => {
       rotation: 60
     }
   ];
+
+  const ChangeMapView = ({ center, zoom }) => {
+    const map = useMap();
+    useEffect(() => {
+      if (center && zoom) {
+        map.setView(center, zoom);
+      }
+    }, [center, zoom, map]);
+    return null;
+  };
+  
   
 
   // const initialVehicleData = [
@@ -284,7 +295,11 @@ const VehicleTracking = () => {
     <ContainerTracking>
       <MenuTracking>
         {motoristas.map((motorista, index) => (
-          <section className='card-tracking'>
+          <section 
+            className='card-tracking'
+            onClick={() => {setCenter([motorista.latitude, motorista.longitude]); setZoom(17); console.log(motorista.nome)}}
+            key={index}
+          >
             <div className='photo'>
               <img src={Perfil} alt="foto" />
             </div>
@@ -320,6 +335,7 @@ const VehicleTracking = () => {
           doubleClickZoom={true}
           touchZoom={true}
         >
+          <ChangeMapView center={center} zoom={zoom} />
           <ZoomHandler /> {/* Componente para atualizar o zoom */}
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
