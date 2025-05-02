@@ -7,6 +7,7 @@ import CartRight from "../../../assets/cartRigth3.png";
 import CartLeft from "../../../assets/cartLeft3.png";
 import Perfil from "../../../assets/perfil.png";
 import americaDoSul from "../../../geojson/custom.geo.json";
+import { set } from 'zod';
 
 const VehicleTracking = () => {
   const [center, setCenter] = useState([-12.562786, -52.211822]);
@@ -14,6 +15,8 @@ const VehicleTracking = () => {
   const wsRef = useRef(null);
   const [positImage, setPositImage] = useState(CartRight);
   const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
+  const [selectVehicle, setSelectVehicle] = useState(null);
+  const [controlaMapa, setControlaMapa] = useState(false);
 
   const motoristas = [
     {
@@ -124,7 +127,7 @@ const VehicleTracking = () => {
       if (center && zoom) {
         map.setView(center, zoom);
       }
-    }, [center, zoom, map]);
+    }, [selectVehicle]);
     return null;
   };
   
@@ -297,7 +300,7 @@ const VehicleTracking = () => {
         {motoristas.map((motorista, index) => (
           <section 
             className='card-tracking'
-            onClick={() => {setCenter([motorista.latitude, motorista.longitude]); setZoom(17); console.log(motorista.nome)}}
+            onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(17), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
             key={index}
           >
             <div className='photo'>
@@ -335,7 +338,8 @@ const VehicleTracking = () => {
           doubleClickZoom={true}
           touchZoom={true}
         >
-          <ChangeMapView center={center} zoom={zoom} />
+          {controlaMapa &&  <ChangeMapView center={center} zoom={zoom} />}
+
           <ZoomHandler /> {/* Componente para atualizar o zoom */}
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
