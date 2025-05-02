@@ -7,7 +7,7 @@ import CartRight from "../../../assets/cartRigth3.png";
 import CartLeft from "../../../assets/cartLeft3.png";
 import Perfil from "../../../assets/perfil.png";
 import americaDoSul from "../../../geojson/custom.geo.json";
-import { set } from 'zod';
+import Search from "../../../components/search";
 
 const VehicleTracking = () => {
   const [center, setCenter] = useState([-12.562786, -52.211822]);
@@ -296,35 +296,40 @@ const VehicleTracking = () => {
 
   return (
     <ContainerTracking>
-      <MenuTracking>
-        {motoristas.map((motorista, index) => (
-          <section 
-            className='card-tracking'
-            onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(15), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
-            key={index}
-          >
-            <div className='photo'>
-              <img src={Perfil} alt="foto" />
-            </div>
-            <div className='info-cantainer'>
-              <div>
-                <div className='box-info'>
-                  <h4>Nome</h4>
-                  <p>{motorista.nome}</p>
+      <div className='tracking-container'>
+        <div className='search'>
+          <Search $width={"89%"} $height={"40px"} />
+        </div>
+        <MenuTracking>
+          {motoristas.map((motorista, index) => (
+            <section 
+              className='card-tracking'
+              onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(15), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
+              key={index}
+            >
+              <div className='photo'>
+                <img src={Perfil} alt="foto" />
+              </div>
+              <div className='info-cantainer'>
+                <div>
+                  <div className='box-info'>
+                    <h4>Nome</h4>
+                    <p>{motorista.nome}</p>
+                  </div>
+                  <div className='box-info'>
+                    <h4>CNH</h4>
+                    <p>{motorista.cnh}</p>
+                  </div>
                 </div>
-                <div className='box-info'>
-                  <h4>CNH</h4>
-                  <p>{motorista.cnh}</p>
+                <div className='box-info-address'>
+                  <h4>Endereço de entrega</h4>
+                  <p>{motorista.endereco}</p>
                 </div>
               </div>
-              <div className='box-info-address'>
-                <h4>Endereço de entrega</h4>
-                <p>{motorista.endereco}</p>
-              </div>
-            </div>
-          </section>
-        ))}
-      </MenuTracking>
+            </section>
+          ))}
+        </MenuTracking>
+      </div>
       <Map>
         <MapContainer
           center={center}

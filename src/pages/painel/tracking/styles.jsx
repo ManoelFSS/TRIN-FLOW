@@ -10,6 +10,28 @@ export const ContainerTracking = styled.section`
         flex-direction: column;
         gap: 6px;
     }
+
+    .tracking-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding-top: 10px;
+        height: calc(100vh - 45px );
+        background-color:rgb(255, 255, 255);
+
+        @media (max-width: 650px) {
+            height: 48vh;
+        }
+
+        .search {
+            width: 100%;
+            display: flex;
+            justify-content: center;                    
+            padding: 0px 5px;
+        }
+    }
 `;
 
 export const Map = styled.section`
