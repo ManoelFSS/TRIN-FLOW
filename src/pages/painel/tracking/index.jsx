@@ -300,7 +300,7 @@ const VehicleTracking = () => {
         {motoristas.map((motorista, index) => (
           <section 
             className='card-tracking'
-            onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(17), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
+            onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(15), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
             key={index}
           >
             <div className='photo'>
