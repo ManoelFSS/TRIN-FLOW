@@ -17,6 +17,7 @@ const VehicleTracking = () => {
   const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
   const [selectVehicle, setSelectVehicle] = useState(null);
   const [controlaMapa, setControlaMapa] = useState(false);
+  const [valueSearch, setValueSearch] = useState('');
 
   const motoristas = [
     {
@@ -298,10 +299,17 @@ const VehicleTracking = () => {
     <ContainerTracking>
       <div className='tracking-container'>
         <div className='search'>
-          <Search $width={"89%"} $height={"40px"} />
+          <Search 
+            $width={"89%"} 
+            $height={"40px"} 
+            valueSearch={valueSearch} 
+            setValueSearch={setValueSearch}
+          />
         </div>
         <MenuTracking>
-          {vehicles.map((motorista, index) => (
+          {vehicles.filter((motorista) => motorista.nome.toLowerCase().includes(valueSearch.toLowerCase()) || 
+            motorista.cnh.toLowerCase().includes(valueSearch.toLowerCase()))
+            .map((motorista, index) => (
             <section 
               className='card-tracking'
               onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(15), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}

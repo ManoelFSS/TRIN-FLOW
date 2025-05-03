@@ -15,7 +15,6 @@ export const ContainerTracking = styled.section`
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         gap: 10px;
         padding-top: 10px;
         height: calc(100vh - 45px );
