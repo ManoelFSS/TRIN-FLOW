@@ -85,9 +85,10 @@ export const MenuTracking = styled.section`
         cursor: pointer;
         transform: scale(0.9);
         trasition: transform 0.3s ease;
+        border: solid 1px transparent;
 
         &:hover {
-            transform: scale(1);
+            border: solid 1px var( --color-bord-btn-primary );
         }
 
         &:nth-child(even) {

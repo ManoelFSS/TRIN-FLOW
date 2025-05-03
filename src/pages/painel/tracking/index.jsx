@@ -25,7 +25,8 @@ const VehicleTracking = () => {
       nome: "João da Silva",
       cnh: "12345678900",
       endereco: "Rua das Araucárias, nº 285, Bairro Centro, Chapecó - SC, CEP 89801-200",
-      vehicle: "Veículo A",
+      vehicle: "Carreta Bitrem",
+      plate: "BRA3C41",
       latitude: -7.763433,
       longitude: -40.287220,
       rotation: 0
@@ -35,7 +36,8 @@ const VehicleTracking = () => {
       nome: "Maria Oliveira",
       cnh: "98765432100",
       endereco: "Avenida Brasil, nº 1000, Bairro São Cristóvão, Chapecó - SC, CEP 89801-250",
-      vehicle: "Veículo B",
+      vehicle: "Caminhão Truck",
+      plate: "KZT6P20",
       latitude: -7.756626,
       longitude: -40.271342,
       rotation: 0
@@ -45,7 +47,8 @@ const VehicleTracking = () => {
       nome: "Carlos Souza",
       cnh: "45612378900",
       endereco: "Rua das Palmeiras, nº 58, Bairro Passo dos Fortes, Chapecó - SC, CEP 89801-180",
-      vehicle: "Veículo C",
+      vehicle: "Cavalo Mecânico",
+      plate: "QWE1J89",
       latitude: -15.7810,
       longitude: -47.9300,
       rotation: 0
@@ -55,7 +58,8 @@ const VehicleTracking = () => {
       nome: "Ana Paula Lima",
       cnh: "32198765400",
       endereco: "Rua das Hortênsias, nº 77, Bairro Efapi, Chapecó - SC, CEP 89809-100",
-      vehicle: "Veículo D",
+      vehicle: "Carreta Rodotrem",
+      plate: "MNL4T72" ,
       latitude: -23.550520,
       longitude: -46.633308, // São Paulo - SP
       rotation: 15
@@ -65,7 +69,8 @@ const VehicleTracking = () => {
       nome: "Bruno Ferreira",
       cnh: "74185296300",
       endereco: "Avenida Getúlio Vargas, nº 120, Bairro Líder, Chapecó - SC, CEP 89802-000",
-      vehicle: "Veículo E",
+      vehicle: "Caminhão Toco",
+      plate: "GHB8F60",
       latitude: -22.906847,
       longitude: -43.172896, // Rio de Janeiro - RJ
       rotation: 25
@@ -75,7 +80,8 @@ const VehicleTracking = () => {
       nome: "Patrícia Mendes",
       cnh: "85296374100",
       endereco: "Rua Rui Barbosa, nº 315, Bairro São Pedro, Chapecó - SC, CEP 89801-600",
-      vehicle: "Veículo F",
+      vehicle: "Carreta LS (Linha Segmentada)",
+      plate: "QWE1J89",
       latitude: -30.034647,
       longitude: -51.217658, // Porto Alegre - RS
       rotation: 10
@@ -85,7 +91,8 @@ const VehicleTracking = () => {
       nome: "Ricardo Alves",
       cnh: "15975348600",
       endereco: "Travessa Beira Rio, nº 89, Bairro Universitário, Chapecó - SC, CEP 89803-210",
-      vehicle: "Veículo G",
+      vehicle: "Caminhão VUC (Veículo Urbano de Carga)",
+      plate: "MNL4T72",
       latitude: -19.8157,
       longitude: -43.9542, // Belo Horizonte - MG
       rotation: 45
@@ -95,7 +102,8 @@ const VehicleTracking = () => {
       nome: "Juliana Rocha",
       cnh: "36925814700",
       endereco: "Rua Fernando Machado, nº 440, Bairro Centro, Chapecó - SC, CEP 89801-020",
-      vehicle: "Veículo H",
+      vehicle: "Caminhão Baú",
+      plate: "GHB8F60",
       latitude: -3.7319,
       longitude: -38.5267, // Fortaleza - CE
       rotation: 5
@@ -105,7 +113,8 @@ const VehicleTracking = () => {
       nome: "Lucas Martins",
       cnh: "75315984200",
       endereco: "Rua São Marcos, nº 198, Bairro Paraíso, Chapecó - SC, CEP 89805-100",
-      vehicle: "Veículo I",
+      vehicle: "Caminhão Carga Seca",
+      plate: "QWE1J89",
       latitude: -1.4550,
       longitude: -48.5024, // Belém - PA
       rotation: 30
@@ -115,7 +124,8 @@ const VehicleTracking = () => {
       nome: "Fernanda Dias",
       cnh: "95135785200",
       endereco: "Rua Marechal Bormann, nº 62, Bairro Esplanada, Chapecó - SC, CEP 89801-360",
-      vehicle: "Veículo J",
+      vehicle: "Carreta Prancha",
+      plate: "MNL4T72",
       latitude: -8.0476,
       longitude: -34.8770, // Recife - PE
       rotation: 60
@@ -174,7 +184,7 @@ const VehicleTracking = () => {
         "></div>`,
       iconSize: [iconSize, iconSize],
       iconAnchor: [iconSize / 2, iconSize], // Ajuste o ponto de ancoragem
-      popupAnchor: [0, -iconSize], // Ajuste para o popup
+      popupAnchor: [0, -30], // Ajuste para o popup
       className: '',
     });
   };
@@ -360,14 +370,12 @@ const VehicleTracking = () => {
             >
               <Popup>
                 <div style={{ textAlign: 'center' }}>
-                  <a
-                    href="https://www.google.com/maps/dir/?api=1&origin=-7.763412,-40.287154&destination=-9.415635,-40.502929&travelmode=driving"
-                    target="_blank"
-                  >
-                    Ir do Centro de SP até a Av. Paulista
-                  </a>
-                  <div style={{ fontWeight: 'bold', fontSize: '15px', marginBottom: '8px' }}>
+                  <div style={{ fontWeight: 'bold', fontSize: '16px', marginBottom: '2px', color: '#FF9D00' }}>
                     {vehicle.vehicle}
+                  </div>
+                  <div style={{marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', width: '100%', justifyContent: 'center' }}>
+                    <h4>Placa: </h4>
+                    <span>{vehicle.plate}</span>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <span style={{ fontWeight: 'bold' }}>Localização</span>
@@ -393,6 +401,28 @@ const VehicleTracking = () => {
                     }}
                   >
                     Abrir no Google Maps
+                  </button>
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `https://www.google.com/maps/dir/?api=1&origin=-7.763412,-40.287154&destination=-9.415635,-40.502929&travelmode=driving`,
+                        '_blank'
+                      )
+                    }
+                    style={{
+                      marginTop: '8px',
+                      padding: '6px 10px',
+                      backgroundColor: '#FF9D00',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      marginLeft: '8px'
+                    }}
+                  >
+                    Ver Rota
                   </button>
                 </div>
               </Popup>
