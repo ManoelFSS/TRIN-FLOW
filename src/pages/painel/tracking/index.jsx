@@ -301,7 +301,7 @@ const VehicleTracking = () => {
           <Search $width={"89%"} $height={"40px"} />
         </div>
         <MenuTracking>
-          {motoristas.map((motorista, index) => (
+          {vehicles.map((motorista, index) => (
             <section 
               className='card-tracking'
               onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(15), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
