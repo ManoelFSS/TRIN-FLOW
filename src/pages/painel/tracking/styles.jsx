@@ -21,7 +21,7 @@ export const ContainerTracking = styled.section`
         background-color:rgb(255, 255, 255);
 
         @media (max-width: 650px) {
-            height: 48vh;
+            height: 40vh;
         }
 
         .search {
