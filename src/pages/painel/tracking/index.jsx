@@ -132,13 +132,6 @@ const VehicleTracking = () => {
     return null;
   };
   
-  
-
-  // const initialVehicleData = [
-  //   { id: 1, vehicle: "Veículo A", latitude: -7.763433, longitude: -40.287220, rotation: 0 },
-  //   { id: 2, vehicle: "Veículo B", latitude: -7.756626, longitude: -40.271342, rotation: 0 },
-  //   { id: 3, vehicle: "Veículo C", latitude: -15.7810, longitude: -47.9300, rotation: 0 },
-  // ];
   const [vehicles, setVehicles] = useState(motoristas);
 
   const customStyle = {
@@ -175,7 +168,7 @@ const VehicleTracking = () => {
           width: ${iconSize}px;
           height: ${iconSize * 2}px;
           background: url(${positImage}) no-repeat center center / cover;
-          transform: translate(-0%, -25%) rotate(${rotation}deg);
+          transform: translate(-0%, -20%) rotate(${rotation}deg);
           user-select: none;
           pointer-events: none;
         "></div>`,
@@ -312,7 +305,7 @@ const VehicleTracking = () => {
             .map((motorista, index) => (
             <section 
               className='card-tracking'
-              onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(11), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
+              onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(17), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
               key={index}
             >
               <div className='photo'>
