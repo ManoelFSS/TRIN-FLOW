@@ -29,7 +29,8 @@ const VehicleTracking = () => {
       plate: "BRA3C41",
       latitude: -7.763433,
       longitude: -40.287220,
-      rotation: 0
+      rotation: 0,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 2,
@@ -40,7 +41,8 @@ const VehicleTracking = () => {
       plate: "KZT6P20",
       latitude: -7.756626,
       longitude: -40.271342,
-      rotation: 0
+      rotation: 0,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 3,
@@ -51,7 +53,8 @@ const VehicleTracking = () => {
       plate: "QWE1J89",
       latitude: -15.7810,
       longitude: -47.9300,
-      rotation: 0
+      rotation: 0,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 4,
@@ -59,10 +62,11 @@ const VehicleTracking = () => {
       cnh: "32198765400",
       endereco: "Rua das Hortênsias, nº 77, Bairro Efapi, Chapecó - SC, CEP 89809-100",
       vehicle: "Carreta Rodotrem",
-      plate: "MNL4T72" ,
+      plate: "MNL4T72",
       latitude: -23.550520,
-      longitude: -46.633308, // São Paulo - SP
-      rotation: 15
+      longitude: -46.633308,
+      rotation: 15,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 5,
@@ -72,8 +76,9 @@ const VehicleTracking = () => {
       vehicle: "Caminhão Toco",
       plate: "GHB8F60",
       latitude: -22.906847,
-      longitude: -43.172896, // Rio de Janeiro - RJ
-      rotation: 25
+      longitude: -43.172896,
+      rotation: 25,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 6,
@@ -83,8 +88,9 @@ const VehicleTracking = () => {
       vehicle: "Carreta LS (Linha Segmentada)",
       plate: "QWE1J89",
       latitude: -30.034647,
-      longitude: -51.217658, // Porto Alegre - RS
-      rotation: 10
+      longitude: -51.217658,
+      rotation: 10,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 7,
@@ -94,8 +100,9 @@ const VehicleTracking = () => {
       vehicle: "Caminhão VUC (Veículo Urbano de Carga)",
       plate: "MNL4T72",
       latitude: -19.8157,
-      longitude: -43.9542, // Belo Horizonte - MG
-      rotation: 45
+      longitude: -43.9542,
+      rotation: 45,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 8,
@@ -105,8 +112,9 @@ const VehicleTracking = () => {
       vehicle: "Caminhão Baú",
       plate: "GHB8F60",
       latitude: -3.7319,
-      longitude: -38.5267, // Fortaleza - CE
-      rotation: 5
+      longitude: -38.5267,
+      rotation: 5,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 9,
@@ -116,8 +124,9 @@ const VehicleTracking = () => {
       vehicle: "Caminhão Carga Seca",
       plate: "QWE1J89",
       latitude: -1.4550,
-      longitude: -48.5024, // Belém - PA
-      rotation: 30
+      longitude: -48.5024,
+      rotation: 30,
+      dataLocalizacao: "04/05/2025 15:20:00"
     },
     {
       id: 10,
@@ -127,11 +136,13 @@ const VehicleTracking = () => {
       vehicle: "Carreta Prancha",
       plate: "MNL4T72",
       latitude: -8.0476,
-      longitude: -34.8770, // Recife - PE
-      rotation: 60
+      longitude: -34.8770,
+      rotation: 60,
+      dataLocalizacao: "04/05/2025 15:20:00"
     }
   ];
-
+  
+  
   const ChangeMapView = ({ center, zoom }) => {
     const map = useMap();
     useEffect(() => {
@@ -291,6 +302,7 @@ const VehicleTracking = () => {
           latitude: newLat,
           longitude: newLng,
           rotation: newRotation,
+          dataLocalizacao: new Date().toLocaleString(),
         };
       })
     );
@@ -370,7 +382,7 @@ const VehicleTracking = () => {
             >
               <Popup>
                 <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontWeight: 'bold', fontSize: '16px', marginBottom: '2px', color: '#FF9D00' }}>
+                  <div style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '2px', color: '#FF9D00' }}>
                     {vehicle.vehicle}
                   </div>
                   <div style={{marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', width: '100%', justifyContent: 'center' }}>
@@ -380,6 +392,7 @@ const VehicleTracking = () => {
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <span style={{ fontWeight: 'bold' }}>Localização</span>
                     {vehicle.latitude.toFixed(6)}, {vehicle.longitude.toFixed(6)}
+                    <span style={{ fontWeight: 'bold', marginTop: '8px' }}>{vehicle.dataLocalizacao}</span>
                   </div>
                   <button
                     onClick={() =>
