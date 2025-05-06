@@ -2,8 +2,25 @@ import styled from "styled-components";
 
 export const ContainerTracking = styled.section`
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
+    padding: 10px;
     height: calc(100vh - 47px );
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background:rgba(241, 241, 241, 0);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #FF9D00;
+        cursor: pointer;
+    }
 
 
     @media (max-width: 650px) {
@@ -11,37 +28,56 @@ export const ContainerTracking = styled.section`
         gap: 6px;
     }
 
+    .tricking-header {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        padding: 10px;
+        background-color:rgb(255, 255, 255);
+    }
+
     .tracking-container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap; ;
         gap: 10px;
-        padding-top: 10px;
-        height: calc(100vh - 45px );
-        background-color:rgb(255, 255, 255);
-
-        @media (max-width: 650px) {
-            height: 40vh;
-        }
-
-        .search {
-            width: 100%;
+        width: 100%;
+        
+        .tracking {
             display: flex;
-            justify-content: center;                    
-            padding: 0px 5px;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding-top: 15px;
+            height: calc(100vh - 65px );
+            background-color:rgb(255, 255, 255);
+            box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.28);
+
+            @media (max-width: 690px) {
+                width: 100%;
+                height: 34vh;
+            }
+
+            .search {
+                width: 100%;
+                display: flex;
+                justify-content: center;                    
+                padding: 0px 5px;
+            }
         }
     }
+
 `;
 
 export const Map = styled.section`
-    padding: 10px;
+    flex: 1;
     width: 100%;
-    height: calc(100vh - 47px );
+    min-width: 230px;
     background-color:rgb(248, 248, 248);
-    box-shadow: inset 1px 0px 5px rgba(0, 0, 0, 0.16);
+    box-shadow:  1px 0px 5px rgba(0, 0, 0, 0.28);
     
-    @media (max-width: 650px) {
-        height: 250vh;
+    @media (max-width: 690px) {
+        height: 47vh;
     }
 
 `;
@@ -57,7 +93,7 @@ export const MenuTracking = styled.section`
     background-color:rgb(255, 255, 255);
     gap: 10px;
 
-    @media (max-width: 650px) {
+    @media (max-width: 690px) {
         min-width: 100%;
     }
 

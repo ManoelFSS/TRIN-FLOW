@@ -44,7 +44,7 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 const StockProductChart = () => {
     
     const items = [
-        { name: 'Placa 50 x 50', stock: 3000, sold: 5000, minStock: 1000, category: 'Placas' },
+        { name: 'Placa 50 x 50', stock: 3000, sold: 4000, minStock: 0, category: 'Placas' },
         { name: 'Placa 60 x 60', stock: 1000, sold: 3000, minStock: 1000, category: 'Placas' },
         { name: 'Gesso Lento', stock: 80, sold: 500, minStock: 1000, category: 'Gesso' },
         { name: 'Gesso Rápido', stock: 5700, sold: 10000, minStock: 1000, category: 'Gesso'  },

@@ -8,141 +8,25 @@ import CartLeft from "../../../assets/cartLeft3.png";
 import Perfil from "../../../assets/perfil.png";
 import americaDoSul from "../../../geojson/custom.geo.json";
 import Search from "../../../components/search";
+import PopupModal from "../../../components/popupModal";
+import BtnNavigate from "../../../components/btns/btnNavigate";
+// db
+import {motoristas} from "../../../DB";
 
 const VehicleTracking = () => {
+
   const [center, setCenter] = useState([-12.562786, -52.211822]);
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(0);
   const wsRef = useRef(null);
   const [positImage, setPositImage] = useState(CartRight);
   const [currentLocation, setCurrentLocation] = useState({ latitude: 0, longitude: 0 });
   const [selectVehicle, setSelectVehicle] = useState(null);
   const [controlaMapa, setControlaMapa] = useState(false);
   const [valueSearch, setValueSearch] = useState('');
+  const [viewMapEntrega, setViewMapEntrega] = useState(true);
 
-  const motoristas = [
-    {
-      id: 1,
-      nome: "João da Silva",
-      cnh: "12345678900",
-      endereco: "Rua das Araucárias, nº 285, Bairro Centro, Chapecó - SC, CEP 89801-200",
-      vehicle: "Carreta Bitrem",
-      plate: "BRA3C41",
-      latitude: -7.763433,
-      longitude: -40.287220,
-      rotation: 0,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 2,
-      nome: "Maria Oliveira",
-      cnh: "98765432100",
-      endereco: "Avenida Brasil, nº 1000, Bairro São Cristóvão, Chapecó - SC, CEP 89801-250",
-      vehicle: "Caminhão Truck",
-      plate: "KZT6P20",
-      latitude: -7.756626,
-      longitude: -40.271342,
-      rotation: 0,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 3,
-      nome: "Carlos Souza",
-      cnh: "45612378900",
-      endereco: "Rua das Palmeiras, nº 58, Bairro Passo dos Fortes, Chapecó - SC, CEP 89801-180",
-      vehicle: "Cavalo Mecânico",
-      plate: "QWE1J89",
-      latitude: -15.7810,
-      longitude: -47.9300,
-      rotation: 0,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 4,
-      nome: "Ana Paula Lima",
-      cnh: "32198765400",
-      endereco: "Rua das Hortênsias, nº 77, Bairro Efapi, Chapecó - SC, CEP 89809-100",
-      vehicle: "Carreta Rodotrem",
-      plate: "MNL4T72",
-      latitude: -23.550520,
-      longitude: -46.633308,
-      rotation: 15,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 5,
-      nome: "Bruno Ferreira",
-      cnh: "74185296300",
-      endereco: "Avenida Getúlio Vargas, nº 120, Bairro Líder, Chapecó - SC, CEP 89802-000",
-      vehicle: "Caminhão Toco",
-      plate: "GHB8F60",
-      latitude: -22.906847,
-      longitude: -43.172896,
-      rotation: 25,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 6,
-      nome: "Patrícia Mendes",
-      cnh: "85296374100",
-      endereco: "Rua Rui Barbosa, nº 315, Bairro São Pedro, Chapecó - SC, CEP 89801-600",
-      vehicle: "Carreta LS (Linha Segmentada)",
-      plate: "QWE1J89",
-      latitude: -30.034647,
-      longitude: -51.217658,
-      rotation: 10,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 7,
-      nome: "Ricardo Alves",
-      cnh: "15975348600",
-      endereco: "Travessa Beira Rio, nº 89, Bairro Universitário, Chapecó - SC, CEP 89803-210",
-      vehicle: "Caminhão VUC (Veículo Urbano de Carga)",
-      plate: "MNL4T72",
-      latitude: -19.8157,
-      longitude: -43.9542,
-      rotation: 45,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 8,
-      nome: "Juliana Rocha",
-      cnh: "36925814700",
-      endereco: "Rua Fernando Machado, nº 440, Bairro Centro, Chapecó - SC, CEP 89801-020",
-      vehicle: "Caminhão Baú",
-      plate: "GHB8F60",
-      latitude: -3.7319,
-      longitude: -38.5267,
-      rotation: 5,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 9,
-      nome: "Lucas Martins",
-      cnh: "75315984200",
-      endereco: "Rua São Marcos, nº 198, Bairro Paraíso, Chapecó - SC, CEP 89805-100",
-      vehicle: "Caminhão Carga Seca",
-      plate: "QWE1J89",
-      latitude: -1.4550,
-      longitude: -48.5024,
-      rotation: 30,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    },
-    {
-      id: 10,
-      nome: "Fernanda Dias",
-      cnh: "95135785200",
-      endereco: "Rua Marechal Bormann, nº 62, Bairro Esplanada, Chapecó - SC, CEP 89801-360",
-      vehicle: "Carreta Prancha",
-      plate: "MNL4T72",
-      latitude: -8.0476,
-      longitude: -34.8770,
-      rotation: 60,
-      dataLocalizacao: "04/05/2025 15:20:00"
-    }
-  ];
-  
-  
+  const [vehicles, setVehicles] = useState(motoristas);
+
   const ChangeMapView = ({ center, zoom }) => {
     const map = useMap();
     useEffect(() => {
@@ -152,8 +36,6 @@ const VehicleTracking = () => {
     }, [selectVehicle]);
     return null;
   };
-  
-  const [vehicles, setVehicles] = useState(motoristas);
 
   const customStyle = {
     fillColor: "transparent",
@@ -242,7 +124,7 @@ const VehicleTracking = () => {
     return angleDeg;
   };
 
-  // Funções de localização (mantidas como no código original)
+  // Funções de localização 
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -312,137 +194,110 @@ const VehicleTracking = () => {
 
   return (
     <ContainerTracking>
-      <div className='tracking-container'>
-        <div className='search'>
-          <Search 
-            $width={"89%"} 
-            $height={"40px"} 
-            valueSearch={valueSearch} 
-            setValueSearch={setValueSearch}
-          />
-        </div>
-        <MenuTracking>
-          {vehicles.filter((motorista) => motorista.nome.toLowerCase().includes(valueSearch.toLowerCase()) || 
-            motorista.cnh.toLowerCase().includes(valueSearch.toLowerCase()))
-            .map((motorista, index) => (
-            <section 
-              className='card-tracking'
-              onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(17), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 2000)}}
-              key={index}
-            >
-              <div className='photo'>
-                <img src={Perfil} alt="foto" />
-              </div>
-              <div className='info-cantainer'>
-                <div>
-                  <div className='box-info'>
-                    <h4>Nome</h4>
-                    <p>{motorista.nome}</p>
-                  </div>
-                  <div className='box-info'>
-                    <h4>CNH</h4>
-                    <p>{motorista.cnh}</p>
-                  </div>
-                </div>
-                <div className='box-info-address'>
-                  <h4>Endereço de entrega</h4>
-                  <p>{motorista.endereco}</p>
-                </div>
-              </div>
-            </section>
-          ))}
-        </MenuTracking>
-      </div>
-      <Map>
-        <MapContainer
-          center={center}
-          zoom={zoom}
-          style={{ height: "100%", width: "100%" }}
-          scrollWheelZoom={true}
-          minZoom={4}
-          maxZoom={18}
-          zoomControl={true}
-          dragging={true}
-          doubleClickZoom={true}
-          touchZoom={true}
-        >
-          {controlaMapa &&  <ChangeMapView center={center} zoom={zoom} />}
+      <section className='tricking-header'>
+        <BtnNavigate 
+          $width={"100px"} 
+          $height={"30px"} 
+          $text={"Mapa"}  
+          onClick={() => setViewMapEntrega(true)}
+          $background={viewMapEntrega ? " #FF9D00" : " #ffffff"}
+          $color={viewMapEntrega ? " #FFffff" : " #000000"}
+        />
+        <BtnNavigate 
+          $width={"100px"} 
+          $height={"30px"} 
+          $text={"Entregas"}  
+          onClick={() => setViewMapEntrega(false)}
+          $background={viewMapEntrega ? "rgb(255, 255, 255)" : " #FF9D00"}
+          $color={viewMapEntrega ? " #000000" : " #FFffff"}
+        />
+      </section>
 
-          <ZoomHandler /> {/* Componente para atualizar o zoom */}
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <GeoJSON data={safeGeoJSON} style={customStyle} />
-          {vehicles.map((vehicle) => (
-            <Marker
-              key={vehicle.id}
-              position={[vehicle.latitude, vehicle.longitude]}
-              icon={createVehicleIcon(vehicle.rotation)}
-            >
-              <Popup>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontWeight: 'bold', fontSize: '18px', marginBottom: '2px', color: '#FF9D00' }}>
-                    {vehicle.vehicle}
-                  </div>
-                  <div style={{marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', width: '100%', justifyContent: 'center' }}>
-                    <h4>Placa: </h4>
-                    <span>{vehicle.plate}</span>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <span style={{ fontWeight: 'bold' }}>Localização</span>
-                    {vehicle.latitude.toFixed(6)}, {vehicle.longitude.toFixed(6)}
-                    <span style={{ fontWeight: 'bold', marginTop: '8px' }}>{vehicle.dataLocalizacao}</span>
-                  </div>
-                  <button
-                    onClick={() =>
-                      window.open(
-                        `https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}`,
-                        '_blank'
-                      )
-                    }
-                    style={{
-                      marginTop: '8px',
-                      padding: '6px 10px',
-                      backgroundColor: '#FF9D00',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      fontSize: '12px',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Abrir no Google Maps
-                  </button>
-                  <button
-                    onClick={() =>
-                      window.open(
-                        `https://www.google.com/maps/dir/?api=1&origin=-7.763412,-40.287154&destination=-9.415635,-40.502929&travelmode=driving`,
-                        '_blank'
-                      )
-                    }
-                    style={{
-                      marginTop: '8px',
-                      padding: '6px 10px',
-                      backgroundColor: '#FF9D00',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      fontSize: '12px',
-                      fontWeight: 'bold',
-                      marginLeft: '8px'
-                    }}
-                  >
-                    Ver Rota
-                  </button>
+      {viewMapEntrega && <section className="tracking-container">
+        <div className='tracking'>
+          <div className='search'>
+            <Search 
+              $width={"89%"} 
+              $height={"40px"} 
+              valueSearch={valueSearch} 
+              setValueSearch={setValueSearch}
+            />
+          </div>
+          <MenuTracking>
+            {vehicles.filter((motorista) => motorista.nome.toLowerCase().includes(valueSearch.toLowerCase()) || 
+              motorista.cnh.toLowerCase().includes(valueSearch.toLowerCase()))
+              .map((motorista, index) => (
+              <section 
+                className='card-tracking'
+                onClick={() => {setControlaMapa(true); setCenter([motorista.latitude, motorista.longitude]); setZoom(17), setSelectVehicle(!selectVehicle), setInterval(() => {setControlaMapa(false);}, 1000)}}
+                key={index}
+              >
+                <div className='photo'>
+                  <img src={Perfil} alt="foto" />
                 </div>
-              </Popup>
-            </Marker>
-          ))}
-        </MapContainer>
-      </Map>
+                <div className='info-cantainer'>
+                  <div>
+                    <div className='box-info'>
+                      <h4>Nome</h4>
+                      <p>{motorista.nome}</p>
+                    </div>
+                    <div className='box-info'>
+                      <h4>CNH</h4>
+                      <p>{motorista.cnh}</p>
+                    </div>
+                  </div>
+                  <div className='box-info-address'>
+                    <h4>Endereço de entrega</h4>
+                    <p>{motorista.endereco}</p>
+                  </div>
+                </div>
+              </section>
+            ))}
+          </MenuTracking>
+        </div>
+        <Map>
+          <MapContainer
+            center={center}
+            zoom={zoom}
+            style={{ height: "100%", width: "100%" }}
+            scrollWheelZoom={true}
+            minZoom={4}
+            maxZoom={18}
+            zoomControl={true}
+            dragging={true}
+            doubleClickZoom={true}
+            touchZoom={true}
+          >
+            {controlaMapa &&  <ChangeMapView center={center} zoom={zoom} />} {/* Componente para centralizar o mapa */}
+
+            <ZoomHandler /> {/* Componente para atualizar o zoom */}
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <GeoJSON data={safeGeoJSON} style={customStyle} />
+            {vehicles.map((vehicle) => (
+              <Marker
+                key={vehicle.id}
+                position={[vehicle.latitude, vehicle.longitude]}
+                icon={createVehicleIcon(vehicle.rotation)}
+              >
+                <Popup>
+                  <PopupModal
+                    name={vehicle.vehicle}
+                    plate={vehicle.plate}
+                    latitude={vehicle.latitude}
+                    longitude={vehicle.longitude}
+                    date={vehicle.dataLocalizacao}
+                    veiclePhoto={vehicle.veiclePhoto}
+                  />
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </Map>
+      </section>}
+      
     </ContainerTracking>
   );
 };
